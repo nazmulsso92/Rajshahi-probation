@@ -1,805 +1,407 @@
 <!DOCTYPE html>
-
 <html lang="bn">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>প্রবেশনার কেস ম্যানেজমেন্ট সিস্টেম - রাজশাহী</title>
-
     <!-- Tailwind CSS CDN -->
-
     <script src="https://cdn.tailwindcss.com"></script>
-
     <!-- FontAwesome Icons -->
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <!-- Chart.js CDN -->
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
-
     <script>
-
         tailwind.config = {
-
             theme: {
-
                 extend: {
-
                     colors: {
-
                         brand: { 
-
                             50: '#f0fdf4', 
-
                             100: '#dcfce7', 
-
                             500: '#22c55e', 
-
                             600: '#16a34a', 
-
                             700: '#15803d', 
-
                             800: '#166534', 
-
                             900: '#14532d' 
-
                         }
-
                     }
-
                 }
-
             }
-
         }
-
     </script>
-
     <style>
-
         @import url('https://fonts.googleapis.com/css2?family=Kalpurush&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
-
         
-
         body {
-
             font-family: 'Noto Sans Bengali', 'Kalpurush', sans-serif;
-
         }
-
-
 
         @media print {
-
             body * {
-
                 visibility: hidden;
-
             }
-
             #printable-report, #printable-report *, #printable-monthly-report, #printable-monthly-report * {
-
                 visibility: visible;
-
             }
-
             #printable-report, #printable-monthly-report {
-
                 position: absolute;
-
                 left: 0;
-
                 top: 0;
-
                 width: 100%;
-
                 margin: 0;
-
                 padding: 20px;
-
                 background: white;
-
                 color: black;
-
             }
-
             .no-print {
-
                 display: none !important;
-
             }
-
         }
-
     </style>
-
 </head>
-
 <body class="bg-gray-100 font-sans text-gray-900 antialiased selection:bg-brand-500 selection:text-white">
 
-
-
     <!-- 0. LOGIN & REGISTRATION OVERLAY SCREEN -->
-
     <div id="login-screen" class="fixed inset-0 bg-brand-950 z-50 flex items-center justify-center p-4 overflow-y-auto">
-
         <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 space-y-6 my-auto">
-
             <div class="text-center space-y-2">
-
                 <div class="w-16 h-16 bg-brand-600 rounded-2xl mx-auto flex items-center justify-center text-white text-3xl font-bold shadow-lg">
-
                     <i class="fa-solid fa-scale-balanced"></i>
-
                 </div>
-
                 <h1 class="text-2xl font-bold text-gray-800">প্রবেশন কেস ম্যানেজমেন্ট</h1>
-
                 <p class="text-xs text-gray-500">প্রবেশন অফিসারের কার্যালয়, রাজশাহী</p>
-
             </div>
-
-
 
             <!-- LOGIN FORM -->
-
             <div id="auth-box-login" class="space-y-4">
-
                 <div>
-
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">ইউজার আইডি</label>
-
                     <input type="text" id="login-username" placeholder="আপনার আইডি দিন" class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-brand-500">
-
                 </div>
-
                 <div>
-
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">পাসওয়ার্ড</label>
-
                     <input type="password" id="login-password" placeholder="পাসওয়ার্ড দিন" class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-brand-500">
-
                 </div>
-
                 <button onclick="handleLogin()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-3 rounded-xl shadow-md transition">লগইন করুন</button>
-
                 
-
                 <div class="flex justify-between items-center text-xs pt-2">
-
                     <button type="button" onclick="showRegisterBox()" class="text-brand-700 font-semibold hover:underline cursor-pointer">নতুন অ্যাকাউন্ট তৈরি করুন</button>
-
                     <button type="button" onclick="showForgotBox()" class="text-gray-500 hover:underline cursor-pointer">পাসওয়ার্ড ভুলে গেছেন?</button>
-
                 </div>
-
             </div>
-
-
 
             <!-- REGISTRATION FORM (For Officers) -->
-
             <div id="auth-box-register" class="space-y-4 hidden">
-
                 <div class="border-b pb-2">
-
                     <h3 class="font-bold text-gray-800 text-sm">অফিসার অ্যাকাউন্ট রেজিস্ট্রেশন</h3>
-
                     <p class="text-xs text-gray-500">আপনার নিজস্ব আইডি ও পাসওয়ার্ড তৈরি করুন</p>
-
                 </div>
-
                 <div>
-
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">আপনার পূর্ণ নাম</label>
-
                     <input type="text" id="reg-name" placeholder="যেমন: মো: নাজমুল খান" class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
-
                 </div>
-
                 <div>
-
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">পদবি ও কার্যালয় বাছাই করুন</label>
-
                     <select id="reg-designation" class="w-full border rounded-xl px-3 py-2 text-sm outline-none bg-white">
-
                         <option value="জেলা প্রবেশন অফিসার, রাজশাহী">জেলা প্রবেশন অফিসার, রাজশাহী (Admin)</option>
-
                         <optgroup label="উপজেলা / থানা কার্যালয়">
-
                             <option value="উপজেলা সমাজসেবা অফিসার, পবা">উপজেলা সমাজসেবা অফিসার, পবা</option>
-
                             <option value="উপজেলা সমাজসেবা অফিসার, গোদাগাড়ী">উপজেলা সমাজসেবা অফিসার, গোদাগাড়ী</option>
-
                             <option value="উপজেলা সমাজসেবা অফিসার, তানোর">উপজেলা সমাজসেবা অফিসার, তানোর</option>
-
                             <option value="উপজেলা সমাজসেবা অফিসার, মোহনপুর">উপজেলা সমাজসেবা অফিসার, মোহনপুর</option>
-
                             <option value="উপজেলা সমাজসেবা অফিসার, বাগমারা">উপজেলা সমাজসেবা অফিসার, বাগমারা</option>
-
                             <option value="উপজেলা সমাজসেবা অফিসার, দুর্গাপুর">উপজেলা সমাজসেবা অফিসার, দুর্গাপুর</option>
-
                             <option value="উপজেলা সমাজসেবা অফিসার, পুঠিয়া">উপজেলা সমাজসেবা অফিসার, পুঠিয়া</option>
-
                             <option value="উপজেলা সমাজসেবা অফিসার, চারঘাট">উপজেলা সমাজসেবা অফিসার, চারঘাট</option>
-
                             <option value="উপজেলা সমাজসেবা অফিসার, বাঘা">উপজেলা সমাজসেবা অফিসার, বাঘা</option>
-
                             <option value="সমাজসেবা অফিসার, বোয়ালিয়া মডেল থানা এলাকা">সমাজসেবা অফিসার, বোয়ালিয়া মডেল থানা এলাকা</option>
-
                             <option value="সমাজসেবা অফিসার, রাজপাড়া থানা এলাকা">সমাজসেবা অফিসার, রাজপাড়া থানা এলাকা</option>
-
                             <option value="সমাজসেবা অফিসার, কাশিয়াডাঙ্গা থানা এলাকা">সমাজসেবা অফিসার, কাশিয়াডাঙ্গা থানা এলাকা</option>
-
                             <option value="সমাজসেবা অফিসার, চন্দ্রিমা থানা এলাকা">সমাজসেবা অফিসার, চন্দ্রিমা থানা এলাকা</option>
-
                             <option value="সমাজসেবা অফিসার, মতিহার থানা এলাকা">সমাজসেবা অফিসার, মতিহার থানা এলাকা</option>
-
                         </optgroup>
-
                     </select>
-
                 </div>
-
                 <div>
-
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">মোবাইল নম্বর</label>
-
                     <input type="text" id="reg-mobile" placeholder="০১৭XXXXXXXX" class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
-
                 </div>
-
                 <div>
-
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">ইমেইল ঠিকানা</label>
-
                     <input type="email" id="reg-email" placeholder="email@gmail.com" class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
-
                 </div>
-
                 <div>
-
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">নতুন ইউজার আইডি</label>
-
                     <input type="text" id="reg-username" placeholder="আইডি দিন (যেমন: paba_uso)" class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
-
                 </div>
-
                 <div>
-
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">নতুন পাসওয়ার্ড</label>
-
                     <input type="password" id="reg-password" placeholder="গোপন পাসওয়ার্ড" class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
-
                 </div>
-
                 <button type="button" onclick="handleRegister()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-2.5 rounded-xl shadow transition">অ্যাকাউন্ট তৈরি করুন</button>
-
                 <div class="text-center pt-2">
-
                     <button type="button" onclick="showLoginBox()" class="text-xs text-brand-700 font-semibold hover:underline cursor-pointer">← ফিরে যান (লগইন)</button>
-
                 </div>
-
             </div>
-
-
 
             <!-- FORGOT PASSWORD FORM -->
-
             <div id="auth-box-forgot" class="space-y-4 hidden">
-
                 <div class="border-b pb-2">
-
                     <h3 class="font-bold text-gray-800 text-sm">পাসওয়ার্ড পুনরুদ্ধার / রিসেট</h3>
-
                     <p class="text-xs text-gray-500">আপনার নিবন্ধিত মোবাইল নম্বর বা ইমেইল দিয়ে নতুন পাসওয়ার্ড সেট করুন</p>
-
                 </div>
-
                 <div>
-
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">আপনার ইউজার আইডি</label>
-
                     <input type="text" id="forgot-username" placeholder="ইউজার আইডি দিন" class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
-
                 </div>
-
                 <div>
-
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">নিবন্ধিত মোবাইল নম্বর বা ইমেইল</label>
-
                     <input type="text" id="forgot-contact" placeholder="মোবাইল বা ইমেইল দিন" class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
-
                 </div>
-
                 <div>
-
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">নতুন পাসওয়ার্ড</label>
-
                     <input type="password" id="forgot-new-password" placeholder="নতুন পাসওয়ার্ড দিন" class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
-
                 </div>
-
                 <button type="button" onclick="handlePasswordReset()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-2.5 rounded-xl shadow transition">পাসওয়ার্ড পরিবর্তন করুন</button>
-
                 <div class="text-center pt-2">
-
                     <button type="button" onclick="showLoginBox()" class="text-xs text-brand-700 font-semibold hover:underline cursor-pointer">← লগইন স্ক্রিনে ফিরে যান</button>
-
                 </div>
-
             </div>
-
-
 
         </div>
-
     </div>
 
-
-
     <!-- MAIN APP CONTAINER -->
-
     <div id="app-container" class="flex h-screen overflow-hidden hidden">
-
         <!-- Sidebar Navigation -->
-
         <aside class="w-64 bg-brand-900 text-white flex flex-col hidden md:flex shadow-2xl z-20">
-
             <div class="p-5 border-b border-brand-700/50 bg-brand-800/40">
-
                 <div class="flex items-center space-x-3">
-
                     <div class="w-10 h-10 rounded-lg bg-brand-500 flex items-center justify-center text-white text-xl font-bold shadow-md">
-
                         <i class="fa-solid fa-scale-balanced"></i>
-
                     </div>
-
                     <div>
-
                         <h1 class="text-base font-bold tracking-wide leading-tight">প্রবেশন অফিস</h1>
-
                         <p id="logged-user-role-text" class="text-xs text-brand-200 mt-0.5">অফিসার</p>
-
                     </div>
-
                 </div>
-
             </div>
-
-
 
             <nav class="flex-1 p-3 space-y-1 overflow-y-auto text-sm">
-
                 <a href="#dashboard-district" id="nav-dashboard-district" onclick="switchTab('dashboard-district')" class="nav-link flex items-center px-4 py-2.5 rounded-xl bg-brand-700 text-white font-medium transition duration-200 shadow-sm admin-only">
-
                     <i class="fa-solid fa-building-columns w-6 text-brand-100"></i> জেলা ড্যাশবোর্ড
-
                 </a>
-
                 <a href="#dashboard-upazila" id="nav-dashboard-upazila" onclick="switchTab('dashboard-upazila')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
-
                     <i class="fa-solid fa-map-location-dot w-6 text-brand-100"></i> <span id="nav-upz-text">উপজেলা ড্যাশবোর্ড</span>
-
                 </a>
-
                 <a href="#entry" id="nav-entry" onclick="switchTab('entry')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
-
                     <i class="fa-solid fa-user-plus w-6 text-brand-100"></i> নতুন প্রবেশনার এন্ট্রি
-
                 </a>
-
                 <a href="#register-district" id="nav-register-district" onclick="switchTab('register-district')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200 admin-only">
-
                     <i class="fa-solid fa-book-open w-6 text-brand-100"></i> জেলা রেজিস্টার
-
                 </a>
-
                 <a href="#register-upazila" id="nav-register-upazila" onclick="switchTab('register-upazila')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
-
                     <i class="fa-solid fa-clipboard-list w-6 text-brand-100"></i> উপজেলা রেজিস্টার
-
                 </a>
-
                 <a href="#database" id="nav-database" onclick="switchTab('database')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
-
                     <i class="fa-solid fa-database w-6 text-brand-100"></i> প্রবেশনারের ডাটাবেস
-
                 </a>
-
                 <a href="#settings" id="nav-settings" onclick="switchTab('settings')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200 admin-only">
-
                     <i class="fa-solid fa-user-gear w-6 text-brand-100"></i> স্টাফ আইডি তৈরি
-
                 </a>
-
                 <a href="#reports" id="nav-reports" onclick="switchTab('reports')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
-
                     <i class="fa-solid fa-file-arrow-down w-6 text-brand-100"></i> রিপোর্ট ও এক্সপোর্ট
-
                 </a>
-
             </nav>
 
-
-
             <div class="p-4 border-t border-brand-800 bg-brand-950/40 text-xs text-center space-y-2">
-
                 <span id="logged-user-name" class="font-semibold text-white block truncate"></span>
-
                 <span id="logged-user-officer-title" class="text-brand-300 text-[10px] block truncate"></span>
-
                 <button onclick="handleLogout()" class="w-full bg-red-600 hover:bg-red-700 text-white py-1.5 rounded-lg font-medium transition mt-1">লগআউট</button>
-
             </div>
-
         </aside>
 
-
-
         <!-- Main Content Area -->
-
         <div class="flex-1 flex flex-col overflow-y-auto">
-
             <header class="bg-white shadow-sm border-b px-6 py-4 flex flex-wrap justify-between items-center gap-4 sticky top-0 z-10">
-
                 <div class="flex items-center space-x-3">
-
                     <button onclick="toggleMobileSidebar()" class="md:hidden text-gray-600 hover:text-brand-700 text-xl focus:outline-none">
-
                         <i class="fa-solid fa-bars"></i>
-
                     </button>
-
                     <h2 id="page-title" class="text-xl font-bold text-gray-800 tracking-tight">ড্যাশবোর্ড ওভারভিউ</h2>
-
                 </div>
-
                 <div class="flex items-center space-x-3">
-
                     <span class="bg-brand-50 border border-brand-200 text-brand-800 text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center shadow-sm">
-
                         <i class="fa-solid fa-building-columns mr-2 text-brand-600"></i> <span id="header-office-text">প্রবেশন অফিসারের কার্যালয়, রাজশাহী</span>
-
                     </span>
-
                 </div>
-
             </header>
 
-
-
             <main class="p-4 md:p-6 flex-1 max-w-7xl w-full mx-auto">
-
                 
-
                 <!-- 1. DISTRICT DASHBOARD (Admin Only) -->
-
                 <section id="view-dashboard-district" class="space-y-6">
-
                     <div class="bg-brand-50 border-l-4 border-brand-600 p-4 rounded-r-xl shadow-sm">
-
                         <h4 class="font-bold text-brand-900 text-base">জেলা প্রবেশন অফিসারের নিয়ন্ত্রণাধীন কেসসমূহ</h4>
-
                         <p class="text-xs text-brand-700 mt-1">জেলার অধীনে পরিচালিত প্রবেশনারগণ কোন উপজেলা থেকে এসেছে তার পরিসংখ্যান।</p>
-
                     </div>
-
-
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
                         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-
                             <p class="text-xs font-semibold uppercase text-gray-500">জেলা মোট কেস</p>
-
                             <h3 id="dist-stat-total" class="text-3xl font-bold text-gray-800 mt-2">০</h3>
-
                         </div>
-
                         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-
                             <p class="text-xs font-semibold uppercase text-gray-500">চলমান কেস</p>
-
                             <h3 id="dist-stat-running" class="text-3xl font-bold text-green-600 mt-2">০</h3>
-
                         </div>
-
                         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-
                             <p class="text-xs font-semibold uppercase text-gray-500">মেয়াদ উত্তীর্ণ</p>
-
                             <h3 id="dist-stat-expired" class="text-3xl font-bold text-amber-600 mt-2">০</h3>
-
                         </div>
-
                         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-
                             <p class="text-xs font-semibold uppercase text-gray-500">প্রতিবেদন বাকি</p>
-
                             <h3 id="dist-stat-pending" class="text-3xl font-bold text-red-600 mt-2">০</h3>
-
                         </div>
-
                     </div>
-
-
 
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-
                         <h3 class="text-base font-bold text-gray-800 mb-4"><i class="fa-solid fa-chart-column text-brand-600 mr-2"></i>জেলা কেসের উপজেলাভিত্তিক বন্টন চিত্র</h3>
-
                         <div class="relative h-72">
-
                             <canvas id="chartDistrictUpazilaBar"></canvas>
-
                         </div>
-
                     </div>
-
                 </section>
-
-
 
                 <!-- 2. UPAZILA DASHBOARD -->
-
                 <section id="view-dashboard-upazila" class="hidden space-y-6">
-
                     <div class="bg-amber-50 border-l-4 border-amber-600 p-4 rounded-r-xl shadow-sm">
-
                         <h4 id="upz-dashboard-title" class="font-bold text-amber-900 text-base">উপজেলা সমাজসেবা অফিসার / প্রবেশন অফিসারগণের মামলাসমূহ</h4>
-
                         <p class="text-xs text-amber-800 mt-1">উপজেলা পর্যায়ে সমর্পিত মামলাসমূহ ও স্থানভিত্তিক তদারকি পরিসংখ্যান।</p>
-
                     </div>
-
-
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
                         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-
                             <p class="text-xs font-semibold uppercase text-gray-500">উপজেলা মোট কেস</p>
-
                             <h3 id="upz-stat-total" class="text-3xl font-bold text-gray-800 mt-2">০</h3>
-
                         </div>
-
                         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-
                             <p class="text-xs font-semibold uppercase text-gray-500">উপজেলা চলমান কেস</p>
-
                             <h3 id="upz-stat-running" class="text-3xl font-bold text-green-600 mt-2">০</h3>
-
                         </div>
-
                         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-
                             <p class="text-xs font-semibold uppercase text-gray-500">মেয়াদ উত্তীর্ণ কেস</p>
-
                             <h3 id="upz-stat-expired" class="text-3xl font-bold text-amber-600 mt-2">০</h3>
-
                         </div>
-
                         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-
                             <p class="text-xs font-semibold uppercase text-gray-500">চূড়ান্ত প্রতিবেদন বাকি</p>
-
                             <h3 id="upz-stat-pending" class="text-3xl font-bold text-red-600 mt-2">০</h3>
-
                         </div>
-
                     </div>
-
-
 
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-
                         <h3 class="text-base font-bold text-gray-800 mb-4"><i class="fa-solid fa-chart-pie text-brand-600 mr-2"></i>উপজেলাভিত্তিক কেস বন্টন চিত্র</h3>
-
                         <div class="relative h-72">
-
                             <canvas id="chartUpazilaBar"></canvas>
-
                         </div>
-
                     </div>
-
                 </section>
 
-
-
                 <!-- 3. ENTRY / EDIT VIEW -->
-
                 <section id="view-entry" class="hidden space-y-6">
-
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 max-w-4xl mx-auto">
-
                         <div class="flex justify-between items-center mb-6 border-b pb-4">
-
                             <div>
-
                                 <h3 id="form-section-title" class="text-lg font-bold text-gray-800"><i class="fa-solid fa-user-plus text-brand-600 mr-2"></i>নতুন প্রবেশনার তথ্য এন্ট্রি ফর্ম</h3>
-
                                 <p class="text-xs text-gray-500 mt-1">প্রবেশনারের তথ্য সংরক্ষণ করুন। অসম্পূর্ণ তথ্য পরবর্তীতে এডিট করে আপডেট করা যাবে।</p>
-
                             </div>
-
                             <button type="button" onclick="resetEntryForm()" id="cancel-edit-btn" class="hidden bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1.5 rounded-lg">এডিট বাতিল</button>
-
                         </div>
 
-
-
                         <form id="probationer-form" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-
                             <input type="hidden" id="edit_record_id" value="">
-
                             <div>
-
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">প্রাপ্তির তারিখ <span class="text-red-500">*</span></label>
-
                                 <input type="date" id="rcv_date" required class="w-full border rounded-lg px-3 py-2 text-sm outline-none">
-
                             </div>
-
                             <div>
-
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">স্মারক নং ও তারিখ <span class="text-red-500">*</span></label>
-
                                 <input type="text" id="memo_no" placeholder="স্মারক নং" required class="w-full border rounded-lg px-3 py-2 text-sm outline-none">
-
                             </div>
-
-
 
                             <div class="md:col-span-2 bg-brand-50/60 p-4 rounded-xl border border-brand-200">
-
                                 <label class="block text-xs font-bold text-brand-900 uppercase tracking-wider mb-1.5"><i class="fa-solid fa-user-check text-brand-600 mr-1.5"></i>দায়িত্বপ্রাপ্ত কর্মকর্তা বাছাই করুন <span class="text-red-500">*</span></label>
-
                                 <select id="assigned_officer" required class="w-full border border-brand-300 rounded-lg px-3 py-2 text-sm font-semibold text-brand-900 outline-none bg-white">
-
                                     <option value="">-- দায়িত্বপ্রাপ্ত কর্মকর্তা নির্বাচন করুন --</option>
-
                                     <option value="জেলা প্রবেশন অফিসার, রাজশাহী">জেলা প্রবেশন অফিসার, রাজশাহী</option>
-
                                     <optgroup label="উপজেলা সমাজসেবা অফিসার / প্রবেশন অফিসার">
-
                                         <option value="উপজেলা সমাজসেবা অফিসার, পবা">উপজেলা সমাজসেবা অফিসার, পবা</option>
-
                                         <option value="উপজেলা সমাজসেবা অফিসার, গোদাগাড়ী">উপজেলা সমাজসেবা অফিসার, গোদাগাড়ী</option>
-
                                         <option value="উপজেলা সমাজসেবা অফিসার, তানোর">উপজেলা সমাজসেবা অফিসার, তানোর</option>
-
                                         <option value="উপজেলা সমাজসেবা অফিসার, মোহনপুর">উপজেলা সমাজসেবা অফিসার, মোহনপুর</option>
-
                                         <option value="উপজেলা সমাজসেবা অফিসার, বাগমারা">উপজেলা সমাজসেবা অফিসার, বাগমারা</option>
-
                                         <option value="উপজেলা সমাজসেবা অফিসার, দুর্গাপুর">উপজেলা সমাজসেবা অফিসার, দুর্গাপুর</option>
-
                                         <option value="উপজেলা সমাজসেবা অফিসার, পুঠিয়া">উপজেলা সমাজসেবা অফিসার, পুঠিয়া</option>
-
                                         <option value="উপজেলা সমাজসেবা অফিসার, চারঘাট">উপজেলা সমাজসেবা অফিসার, চারঘাট</option>
-
                                         <option value="উপজেলা সমাজসেবা অফিসার, বাঘা">উপজেলা সমাজসেবা অফিসার, বাঘা</option>
-
                                         <option value="সমাজসেবা অফিসার, বোয়ালিয়া মডেল থানা এলাকা">সমাজসেবা অফিসার, বোয়ালিয়া মডেল থানা এলাকা</option>
-
                                         <option value="সমাজসেবা অফিসার, রাজপাড়া থানা এলাকা">সমাজসেবা অফিসার, রাজপাড়া থানা এলাকা</option>
-
                                         <option value="সমাজসেবা অফিসার, কাশিয়াডাঙ্গা থানা এলাকা">সমাজসেবা অফিসার, কাশিয়াডাঙ্গা থানা এলাকা</option>
-
                                         <option value="সমাজসেবা অফিসার, চন্দ্রিমা থানা এলাকা">সমাজসেবা অফিসার, চন্দ্রিমা থানা এলাকা</option>
-
                                         <option value="সমাজসেবা অফিসার, মতিহার থানা এলাকা">সমাজসেবা অফিসার, মতিহার থানা এলাকা</option>
-
                                     </optgroup>
-
                                 </select>
-
                             </div>
 
-
-
                             <div>
-
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">আদালতের নাম <span class="text-red-500">*</span></label>
-
                                 <select id="court_name" required class="w-full border rounded-lg px-3 py-2 text-sm outline-none">
-
                                     <option value="">-- আদালত নির্বাচন করুন --</option>
-
                                     <option value="সিনিয়র জেলা ও দায়রা জজ, রাজশাহী">সিনিয়র জেলা ও দায়রা জজ, রাজশাহী</option>
-
                                     <option value="অতিরিক্ত জেলা জজ, ২য় আদালত, রাজশাহী">অতিরিক্ত জেলা জজ, ২য় আদালত, রাজশাহী</option>
-
                                     <option value="অতিরিক্ত জেলা জজ, ৩য় আদালত, রাজশাহী">অতিরিক্ত জেলা জজ, ৩য় আদালত, রাজশাহী</option>
-
                                     <option value="অতিরিক্ত জেলা জজ, ৪র্থ আদালত, রাজশাহী">অতিরিক্ত জেলা জজ, ৪র্থ আদালত, রাজশাহী</option>
-
                                     <option value="অতিরিক্ত জেলা জজ, ৫ম আদালত, রাজশাহী">অতিরিক্ত জেলা জজ, ৫ম আদালত, রাজশাহী</option>
-
                                     <option value="যুগ্ম জেলা জজ, ১ম আদালত, রাজশাহী">যুগ্ম জেলা জজ, ১ম আদালত, রাজশাহী</option>
-
                                     <option value="যুগ্ম জেলা জজ, ২য় আদালত, রাজশাহী">যুগ্ম জেলা জজ, ২য় আদালত, রাজশাহী</option>
-
                                     <option value="যুগ্ম জেলা জজ, অতিরিক্ত আদালত, রাজশাহী">যুগ্ম জেলা জজ, অতিরিক্ত আদালত, রাজশাহী</option>
-
                                     <option value="চীফ জুডিসিয়াল ম্যাজিস্ট্রেট আদালত, রাজশাহী">চীফ জুডিসিয়াল ম্যাজিস্ট্রেট আদালত, রাজশাহী</option>
-
                                     <option value="অতিরিক্ত চীফ জুডিসিয়াল ম্যাজিস্ট্রেট আদালত, রাজশাহী">অতিরিক্ত চীফ জুডিসিয়াল ম্যাজিস্ট্রেট আদালত, রাজশাহী</option>
-
                                     <option value="সিনিয়র জুডিসিয়াল ম্যাজিস্ট্রেট, ১ম আদালত, রাজশাহী">সিনিয়র জুডিসিয়াল ম্যাজিস্ট্রেট, ১ম আদালত, রাজশাহী</option>
-
                                     <option value="সিনিয়র জুডিসিয়াল ম্যাজিস্ট্রেট, ২য় আদালত, রাজশাহী">সিনিয়র জুডিসিয়াল ম্যাজিস্ট্রেট, ২য় আদালত, রাজশাহী</option>
-
                                     <option value="সিনিয়র জুডিসিয়াল ম্যাজিস্ট্রেট, ৩য় আদালত, রাজশাহী">সিনিয়র জুডিসিয়াল ম্যাজিস্ট্রেট, ৩য় আদালত, রাজশাহী</option>
-
                                     <option value="সিনিয়র জুডিসিয়াল ম্যাজিস্ট্রেট, ৪র্থ আদালত, রাজশাহী">সিনিয়র জুডিসিয়াল ম্যাজিস্ট্রেট, ৪র্থ আদালত, রাজশাহী</option>
-
                                     <option value="জুডিসিয়াল ম্যাজিস্ট্রেট, ১ম আদালত, রাজশাহী">জুডিসিয়াল ম্যাজিস্ট্রেট, ১ম আদালত, রাজশাহী</option>
-
                                     <option value="জুডিসিয়াল ম্যাজিস্ট্রেট, ২য় আদালত, রাজশাহী">জুডিসিয়াল ম্যাজিস্ট্রেট, ২য় আদালত, রাজশাহী</option>
-
                                     <option value="জুডিসিয়াল ম্যাজিস্ট্রেট, ৩য় আদালত, রাজশাহী">জুডিসিয়াল ম্যাজিস্ট্রেট, ৩য় আদালত, রাজশাহী</option>
-
                                     <option value="জুডিসিয়াল ম্যাজিস্ট্রেট, ৪র্থ আদালত, রাজশাহী">জুডিসিয়াল ম্যাজিস্ট্রেট, ৪র্থ আদালত, রাজশাহী</option>
-
                                     <option value="নারী ও শিশু নির্যাতন দমন ট্রাইব্যুনাল-১, রাজশাহী">নারী ও শিশু নির্যাতন দমন ট্রাইব্যুনাল-১, রাজশাহী</option>
-
                                     <option value="নারী ও শিশু নির্যাতন দমন ট্রাইব্যুনাল-২, রাজশাহী">নারী ও শিশু নির্যাতন দমন ট্রাইব্যুনাল-২, রাজশাহী</option>
-
                                     <option value="শিশু আদালত, রাজশাহী">শিশু আদালত, রাজশাহী</option>
-
                                     <option value="অন্যান্য আদালত">অন্যান্য আদালত</option>
-
                                 </select>
-
                             </div>
-
                             <div>
-
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">মামলা নম্বর <span class="text-red-500">*</span></label>
-
                                 <input type="text" id="case_no" placeholder="মামলা নম্বর" required class="w-full border rounded-lg px-3 py-2 text-sm outline-none">
-
                             </div>
-
                             <div>
-
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">প্রবেশনারের নাম <span class="text-red-500">*</span></label>
-
                                 <input type="text" id="p_name" placeholder="নাম" required class="w-full border rounded-lg px-3 py-2 text-sm outline-none">
-
                             </div>
-
                             <div>
-
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">পিতার নাম <span class="text-red-500">*</span></label>
-
                                 <input type="text" id="f_name" placeholder="পিতার নাম" required class="w-full border rounded-lg px-3 py-2 text-sm outline-none">
-
                             </div>
-
                             <div>
-
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">মাতার নাম</label>
-
                                 <input type="text" id="m_name" placeholder="মাতার নাম" class="w-full border rounded-lg px-3 py-2 text-sm outline-none">
-
                             </div>
-
                             <div>
-
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">বয়স <span class="text-red-500">*</span></label>
-
-                                <input t
+                                <input type="number" id="age" placeholder="বয়স" required class="w-full border rounded-lg px-3 py-2 text-sm outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">পেশা</label>
+                                <input type="text" id="occupation" placeholder="পেশা" 
