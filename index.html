@@ -1241,4 +1241,101 @@
         }
 
         function deleteRecord(id) {
-            if(confirm('আপনি কি নিশ্চিতভাবে
+            if(confirm('আপনি কি নিশ্চিতভাবে এই রেকর্ডটি মুছে ফেলতে চান?')) {
+                let db = getDB().filter(d => d.id !== id);
+                saveDB(db);
+                loadDatabase();
+            }
+        }
+
+        // --- REPORTS & PRINTING ---
+        function previewIntakePDFFromForm() {
+            let p_name = document.getElementById('p_name').value;
+            if(!p_name) { alert('প্রবেশনারের নাম দিন!'); return; }
+            let data = {
+                rcv_date: document.getElementById('rcv_date').value,
+                memo_no: document.getElementById('memo_no').value,
+                assigned_officer: document.getElementById('assigned_officer').value,
+                court_name: document.getElementById('court_name').value,
+                case_no: document.getElementById('case_no').value,
+                p_name: p_name,
+                f_name: document.getElementById('f_name').value,
+                m_name: document.getElementById('m_name').value,
+                age: document.getElementById('age').value,
+                occupation: document.getElementById('occupation').value,
+                education: document.getElementById('education').value,
+                mobile: document.getElementById('mobile').value,
+                nid: document.getElementById('nid').value,
+                address: `গ্রাম/বাসাঃ ${document.getElementById('addr_village').value}, ডাকঘরঃ ${document.getElementById('addr_post').value}, উপজেলাঃ ${document.getElementById('addr_upazila').value}, ইউপিঃ ${document.getElementById('addr_union').value}, ওয়ার্ডঃ ${document.getElementById('addr_ward').value}`,
+                duration: document.getElementById('duration').value,
+                start_date: document.getElementById('start_date').value,
+                end_date: document.getElementById('end_date').value,
+                remarks: document.getElementById('remarks').value
+            };
+            generatePrintableHTML(data);
+            window.print();
+        }
+
+        function printIntakePDF(id) {
+            let db = getDB();
+            let item = db.find(d => d.id === id);
+            if(item) { generatePrintableHTML(item); window.print(); }
+        }
+
+        function generatePrintableHTML(item) {
+            document.getElementById('report-content-body').innerHTML = `
+                <table class="w-full border-collapse border border-gray-400 text-sm leading-relaxed">
+                    <tr><td class="border border-gray-400 p-3 font-semibold bg-gray-50">প্রাপ্তি ও স্মারক:</td><td class="border border-gray-400 p-3">${item.rcv_date || ''} | ${item.memo_no || ''}</td></tr>
+                    <tr><td class="border border-gray-400 p-3 font-semibold bg-gray-50">দায়িত্বপ্রাপ্ত কর্মকর্তা:</td><td class="border border-gray-400 p-3 font-bold">${item.assigned_officer || ''}</td></tr>
+                    <tr><td class="border border-gray-400 p-3 font-semibold bg-gray-50">আদালত ও মামলা:</td><td class="border border-gray-400 p-3">${item.court_name || ''} | ${item.case_no || ''}</td></tr>
+                    <tr><td class="border border-gray-400 p-3 font-semibold bg-gray-50">নাম ও পিতা:</td><td class="border border-gray-400 p-3 font-bold text-base">${item.p_name || ''} (পিতা: ${item.f_name || ''})</td></tr>
+                    <tr><td class="border border-gray-400 p-3 font-semibold bg-gray-50">বয়স ও পেশা:</td><td class="border border-gray-400 p-3">বয়স: ${item.age || ''} | পেশা: ${item.occupation || ''} | শিক্ষা: ${item.education || ''}</td></tr>
+                    <tr><td class="border border-gray-400 p-3 font-semibold bg-gray-50">মোবাইল ও ঠিকানা:</td><td class="border border-gray-400 p-3">মোবাইল: ${item.mobile || ''} | ঠিকানা: ${item.address || ''}</td></tr>
+                    <tr><td class="border border-gray-400 p-3 font-semibold bg-gray-50">মেয়াদ:</td><td class="border border-gray-400 p-3">${item.duration || ''} (${item.start_date || ''} হতে ${item.end_date || ''})</td></tr>
+                </table>
+            `;
+        }
+
+        function printMonthlyMeetingReport() {
+            let db = getDB();
+            let todayStr = new Date().toLocaleDateString('bn-BD');
+            document.getElementById('monthly-report-date-str').innerText = `তারিখ: ${todayStr}`;
+
+            let distCount = db.filter(i => i.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী').length;
+            let upzCount = db.filter(i => i.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী').length;
+
+            document.getElementById('monthly-report-body').innerHTML = `
+                <table class="w-full border-collapse border border-gray-400 text-sm">
+                    <tr class="bg-gray-100 font-bold"><td class="border p-2">বিবরণ</td><td class="border p-2 text-center">সংখ্যা</td></tr>
+                    <tr><td class="border p-2">জেলা প্রবেশন অফিসারের অধীনে মোট কেস</td><td class="border p-2 text-center">${distCount}</td></tr>
+                    <tr><td class="border p-2">উপজেলা সমাজসেবা অফিসারগণের অধীনে মোট কেস</td><td class="border p-2 text-center">${upzCount}</td></tr>
+                    <tr class="font-bold bg-gray-50"><td class="border p-2">সর্বমোট কেস</td><td class="border p-2 text-center">${db.length}</td></tr>
+                </table>
+                <p class="mt-4 text-xs text-gray-600">উক্ত মাসিক মিটিংয়ে জেলা ও উপজেলা পর্যায়ের প্রবেশনারগণের মামলা ও তদারকি সন্তোষজনক রয়েছে।</p>
+            `;
+            window.print();
+        }
+
+        function exportToCSV(type) {
+            let db = getDB();
+            if(type === 'district') db = db.filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
+            else db = db.filter(item => item.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী');
+
+            if(db.length === 0) { alert('কোনো ডাটা নেই!'); return; }
+            let csv = "data:text/csv;charset=utf-8,\uFEFFID,Date,Officer,Court,CaseNo,Name,Father,Mobile,Upazila,Start,End\n";
+            db.forEach(r => {
+                csv += `${r.id},${r.rcv_date},"${r.assigned_officer}","${r.court_name}","${r.case_no}","${r.p_name}","${r.f_name}",${r.mobile},"${r.upazila}",${r.start_date},${r.end_date}\n`;
+            });
+            let link = document.createElement("a");
+            link.setAttribute("href", encodeURI(csv));
+            link.setAttribute("download", `probation_${type}_report.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Initialize Session Check
+        checkExistingSession();
+    </script>
+</body>
+</html>
