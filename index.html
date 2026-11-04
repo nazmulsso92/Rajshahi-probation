@@ -51,7 +51,7 @@
                 top: 0;
                 width: 100%;
                 margin: 0;
-                padding: 15px;
+                padding: 20px;
                 background: white;
                 color: black;
             }
@@ -97,9 +97,9 @@
             </nav>
 
             <div class="p-4 border-t border-brand-800 bg-brand-950/40 text-xs text-brand-100/70 text-center leading-relaxed">
-                পরিকল্পনা ও বাস্তবায়নে:<br>
-                <span class="font-semibold text-white">মোঃ নাজমুল খাঁ</span><br>
-                প্রবেশন অফিসার, রাজশাহী
+                কার্যালয়:<br>
+                <span class="font-semibold text-white">প্রবেশন অফিসারের কার্যালয়</span><br>
+                রাজশাহী
             </div>
         </aside>
 
@@ -225,7 +225,7 @@
                         <div class="flex justify-between items-center mb-6 border-b pb-4">
                             <div>
                                 <h3 class="text-lg font-bold text-gray-800"><i class="fa-solid fa-user-plus text-brand-600 mr-2"></i>নতুন প্রবেশনার তথ্য এন্ট্রি ফর্ম</h3>
-                                <p class="text-xs text-gray-500 mt-1">প্রবেশনারের বিস্তারিত তথ্য সঠিকভাবে ইনপুট দিয়ে ডাটাবেসে সেভ বা পিডিএফ ইনটেক ফর্ম প্রিন্ট করুন।</p>
+                                <p class="text-xs text-gray-500 mt-1">প্রবেশনারের বিস্তারিত তথ্য সঠিকভাবে ইনপুট দিয়ে ডাটাবেসে সেভ বা পিডিএফ ইনটেক ফর্ম প্রিন্ট করুন।</p>
                             </div>
                         </div>
 
@@ -409,17 +409,17 @@
                 <section id="view-register" class="hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-base font-bold text-gray-800"><i class="fa-solid fa-book-open text-brand-600 mr-2"></i>হাজিরা রেজিস্টার ও সাপ্তাহিক/মাসিক ট্র্যাকিং</h3>
+                            <h3 class="text-base font-bold text-gray-800"><i class="fa-solid fa-book-open text-brand-600 mr-2"></i>হাজিরা রেজিস্টার ও হালনাগাদ</h3>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
                                 <thead>
-                                    <tr class="bg-gray-50 text-gray-700 text-xs uppercase font-bold border-b border-gray-200">
+                                    <tr class="bg-gray-50 text-gray-700 text-xs uppercase font-bold border-b">
                                         <th class="p-3">নাম ও মামলা নং</th>
                                         <th class="p-3">উপজেলা</th>
                                         <th class="p-3">হাজিরা (সম্পন্ন/মোট)</th>
-                                        <th class="p-3">পরবর্তী হাজিরার তারিখ</th>
-                                        <th class="p-3">আচরণগত উন্নতি ও পর্যবেক্ষণ</th>
+                                        <th class="p-3">পরবর্তী হাজিরা তারিখ</th>
+                                        <th class="p-3">আচরণগত পরিবর্তন ও মন্তব্য</th>
                                         <th class="p-3 text-center">কার্যক্রম</th>
                                     </tr>
                                 </thead>
@@ -434,44 +434,27 @@
                 <!-- 4. DATABASE & SEARCH VIEW -->
                 <section id="view-database" class="hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-                            <input type="text" id="search-query" onkeyup="loadDatabase()" placeholder="নাম, মামলা নং বা NID..." class="border rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
-                            <select id="filter-upazila" onchange="loadDatabase()" class="border rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
-                                <option value="">সব উপজেলা/থানা</option>
-                                <option value="রাজশাহী জেলা কার্যালয় (সদর)">রাজশাহী জেলা কার্যালয় (সদর)</option>
-                                <option value="বোয়ালিয়া মডেল থানা এলাকা">বোয়ালিয়া মডেল থানা এলাকা</option>
-                                <option value="রাজপাড়া থানা এলাকা">রাজপাড়া থানা এলাকা</option>
-                                <option value="কাশিয়াডাঙ্গা থানা এলাকা">কাশিয়াডাঙ্গা থানা এলাকা</option>
-                                <option value="চন্দ্রিমা থানা এলাকা">চন্দ্রিমা থানা এলাকা</option>
-                                <option value="মতিহার থানা এলাকা">মতিহার থানা এলাকা</option>
-                                <option value="পবা উপজেলা">পবা উপজেলা</option>
-                                <option value="গোদাগাড়ী উপজেলা">গোদাগাড়ী উপজেলা</option>
-                                <option value="তানোর উপজেলা">তানোর উপজেলা</option>
-                                <option value="মোহনপুর উপজেলা">মোহনপুর উপজেলা</option>
-                                <option value="বাগমারা উপজেলা">বাগমারা উপজেলা</option>
-                                <option value="দুর্গাপুর উপজেলা">দুর্গাপুর উপজেলা</option>
-                                <option value="পুঠিয়া উপজেলা">পুঠিয়া উপজেলা</option>
-                                <option value="চারঘাট উপজেলা">চারঘাট উপজেলা</option>
-                                <option value="বাঘা উপজেলা">বাঘা উপজেলা</option>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                            <input type="text" id="search-query" placeholder="নাম, মামলা নং বা NID দিয়ে খুঁজুন..." class="border border-gray-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
+                            <select id="filter-court" class="border border-gray-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
+                                <option value="">সব আদালত</option>
                             </select>
-                            <select id="filter-status" onchange="loadDatabase()" class="border rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
+                            <select id="filter-status" class="border border-gray-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                                 <option value="">সকল অবস্থা</option>
                                 <option value="Running">মামলা চলমান</option>
                                 <option value="Expired">মেয়াদ উত্তীর্ণ</option>
                             </select>
-                            <button onclick="loadDatabase()" class="bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium py-2 rounded-xl transition flex items-center justify-center">
-                                <i class="fa-solid fa-filter mr-2"></i> ফিল্টার রিফ্রেশ
-                            </button>
+                            <button onclick="loadDatabase()" class="bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium py-2 rounded-xl transition shadow-sm"><i class="fa-solid fa-filter mr-1"></i> ফিল্টার করুন</button>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
                                 <thead>
-                                    <tr class="bg-gray-50 text-gray-700 text-xs uppercase font-bold border-b border-gray-200">
+                                    <tr class="bg-gray-50 text-gray-700 text-xs uppercase font-bold border-b">
                                         <th class="p-3">তারিখ</th>
-                                        <th class="p-3">নাম ও অভিভাবক</th>
+                                        <th class="p-3">নাম ও পিতা</th>
                                         <th class="p-3">মামলা ও আদালত</th>
-                                        <th class="p-3">উপজেলা ও ফোন</th>
-                                        <th class="p-3">মেয়াদকাল</th>
+                                        <th class="p-3">উপজেলা ও মোবাইল</th>
+                                        <th class="p-3">মেয়াদ</th>
                                         <th class="p-3">অবস্থা</th>
                                         <th class="p-3 text-center">অ্যাকশন</th>
                                     </tr>
@@ -487,119 +470,114 @@
                 <!-- 5. REPORTS & EXPORT VIEW -->
                 <section id="view-reports" class="hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
-                        <h3 class="text-base font-bold text-gray-800 border-b pb-3"><i class="fa-solid fa-file-arrow-down text-brand-600 mr-2"></i>রিপোর্ট ডাউনলোড ও ব্যাকআপ ম্যানেজমেন্ট</h3>
+                        <h3 class="text-lg font-bold text-gray-800 border-b pb-3"><i class="fa-solid fa-file-arrow-down text-brand-600 mr-2"></i>রিপোর্ট ডাউনলোড ও এক্সপোর্ট</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="border border-gray-200 p-5 rounded-2xl space-y-3 bg-gray-50 hover:bg-white transition">
-                                <div class="w-10 h-10 rounded-xl bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold">
-                                    <i class="fa-solid fa-file-excel"></i>
-                                </div>
-                                <h4 class="font-bold text-gray-800">এক্সেল ডাউনলোড (CSV)</h4>
-                                <p class="text-xs text-gray-500 leading-relaxed">সব প্রবেশনারের সম্পূ্র্ণ তথ্য এক্সেল শিট আকারে সেভ করুন।</p>
-                                <button onclick="exportToCSV()" class="w-full bg-green-600 hover:bg-green-700 text-white text-xs font-semibold py-2.5 rounded-xl transition flex items-center justify-center">
-                                    <i class="fa-solid fa-download mr-2"></i> এক্সেল ফাইল ডাউনলোড
-                                </button>
+                            <div class="border p-5 rounded-2xl space-y-3 bg-gray-50/50">
+                                <h4 class="font-bold text-gray-700">এক্সেল রিপোর্ট (CSV)</h4>
+                                <p class="text-xs text-gray-500">সকল প্রবেশনারের বিস্তারিত তালিকা মাইক্রোসফট এক্সেল ফরম্যাটে ডাউনলোড করুন।</p>
+                                <button onclick="exportToCSV()" class="w-full bg-green-600 hover:bg-green-700 text-white text-sm py-2.5 rounded-xl font-medium transition shadow-sm"><i class="fa-solid fa-file-excel mr-2"></i> এক্সেল ডাউনলোড</button>
                             </div>
-                            
-                            <div class="border border-gray-200 p-5 rounded-2xl space-y-3 bg-gray-50 hover:bg-white transition">
-                                <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-lg font-bold">
-                                    <i class="fa-solid fa-print"></i>
-                                </div>
-                                <h4 class="font-bold text-gray-800">সামারি রিপোর্ট প্রিন্ট</h4>
-                                <p class="text-xs text-gray-500 leading-relaxed">রাজশাহী জেলার সামগ্রিক পরিসংখ্যান সম্বলিত সারসংক্ষেপ প্রতিবেদন প্রিন্ট করুন।</p>
-                                <button onclick="printSummaryReport()" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2.5 rounded-xl transition flex items-center justify-center">
-                                    <i class="fa-solid fa-print mr-2"></i> সামারি রিপোর্ট প্রিন্ট
-                                </button>
+                            <div class="border p-5 rounded-2xl space-y-3 bg-gray-50/50">
+                                <h4 class="font-bold text-gray-700">প্রিন্ট / পিডিএফ রিপোর্ট</h4>
+                                <p class="text-xs text-gray-500">অফিসিয়াল সারসংক্ষেপ ও পূর্ণাঙ্গ তালিকা প্রিন্ট বা পিডিএফ সেভ করুন।</p>
+                                <button onclick="window.print()" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm py-2.5 rounded-xl font-medium transition shadow-sm"><i class="fa-solid fa-print mr-2"></i> প্রিন্ট / PDF</button>
                             </div>
-
-                            <div class="border border-gray-200 p-5 rounded-2xl space-y-3 bg-gray-50 hover:bg-white transition">
-                                <div class="w-10 h-10 rounded-xl bg-red-100 text-red-700 flex items-center justify-center text-lg font-bold">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </div>
-                                <h4 class="font-bold text-gray-800">ডাটা রিসেট</h4>
-                                <p class="text-xs text-gray-500 leading-relaxed">মেমোরি খালি করতে সমস্ত ডাটা স্থায়ীভাবে মুছে নতুনভাবে শুরু করুন।</p>
-                                <button onclick="clearAllData()" class="w-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-2.5 rounded-xl transition flex items-center justify-center">
-                                    <i class="fa-solid fa-trash mr-2"></i> ডাটা মুছে ফেলুন
-                                </button>
+                            <div class="border p-5 rounded-2xl space-y-3 bg-gray-50/50">
+                                <h4 class="font-bold text-gray-700">ডেটা রিসেট ও ডিলিট</h4>
+                                <p class="text-xs text-gray-500">সঞ্চয়কৃত সব তথ্য মুছে নতুন করে মেমোরি খালি করতে চাইলে ক্লিক করুন।</p>
+                                <button onclick="clearAllData()" class="w-full bg-red-600 hover:bg-red-700 text-white text-sm py-2.5 rounded-xl font-medium transition shadow-sm"><i class="fa-solid fa-trash mr-2"></i> সমস্ত ডাটা মুছুন</button>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- 6. PRINTABLE REPORT MODAL / CONTAINER (Hidden on UI, Active in Print Mode) -->
+                <!-- 6. PRINTABLE REPORT CONTAINER (For PDF / Print) -->
                 <div id="printable-report" class="hidden">
-                    <!-- Dynamic Printable Form / Summary Content Will Be Inserted Here -->
+                    <div class="text-center space-y-1.5 mb-8 border-b-2 border-gray-800 pb-4">
+                        <h2 class="text-2xl font-bold">প্রবেশন অফিস, সমাজসেবা অধিদপ্তর</h2>
+                        <h3 class="text-lg font-semibold">প্রবেশন অফিসারের কার্যালয়, রাজশাহী</h3>
+                        <h4 class="text-base font-bold underline mt-3 text-gray-800">প্রবেশনারের ইনটেক ও প্রগতি প্রতিবেদন</h4>
+                    </div>
+                    
+                    <div id="report-content-body">
+                        <!-- Dynamic Report Content -->
+                    </div>
+
+                    <!-- SIGNATURE BLOCK WITH ENHANCED SPACING & GENERIC TITLE -->
+                    <div class="mt-32 flex justify-between items-end px-8 text-base">
+                        <div class="text-center w-60">
+                            <p class="border-t border-gray-800 pt-2 font-semibold">প্রবেশনারের স্বাক্ষর / টিপসই</p>
+                        </div>
+                        <div class="text-center w-60">
+                            <p class="border-t border-gray-800 pt-2 font-bold">প্রবেশন অফিসার</p>
+                            <p class="text-sm text-gray-700">রাজশাহী</p>
+                        </div>
+                    </div>
                 </div>
 
             </main>
         </div>
     </div>
 
-    <!-- Application Script Logic -->
+    <!-- JavaScript Application Logic & Charts -->
     <script>
-        // Global Chart instances
         let chartUpazilaInstance = null;
         let chartStatusInstance = null;
 
-        // Fetch DB from LocalStorage
         function getDB() {
             let data = localStorage.getItem('probation_db_rajshahi');
             return data ? JSON.parse(data) : [];
         }
 
-        // Save DB to LocalStorage
         function saveDB(data) {
             localStorage.setItem('probation_db_rajshahi', JSON.stringify(data));
         }
 
-        // Sidebar Navigation Tab Switcher
+        function toggleMobileSidebar() {
+            const aside = document.querySelector('aside');
+            aside.classList.toggle('hidden');
+        }
+
         function switchTab(tabId) {
             document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
             document.getElementById('view-' + tabId).classList.remove('hidden');
             
-            document.querySelectorAll('aside nav a').forEach(link => {
-                link.classList.remove('bg-brand-700');
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('bg-brand-700', 'shadow-sm');
                 link.classList.add('hover:bg-brand-800');
             });
-
             const activeNav = document.getElementById('nav-' + tabId);
             if(activeNav) {
-                activeNav.classList.add('bg-brand-700');
+                activeNav.classList.add('bg-brand-700', 'shadow-sm');
                 activeNav.classList.remove('hover:bg-brand-800');
             }
 
-            const pageTitles = {
+            const titles = {
                 'dashboard': 'ড্যাশবোর্ড ওভারভিউ',
                 'entry': 'নতুন প্রবেশনার তথ্য এন্ট্রি',
-                'register': 'হাজিরা রেজিস্টার ও আচরণ ট্র্যাকিং',
-                'database': 'প্রবেশনার ডাটাবেস ও অনুসন্ধান',
-                'reports': 'রিপোর্ট ও এক্সপোর্ট সেন্টার'
+                'register': 'হাজিরা রেজিস্টার ও হালনাগাদ',
+                'database': 'প্রবেশনারের ডাটাবেস ও অনুসন্ধান',
+                'reports': 'রিপোর্ট ডাউনলোড ও এক্সপোর্ট'
             };
-            document.getElementById('page-title').innerText = pageTitles[tabId] || 'ড্যাশবোর্ড';
+            document.getElementById('page-title').innerText = titles[tabId] || '';
 
             if(tabId === 'dashboard') loadDashboard();
             if(tabId === 'register') loadRegister();
             if(tabId === 'database') loadDatabase();
         }
 
-        // Handle Entry Form Submit
+        // Handle Form Submission
         document.getElementById('probationer-form').addEventListener('submit', function(e) {
             e.preventDefault();
             let db = getDB();
 
-            // Construct Full Address string
             let village = document.getElementById('addr_village').value.trim();
             let post = document.getElementById('addr_post').value.trim();
             let union = document.getElementById('addr_union').value.trim();
-            let upazila = document.getElementById('upazila').value;
-            let district = document.getElementById('addr_district').value.trim() || 'রাজশাহী';
+            let upazilaVal = document.getElementById('upazila').value;
+            let districtVal = document.getElementById('addr_district').value.trim();
 
-            let fullAddressParts = [];
-            if(village) fullAddressParts.push("গ্রাম/বাসা: " + village);
-            if(post) fullAddressParts.push("ডাকঘর: " + post);
-            if(union) fullAddressParts.push("ইউপি/ওয়ার্ড: " + union);
-            if(upazila) fullAddressParts.push("উপজেলা/থানা: " + upazila);
-            if(district) fullAddressParts.push("জেলা: " + district);
-            let fullAddress = fullAddressParts.join(", ");
+            let fullAddress = `গ্রাম/বাসাঃ ${village || 'প্রযোজ্য নয়'}, ডাকঘরঃ ${post || 'প্রযোজ্য নয়'}, ইউপি/ওয়ার্ডঃ ${union || 'প্রযোজ্য নয়'}, উপজেলাঃ ${upazilaVal}, জেলাঃ ${districtVal}`;
 
             let newRecord = {
                 id: Date.now(),
@@ -614,16 +592,9 @@
                 occupation: document.getElementById('occupation').value,
                 education: document.getElementById('education').value,
                 mobile: document.getElementById('mobile').value,
+                upazila: upazilaVal,
                 nid: document.getElementById('nid').value,
-                
-                // Address breakdown
-                addr_village: village,
-                addr_post: post,
-                addr_union: union,
-                upazila: upazila,
-                addr_district: district,
-                full_address: fullAddress,
-
+                address: fullAddress,
                 family_info: document.getElementById('family_info').value,
                 duration: document.getElementById('duration').value,
                 start_date: document.getElementById('start_date').value,
@@ -634,53 +605,36 @@
                 behavior_notes: '',
                 remarks: document.getElementById('remarks').value
             };
-
             db.push(newRecord);
             saveDB(db);
-            
-            alert('সফলভাবে নতুন প্রবেশনারের তথ্য এন্ট্রি ও সংরক্ষণ করা হয়েছে!');
+            alert('সফলভাবে নতুন প্রবেশনারের তথ্য সংরক্ষণ করা হয়েছে!');
             this.reset();
             switchTab('dashboard');
         });
 
-        // Load Dashboard Statistics & Render Chart.js
         function loadDashboard() {
             let db = getDB();
             document.getElementById('stat-total').innerText = db.length;
             
             let running = 0, expired = 0, pendingReport = 0;
             let today = new Date().toISOString().split('T')[0];
-            
-            let defaultUpazilas = [
-                "রাজশাহী জেলা কার্যালয় (সদর)", "বোয়ালিয়া মডেল থানা এলাকা", "রাজপাড়া থানা এলাকা",
-                "কাশিয়াডাঙ্গা থানা এলাকা", "চন্দ্রিমা থানা এলাকা", "মতিহার থানা এলাকা", "পবা উপজেলা",
-                "গোদাগাড়ী উপজেলা", "তানোর উপজেলা", "মোহনপুর উপজেলা", "বাগমারা উপজেলা",
-                "দুর্গাপুর উপজেলা", "পুঠিয়া উপজেলা", "চারঘাট উপজেলা", "বাঘা উপজেলা"
-            ];
-
             let upazilaCounts = {};
-            defaultUpazilas.forEach(u => {
-                upazilaCounts[u] = { total: 0, running: 0, expired: 0, pending: 0 };
-            });
 
             db.forEach(item => {
-                let isRunning = item.end_date >= today;
-                if(isRunning) {
-                    running++;
-                } else {
+                if(item.end_date >= today) running++;
+                else {
                     expired++;
                     pendingReport++;
                 }
 
-                let upKey = item.upazila || "অন্যান্য";
-                if(!upazilaCounts[upKey]) {
-                    upazilaCounts[upKey] = { total: 0, running: 0, expired: 0, pending: 0 };
+                if(!upazilaCounts[item.upazila]) {
+                    upazilaCounts[item.upazila] = { total: 0, running: 0, expired: 0, pending: 0 };
                 }
-                upazilaCounts[upKey].total++;
-                if(isRunning) upazilaCounts[upKey].running++;
+                upazilaCounts[item.upazila].total++;
+                if(item.end_date >= today) upazilaCounts[item.upazila].running++;
                 else {
-                    upazilaCounts[upKey].expired++;
-                    upazilaCounts[upKey].pending++;
+                    upazilaCounts[item.upazila].expired++;
+                    upazilaCounts[item.upazila].pending++;
                 }
             });
 
@@ -688,136 +642,99 @@
             document.getElementById('stat-expired').innerText = expired;
             document.getElementById('stat-pending-report').innerText = pendingReport;
 
-            // Render Dashboard Table
             let tbody = document.getElementById('dashboard-summary-table');
             tbody.innerHTML = '';
-            for(let up in upazilaCounts) {
-                if(upazilaCounts[up].total > 0 || defaultUpazilas.includes(up)) {
+            if(Object.keys(upazilaCounts).length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400">কোনো তথ্য পাওয়া যায়নি</td></tr>`;
+            } else {
+                for(let up in upazilaCounts) {
                     tbody.innerHTML += `
-                        <tr class="hover:bg-gray-50/50 transition">
-                            <td class="p-3 font-medium text-gray-800">${up}</td>
-                            <td class="p-3 font-semibold text-gray-700">${upazilaCounts[up].total}</td>
-                            <td class="p-3 text-green-600 font-medium">${upazilaCounts[up].running}</td>
-                            <td class="p-3 text-amber-600 font-medium">${upazilaCounts[up].expired}</td>
-                            <td class="p-3 text-red-600 font-medium">${upazilaCounts[up].pending}</td>
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="p-3 font-semibold text-gray-800">${up}</td>
+                            <td class="p-3">${upazilaCounts[up].total}</td>
+                            <td class="p-3 text-green-600 font-semibold">${upazilaCounts[up].running}</td>
+                            <td class="p-3 text-amber-600">${upazilaCounts[up].expired}</td>
+                            <td class="p-3 text-red-600">${upazilaCounts[up].pending}</td>
                         </tr>
                     `;
                 }
             }
 
-            // Render Chart.js Visualizations
+            // Render Charts
             renderCharts(upazilaCounts, running, expired);
         }
 
-        // Render Chart.js Analytics
-        function renderCharts(upazilaCounts, running, expired) {
-            let labels = Object.keys(upazilaCounts).map(u => u.replace(" উপজেলা", "").replace(" থানা এলাকা", ""));
-            let totals = Object.keys(upazilaCounts).map(u => upazilaCounts[u].total);
+        function renderCharts(upazilaData, runningCount, expiredCount) {
+            let labels = Object.keys(upazilaData);
+            let totals = labels.map(l => upazilaData[l].total);
 
-            // Destroy previous charts if exist
+            // 1. Upazila Bar Chart
+            const ctxBar = document.getElementById('chartUpazila').getContext('2d');
             if(chartUpazilaInstance) chartUpazilaInstance.destroy();
-            if(chartStatusInstance) chartStatusInstance.destroy();
-
-            // 1. Bar Chart: Upazila distribution
-            let ctxBar = document.getElementById('chartUpazila').getContext('2d');
             chartUpazilaInstance = new Chart(ctxBar, {
                 type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: labels.length > 0 ? labels : ['তথ্য নেই'],
                     datasets: [{
                         label: 'প্রবেশনার সংখ্যা',
-                        data: totals,
+                        data: labels.length > 0 ? totals : [0],
                         backgroundColor: '#16a34a',
-                        borderRadius: 6,
-                        hoverBackgroundColor: '#15803d'
+                        borderRadius: 6
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: { precision: 0 }
-                        },
-                        x: {
-                            ticks: { font: { size: 10 } }
-                        }
-                    }
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
                 }
             });
 
-            // 2. Doughnut Chart: Case Status Breakdown
-            let ctxPie = document.getElementById('chartStatus').getContext('2d');
-            chartStatusInstance = new Chart(ctxPie, {
+            // 2. Status Doughnut Chart
+            const ctxDoughnut = document.getElementById('chartStatus').getContext('2d');
+            if(chartStatusInstance) chartStatusInstance.destroy();
+            chartStatusInstance = new Chart(ctxDoughnut, {
                 type: 'doughnut',
                 data: {
-                    labels: ['চলমান কেস', 'মেয়াদ উত্তীর্ণ'],
+                    labels: ['মামলা চলমান', 'মেয়াদ উত্তীর্ণ'],
                     datasets: [{
-                        data: [running, expired],
+                        data: [runningCount, expiredCount],
                         backgroundColor: ['#22c55e', '#f59e0b'],
-                        borderWidth: 2,
-                        hoverOffset: 4
+                        borderWidth: 0
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: { font: { family: 'Noto Sans Bengali', size: 12 } }
-                        }
-                    }
+                    plugins: { legend: { position: 'bottom' } }
                 }
             });
         }
 
-        // Load Register Table
         function loadRegister() {
             let db = getDB();
             let tbody = document.getElementById('register-table-body');
             tbody.innerHTML = '';
-
             if(db.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-5 text-center text-gray-400">কোনো প্রবেশনার ডাটা যুক্ত করা হয়নি</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-400">কোনো প্রবেশনার এন্ট্রি করা হয়নি</td></tr>`;
                 return;
             }
-
             db.forEach(item => {
                 tbody.innerHTML += `
-                    <tr class="border-b hover:bg-gray-50/50">
-                        <td class="p-3">
-                            <strong class="text-gray-800">${item.p_name}</strong>
-                            <div class="text-xs text-gray-500">মামলা: ${item.case_no}</div>
-                        </td>
-                        <td class="p-3 text-xs font-medium text-gray-600">${item.upazila}</td>
-                        <td class="p-3">
-                            <div class="flex items-center space-x-1">
-                                <input type="number" id="comp_${item.id}" value="${item.completed_hazira}" min="0" class="w-16 border rounded-lg px-2 py-1 text-center text-xs focus:ring-1 focus:ring-brand-500 outline-none">
-                                <span class="text-xs text-gray-500">/ ${item.total_hazira}</span>
-                            </div>
-                        </td>
-                        <td class="p-3">
-                            <input type="date" id="next_${item.id}" value="${item.next_hazira || ''}" class="border rounded-lg px-2 py-1 text-xs focus:ring-1 focus:ring-brand-500 outline-none">
-                        </td>
-                        <td class="p-3">
-                            <input type="text" id="note_${item.id}" value="${item.behavior_notes || ''}" placeholder="আচরণ বা প্রগতির তথ্য..." class="w-full border rounded-lg px-3 py-1 text-xs focus:ring-1 focus:ring-brand-500 outline-none">
-                        </td>
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="p-3"><strong>${item.p_name}</strong><br><small class="text-gray-400">মামলা: ${item.case_no}</small></td>
+                        <td class="p-3">${item.upazila}</td>
+                        <td class="p-3"><input type="number" id="comp_${item.id}" value="${item.completed_hazira}" class="w-16 border rounded px-2 py-1 text-center"> / ${item.total_hazira}</td>
+                        <td class="p-3"><input type="date" id="next_${item.id}" value="${item.next_hazira}" class="border rounded px-2 py-1 text-xs"></td>
+                        <td class="p-3"><input type="text" id="note_${item.id}" value="${item.behavior_notes}" placeholder="আচরণ ও মন্তব্য..." class="w-full border rounded px-2 py-1 text-xs"></td>
                         <td class="p-3 text-center">
-                            <button onclick="updateRegister(${item.id})" class="bg-brand-600 hover:bg-brand-700 text-white text-xs px-3 py-1.5 rounded-lg shadow-sm transition">
-                                <i class="fa-solid fa-rotate mr-1"></i> আপডেট
-                            </button>
+                            <button onclick="updateRegister(${item.id})" class="bg-brand-600 hover:bg-brand-700 text-white text-xs px-3 py-1.5 rounded-lg shadow-sm">আপডেট</button>
                         </td>
                     </tr>
                 `;
             });
         }
 
-        // Update Register Records
         function updateRegister(id) {
             let db = getDB();
             let item = db.find(d => d.id === id);
@@ -826,377 +743,203 @@
                 item.next_hazira = document.getElementById(`next_${id}`).value;
                 item.behavior_notes = document.getElementById(`note_${id}`).value;
                 saveDB(db);
-                alert('হাজিরা ও আচরণের তথ্য সফলভাবে আপডেট করা হয়েছে!');
+                alert('হাজিরা তথ্য সফলভাবে আপডেট করা হয়েছে!');
             }
         }
 
-        // Load Database Table with Filters & Search
         function loadDatabase() {
             let db = getDB();
             let tbody = document.getElementById('database-table-body');
             let searchQuery = document.getElementById('search-query').value.toLowerCase();
-            let filterUpazila = document.getElementById('filter-upazila').value;
             let filterStatus = document.getElementById('filter-status').value;
             let today = new Date().toISOString().split('T')[0];
 
             tbody.innerHTML = '';
-
             let filtered = db.filter(item => {
-                let matchesSearch = item.p_name.toLowerCase().includes(searchQuery) ||
-                                    item.case_no.toLowerCase().includes(searchQuery) ||
-                                    (item.nid && item.nid.includes(searchQuery)) ||
-                                    item.mobile.includes(searchQuery);
+                let matchSearch = item.p_name.toLowerCase().includes(searchQuery) || 
+                                  item.case_no.toLowerCase().includes(searchQuery) || 
+                                  (item.nid && item.nid.includes(searchQuery));
+                
+                let status = item.end_date >= today ? 'Running' : 'Expired';
+                let matchStatus = !filterStatus || status === filterStatus;
 
-                let matchesUpazila = !filterUpazila || item.upazila === filterUpazila;
-
-                let isRunning = item.end_date >= today;
-                let status = isRunning ? 'Running' : 'Expired';
-                let matchesStatus = !filterStatus || status === filterStatus;
-
-                return matchesSearch && matchesUpazila && matchesStatus;
+                return matchSearch && matchStatus;
             });
 
             if(filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="p-5 text-center text-gray-400">কোনো প্রবেশনার ডাটা পাওয়া যায়নি</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-gray-400">কোনো রেকর্ড পাওয়া যায়নি</td></tr>`;
                 return;
             }
 
             filtered.forEach(item => {
                 let isRunning = item.end_date >= today;
                 let statusBadge = isRunning ? 
-                    `<span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">চলমান</span>` : 
-                    `<span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">মেয়াদ উত্তীর্ণ</span>`;
+                    `<span class="bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded-full font-semibold">চলমান</span>` : 
+                    `<span class="bg-red-100 text-red-800 text-xs px-2.5 py-1 rounded-full font-semibold">মেয়াদ উত্তীর্ণ</span>`;
 
                 tbody.innerHTML += `
-                    <tr class="hover:bg-gray-50/50 transition">
-                        <td class="p-3 text-xs text-gray-500">${item.rcv_date}</td>
-                        <td class="p-3">
-                            <strong class="text-gray-800">${item.p_name}</strong>
-                            <div class="text-xs text-gray-500">পিতা: ${item.f_name}</div>
-                            <div class="text-xs text-brand-700">শিক্ষা: ${item.education || 'N/A'}</div>
-                        </td>
-                        <td class="p-3 text-xs">
-                            <div class="font-semibold text-gray-700">${item.case_no}</div>
-                            <div class="text-gray-500">${item.court_name}</div>
-                        </td>
-                        <td class="p-3 text-xs">
-                            <div class="font-medium text-gray-800">${item.upazila}</div>
-                            <div class="text-gray-500">${item.mobile}</div>
-                        </td>
-                        <td class="p-3 text-xs">
-                            <div>${item.duration}</div>
-                            <div class="text-gray-400">${item.start_date} হতে ${item.end_date}</div>
-                        </td>
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="p-3 text-xs">${item.rcv_date}</td>
+                        <td class="p-3"><strong>${item.p_name}</strong><br><small class="text-gray-500">পিতা: ${item.f_name}</small></td>
+                        <td class="p-3">${item.case_no}<br><small class="text-gray-500">${item.court_name}</small></td>
+                        <td class="p-3">${item.upazila}<br><small class="text-gray-500">${item.mobile}</small></td>
+                        <td class="p-3 text-xs">${item.start_date} হতে<br>${item.end_date}</td>
                         <td class="p-3">${statusBadge}</td>
                         <td class="p-3 text-center space-x-1">
-                            <button onclick="printIndividualIntakePDF(${item.id})" title="পিডিএফ / প্রিন্ট ইনটেক ফর্ম" class="bg-slate-700 hover:bg-slate-800 text-white text-xs px-2.5 py-1.5 rounded-lg transition">
-                                <i class="fa-solid fa-file-pdf"></i>
-                            </button>
-                            <button onclick="deleteRecord(${item.id})" title="মুছে ফেলুন" class="bg-red-500 hover:bg-red-600 text-white text-xs px-2.5 py-1.5 rounded-lg transition">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
+                            <button onclick="printIntakePDF(${item.id})" title="ইনটেক ফর্ম প্রিন্ট" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-2.5 py-1.5 rounded-lg shadow-sm"><i class="fa-solid fa-file-pdf"></i></button>
+                            <button onclick="deleteRecord(${item.id})" title="মুছে ফেলুন" class="bg-red-500 hover:bg-red-600 text-white text-xs px-2.5 py-1.5 rounded-lg shadow-sm"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 `;
             });
         }
 
-        // Delete Record
-        function deleteRecord(id) {
+        // Print Intake Form from Form Inputs directly
+        function previewIntakePDFFromForm() {
+            let p_name = document.getElementById('p_name').value;
+            if(!p_name) {
+                alert('অনুগ্রহ করে অন্তত প্রবেশনারের নাম পূরণ করুন!');
+                return;
+            }
+            let data = {
+                rcv_date: document.getElementById('rcv_date').value,
+                memo_no: document.getElementById('memo_no').value,
+                court_name: document.getElementById('court_name').value,
+                case_no: document.getElementById('case_no').value,
+                p_name: p_name,
+                f_name: document.getElementById('f_name').value,
+                m_name: document.getElementById('m_name').value,
+                age: document.getElementById('age').value,
+                occupation: document.getElementById('occupation').value,
+                education: document.getElementById('education').value,
+                mobile: document.getElementById('mobile').value,
+                nid: document.getElementById('nid').value,
+                address: `গ্রাম/বাসাঃ ${document.getElementById('addr_village').value}, ডাকঘরঃ ${document.getElementById('addr_post').value}, ইউপি/ওয়ার্ডঃ ${document.getElementById('addr_union').value}, উপজেলাঃ ${document.getElementById('upazila').value}, জেলাঃ ${document.getElementById('addr_district').value}`,
+                family_info: document.getElementById('family_info').value,
+                duration: document.getElementById('duration').value,
+                start_date: document.getElementById('start_date').value,
+                end_date: document.getElementById('end_date').value,
+                total_hazira: document.getElementById('total_hazira').value,
+                remarks: document.getElementById('remarks').value
+            };
+            generatePrintableHTML(data);
+            window.print();
+        }
+
+        // Print Intake Form for Saved Record
+        function printIntakePDF(id) {
             let db = getDB();
             let item = db.find(d => d.id === id);
-            let pName = item ? item.p_name : 'এই রেকাডটি';
-
-            let confirmMsg = `আপনি কি নিশ্চিতভাবে "${pName}" এর ডাটা স্থায়ীভাবে মুছে ফেলতে চান?`;
-            
-            if (window.confirm(confirmMsg)) {
-                db = db.filter(d => d.id !== id);
-                saveDB(db);
-                loadDatabase();
-                loadDashboard();
+            if(item) {
+                generatePrintableHTML(item);
+                window.print();
             }
         }
 
-        // Clear All Application Data
+        // GENERATE PRINTABLE TABLE WITH INCREASED SPACING & LINE-HEIGHT
+        function generatePrintableHTML(item) {
+            let contentBody = document.getElementById('report-content-body');
+            contentBody.innerHTML = `
+                <table class="w-full border-collapse border border-gray-400 text-sm leading-relaxed">
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50 w-1/3">প্রাপ্তির তারিখ ও স্মারক নং:</td>
+                        <td class="border border-gray-400 py-3 px-4">${item.rcv_date || ''} | স্মারক: ${item.memo_no || ''}</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">আদালতের নাম:</td>
+                        <td class="border border-gray-400 py-3 px-4">${item.court_name || ''}</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">মামলা নম্বর (CR/GR):</td>
+                        <td class="border border-gray-400 py-3 px-4 font-bold text-base">${item.case_no || ''}</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">প্রবেশনারের নাম:</td>
+                        <td class="border border-gray-400 py-3 px-4 font-bold text-base">${item.p_name || ''}</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">পিতা ও মাতার নাম:</td>
+                        <td class="border border-gray-400 py-3 px-4">পিতা: ${item.f_name || ''} | মাতা: ${item.m_name || ''}</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">বয়স, পেশা ও শিক্ষাগত যোগ্যতা:</td>
+                        <td class="border border-gray-400 py-3 px-4">বয়স: ${item.age || ''} বছর | পেশা: ${item.occupation || ''} | শিক্ষাগত যোগ্যতা: ${item.education || ''}</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">মোবাইল ও NID:</td>
+                        <td class="border border-gray-400 py-3 px-4">মোবাইল: ${item.mobile || ''} | NID/জন্ম সনদ: ${item.nid || 'প্রযোজ্য নয়'}</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">স্থায়ী ঠিকানা:</td>
+                        <td class="border border-gray-400 py-3 px-4 leading-normal">${item.address || ''}</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">পারিবারিক তথ্য:</td>
+                        <td class="border border-gray-400 py-3 px-4">${item.family_info || 'তথ্য সংরক্ষিত নেই'}</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">প্রবেশনের মেয়াদ ও সময়কাল:</td>
+                        <td class="border border-gray-400 py-3 px-4">${item.duration || ''} (${item.start_date || ''} হতে ${item.end_date || ''})</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">নির্ধারিত হাজিরা সংখ্যা:</td>
+                        <td class="border border-gray-400 py-3 px-4">${item.total_hazira || 12} টি</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">প্রাথমিক পর্যবেক্ষণ / শর্তাবলি:</td>
+                        <td class="border border-gray-400 py-3 px-4">${item.remarks || 'কোনো বিশেষ শর্ত নেই'}</td>
+                    </tr>
+                </table>
+            `;
+        }
+
+        function deleteRecord(id) {
+            if(confirm('আপনি কি নিশ্চিতভাবে এই প্রবেশনারের রেকর্ডটি মুছে ফেলতে চান?')) {
+                let db = getDB();
+                db = db.filter(d => d.id !== id);
+                saveDB(db);
+                loadDatabase();
+            }
+        }
+
         function clearAllData() {
-            if(window.confirm('সতর্কতা! সকল সংরক্ষিত ডাটা মুছে যাবে। আপনি কি নিশ্চিত?')) {
+            if(confirm('সতর্কতা! সমস্ত সংরক্ষিত ডাটা মুছে যাবে। আপনি কি নিশ্চিত?')) {
                 localStorage.removeItem('probation_db_rajshahi');
                 alert('সকল ডাটা মুছে ফেলা হয়েছে।');
                 loadDashboard();
             }
         }
 
-        // CSV Export functionality
         function exportToCSV() {
             let db = getDB();
             if(db.length === 0) {
-                alert('এক্সপোর্ট করার জন্য ডাটাবেসে কোনো রেকর্ড নেই!');
+                alert('এক্সপোর্ট করার মতো কোনো ডাটা নেই!');
                 return;
             }
-
-            let csv = "\uFEFF"; // UTF-8 BOM
-            csv += "ID,প্রাপ্তির তারিখ,স্মারক নং,আদালত,মামলা নং,প্রবেশনারের নাম,পিতার নাম,মাতার নাম,বয়স,পেশা,শিক্ষাগত যোগ্যতা,মোবাইল,NID,গ্রাম/বাসা,ডাকঘর,ইউপি/ওয়ার্ড,উপজেলা,জেলা,পুরো ঠিকানা,পরিবারের তথ্য,মেয়াদকাল,মেয়াদ শুরু,মেয়াদ শেষ,মোট নির্ধারিত হাজিরা\n";
+            let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
+            csvContent += "ID,Received Date,Memo No,Court Name,Case No,Probationer Name,Father Name,Mother Name,Age,Occupation,Education,Mobile,Upazila,NID,Address,Duration,Start Date,End Date,Total Hazira\n";
 
             db.forEach(row => {
                 let line = [
-                    row.id,
-                    `"${row.rcv_date || ''}"`,
-                    `"${row.memo_no || ''}"`,
-                    `"${row.court_name || ''}"`,
-                    `"${row.case_no || ''}"`,
-                    `"${row.p_name || ''}"`,
-                    `"${row.f_name || ''}"`,
-                    `"${row.m_name || ''}"`,
-                    `"${row.age || ''}"`,
-                    `"${row.occupation || ''}"`,
-                    `"${row.education || ''}"`,
-                    `"${row.mobile || ''}"`,
-                    `"${row.nid || ''}"`,
-                    `"${row.addr_village || ''}"`,
-                    `"${row.addr_post || ''}"`,
-                    `"${row.addr_union || ''}"`,
-                    `"${row.upazila || ''}"`,
-                    `"${row.addr_district || ''}"`,
-                    `"${row.full_address || ''}"`,
-                    `"${row.family_info || ''}"`,
-                    `"${row.duration || ''}"`,
-                    `"${row.start_date || ''}"`,
-                    `"${row.end_date || ''}"`,
-                    `"${row.total_hazira || 12}"`
+                    row.id, row.rcv_date, `"${row.memo_no}"`, `"${row.court_name}"`, `"${row.case_no}"`, 
+                    `"${row.p_name}"`, `"${row.f_name}"`, `"${row.m_name}"`, row.age, `"${row.occupation}"`, 
+                    `"${row.education}"`, row.mobile, `"${row.upazila}"`, row.nid, `"${row.address}"`, row.duration, 
+                    row.start_date, row.end_date, row.total_hazira
                 ].join(",");
-                csv += line + "\n";
+                csvContent += line + "\n";
             });
 
-            let blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            let encodedUri = encodeURI(csvContent);
             let link = document.createElement("a");
-            let url = URL.createObjectURL(blob);
-            link.setAttribute("href", url);
-            link.setAttribute("download", `probation_data_rajshahi_${new Date().toISOString().split('T')[0]}.csv`);
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "probation_rajshahi_report.csv");
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         }
 
-        // Print Individual Intake Form PDF Preview
-        function printIndividualIntakePDF(id) {
-            let db = getDB();
-            let item = db.find(d => d.id === id);
-            if(!item) return;
-
-            let printContainer = document.getElementById('printable-report');
-            printContainer.innerHTML = generateIntakeHTML(item);
-            printContainer.classList.remove('hidden');
-            window.print();
-            printContainer.classList.add('hidden');
-        }
-
-        // Preview Intake Form PDF Directly from Current Entry Form Inputs
-        function previewIntakePDFFromForm() {
-            let village = document.getElementById('addr_village').value.trim();
-            let post = document.getElementById('addr_post').value.trim();
-            let union = document.getElementById('addr_union').value.trim();
-            let upazila = document.getElementById('upazila').value;
-            let district = document.getElementById('addr_district').value.trim() || 'রাজশাহী';
-
-            let tempItem = {
-                rcv_date: document.getElementById('rcv_date').value || '---',
-                memo_no: document.getElementById('memo_no').value || '---',
-                court_name: document.getElementById('court_name').value || '---',
-                case_no: document.getElementById('case_no').value || '---',
-                p_name: document.getElementById('p_name').value || '---',
-                f_name: document.getElementById('f_name').value || '---',
-                m_name: document.getElementById('m_name').value || '---',
-                age: document.getElementById('age').value || '---',
-                occupation: document.getElementById('occupation').value || '---',
-                education: document.getElementById('education').value || '---',
-                mobile: document.getElementById('mobile').value || '---',
-                nid: document.getElementById('nid').value || '---',
-                addr_village: village,
-                addr_post: post,
-                addr_union: union,
-                upazila: upazila,
-                addr_district: district,
-                full_address: [village, post, union, upazila, district].filter(Boolean).join(", "),
-                family_info: document.getElementById('family_info').value || '---',
-                duration: document.getElementById('duration').value || '---',
-                start_date: document.getElementById('start_date').value || '---',
-                end_date: document.getElementById('end_date').value || '---',
-                total_hazira: document.getElementById('total_hazira').value || '12',
-                remarks: document.getElementById('remarks').value || '---'
-            };
-
-            let printContainer = document.getElementById('printable-report');
-            printContainer.innerHTML = generateIntakeHTML(tempItem);
-            printContainer.classList.remove('hidden');
-            window.print();
-            printContainer.classList.add('hidden');
-        }
-
-        // Generate Structured HTML for Printable Intake Form
-        function generateIntakeHTML(data) {
-            return `
-                <div class="border-2 border-gray-800 p-8 max-w-3xl mx-auto bg-white text-black font-sans leading-relaxed">
-                    <!-- Letterhead -->
-                    <div class="text-center border-b-2 border-gray-800 pb-4 mb-6">
-                        <h2 class="text-xl font-bold uppercase">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</h2>
-                        <h3 class="text-lg font-bold">প্রবেশন অফিসারের কার্যালয়, রাজশাহী</h3>
-                        <p class="text-xs">সমাজসেবা অধিদপ্তর, সমাজকল্যাণ মন্ত্রণালয়</p>
-                        <div class="inline-block border border-black px-4 py-1 mt-3 font-bold text-sm bg-gray-100">
-                            প্রবেশনার ব্যক্তিগত তথ্য ও ইনটেক ফর্ম
-                        </div>
-                    </div>
-
-                    <!-- Details Table -->
-                    <table class="w-full border-collapse border border-black text-sm mb-6">
-                        <tbody>
-                            <tr>
-                                <td class="border border-black p-2 font-bold w-1/3 bg-gray-50">জেলা অফিসে প্রাপ্তির তারিখ:</td>
-                                <td class="border border-black p-2">${data.rcv_date}</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">আদেশের স্মারক নং ও তারিখ:</td>
-                                <td class="border border-black p-2">${data.memo_no}</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">আদালতের নাম:</td>
-                                <td class="border border-black p-2">${data.court_name}</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">মামলা নম্বর (GR/CR):</td>
-                                <td class="border border-black p-2">${data.case_no}</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">প্রবেশনারের নাম:</td>
-                                <td class="border border-black p-2 font-bold">${data.p_name}</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">পিতা ও মাতার নাম:</td>
-                                <td class="border border-black p-2">পিতা: ${data.f_name} <br> মাতা: ${data.m_name || 'N/A'}</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">বয়স ও পেশা:</td>
-                                <td class="border border-black p-2">বয়স: ${data.age} বছর | পেশা: ${data.occupation || 'N/A'}</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">শিক্ষাগত যোগ্যতা:</td>
-                                <td class="border border-black p-2 font-bold text-brand-900">${data.education || 'N/A'}</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">মোবাইল ও NID:</td>
-                                <td class="border border-black p-2">মোবাইল: ${data.mobile} | NID: ${data.nid || 'N/A'}</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">বিস্তারিত ঠিকানা:</td>
-                                <td class="border border-black p-2">
-                                    গ্রাম/বাসা: ${data.addr_village || 'N/A'}, 
-                                    ডাকঘর: ${data.addr_post || 'N/A'}, <br>
-                                    ইউপি/ওয়ার্ড: ${data.addr_union || 'N/A'}, 
-                                    উপজেলা/থানা: ${data.upazila || 'N/A'}, 
-                                    জেলা: ${data.addr_district || 'রাজশাহী'}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">পরিবারের তথ্য:</td>
-                                <td class="border border-black p-2">${data.family_info || 'N/A'}</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">প্রবেশনের সময়কাল:</td>
-                                <td class="border border-black p-2">${data.duration} (${data.start_date} হতে ${data.end_date} পর্যন্ত)</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">মোট নির্ধারিত হাজিরা:</td>
-                                <td class="border border-black p-2">${data.total_hazira} টি</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-black p-2 font-bold bg-gray-50">বিশেষ শর্তাবলি/মন্তব্য:</td>
-                                <td class="border border-black p-2">${data.remarks || 'কোন মন্তব্য নেই'}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <!-- Authorization Signatures -->
-                    <div class="mt-20 flex justify-between px-6 text-sm">
-                        <div class="text-center">
-                            <p class="border-t border-black pt-1">প্রবেশনারের স্বাক্ষর / টিপসই</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="border-t border-black pt-1 font-bold">মোঃ নাজমুল খাঁ</p>
-                            <p class="text-xs">প্রবেশন অফিসার, রাজশাহী</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        // Print Overall Summary Report
-        function printSummaryReport() {
-            let db = getDB();
-            let printContainer = document.getElementById('printable-report');
-            let today = new Date().toISOString().split('T')[0];
-
-            let rows = db.map((item, index) => `
-                <tr class="border-b border-gray-300 text-xs">
-                    <td class="p-2 border border-gray-400 text-center">${index + 1}</td>
-                    <td class="p-2 border border-gray-400"><strong>${item.p_name}</strong><br>পিতা: ${item.f_name}</td>
-                    <td class="p-2 border border-gray-400">${item.case_no}<br>${item.court_name}</td>
-                    <td class="p-2 border border-gray-400">${item.upazila}<br>মোবাইল: ${item.mobile}</td>
-                    <td class="p-2 border border-gray-400 text-center">${item.start_date} হতে ${item.end_date}</td>
-                    <td class="p-2 border border-gray-400 text-center">${item.end_date >= today ? 'চলমান' : 'উত্তীর্ণ'}</td>
-                </tr>
-            `).join('');
-
-            printContainer.innerHTML = `
-                <div class="p-4 bg-white text-black font-sans">
-                    <div class="text-center mb-6">
-                        <h2 class="text-xl font-bold">প্রবেশন অফিসারের কার্যালয়, রাজশাহী</h2>
-                        <h3 class="text-sm font-semibold">সকল প্রবেশনারের সামগ্রিক বিবরণী ও সারসংক্ষেপ</h3>
-                        <p class="text-xs text-gray-600 mt-1">তারিখ: ${new Date().toLocaleDateString('bn-BD')}</p>
-                    </div>
-
-                    <table class="w-full border-collapse border border-gray-400 text-sm">
-                        <thead>
-                            <tr class="bg-gray-100 border border-gray-400 text-xs">
-                                <th class="p-2 border border-gray-400">ক্রমিক</th>
-                                <th class="p-2 border border-gray-400">প্রবেশনার ও পিতার নাম</th>
-                                <th class="p-2 border border-gray-400">মামলা ও আদালত</th>
-                                <th class="p-2 border border-gray-400">উপজেলা ও ঠিকানা</th>
-                                <th class="p-2 border border-gray-400">মেয়াদকাল</th>
-                                <th class="p-2 border border-gray-400">অবস্থা</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${rows || '<tr><td colspan="6" class="p-4 text-center">কোন তথ্য পাওয়া যায়নি</td></tr>'}
-                        </tbody>
-                    </table>
-
-                    <div class="mt-16 flex justify-between px-10 text-xs">
-                        <div class="text-center">
-                            <p>-----------------------------------</p>
-                            <p>প্রস্তুতকারীর স্বাক্ষর</p>
-                        </div>
-                        <div class="text-center">
-                            <p>-----------------------------------</p>
-                            <p class="font-bold">মোঃ নাজমুল খাঁ</p>
-                            <p>প্রবেশন অফিসার, রাজশাহী</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-            printContainer.classList.remove('hidden');
-            window.print();
-            printContainer.classList.add('hidden');
-        }
-
-        // Toggle Mobile Navigation Menu
-        function toggleMobileSidebar() {
-            const sidebar = document.querySelector('aside');
-            sidebar.classList.toggle('hidden');
-        }
-
-        // Initialize App on DOM Load
-        window.onload = function() {
-            loadDashboard();
-        };
+        // Initial Load
+        loadDashboard();
     </script>
 </body>
 </html>
