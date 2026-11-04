@@ -78,20 +78,26 @@
                 </div>
             </div>
 
-            <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto">
-                <a href="#dashboard" id="nav-dashboard" onclick="switchTab('dashboard')" class="nav-link flex items-center px-4 py-3 rounded-xl bg-brand-700 text-white font-medium transition duration-200 shadow-sm">
-                    <i class="fa-solid fa-chart-pie w-6 text-brand-100"></i> ড্যাশবোর্ড ওভারভিউ
+            <nav class="flex-1 p-3 space-y-1 overflow-y-auto text-sm">
+                <a href="#dashboard-district" id="nav-dashboard-district" onclick="switchTab('dashboard-district')" class="nav-link flex items-center px-4 py-2.5 rounded-xl bg-brand-700 text-white font-medium transition duration-200 shadow-sm">
+                    <i class="fa-solid fa-building-columns w-6 text-brand-100"></i> জেলা ড্যাশবোর্ড
                 </a>
-                <a href="#entry" id="nav-entry" onclick="switchTab('entry')" class="nav-link flex items-center px-4 py-3 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
+                <a href="#dashboard-upazila" id="nav-dashboard-upazila" onclick="switchTab('dashboard-upazila')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
+                    <i class="fa-solid fa-map-location-dot w-6 text-brand-100"></i> উপজেলা ড্যাশবোর্ড
+                </a>
+                <a href="#entry" id="nav-entry" onclick="switchTab('entry')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
                     <i class="fa-solid fa-user-plus w-6 text-brand-100"></i> নতুন প্রবেশনার এন্ট্রি
                 </a>
-                <a href="#register" id="nav-register" onclick="switchTab('register')" class="nav-link flex items-center px-4 py-3 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
-                    <i class="fa-solid fa-book-open w-6 text-brand-100"></i> হাজিরা রেজিস্টার
+                <a href="#register-district" id="nav-register-district" onclick="switchTab('register-district')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
+                    <i class="fa-solid fa-book-open w-6 text-brand-100"></i> জেলা রেজিস্টার
                 </a>
-                <a href="#database" id="nav-database" onclick="switchTab('database')" class="nav-link flex items-center px-4 py-3 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
+                <a href="#register-upazila" id="nav-register-upazila" onclick="switchTab('register-upazila')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
+                    <i class="fa-solid fa-clipboard-list w-6 text-brand-100"></i> উপজেলা রেজিস্টার
+                </a>
+                <a href="#database" id="nav-database" onclick="switchTab('database')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
                     <i class="fa-solid fa-database w-6 text-brand-100"></i> প্রবেশনারের ডাটাবেস
                 </a>
-                <a href="#reports" id="nav-reports" onclick="switchTab('reports')" class="nav-link flex items-center px-4 py-3 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
+                <a href="#reports" id="nav-reports" onclick="switchTab('reports')" class="nav-link flex items-center px-4 py-2.5 rounded-xl hover:bg-brand-800 text-brand-100 font-medium transition duration-200">
                     <i class="fa-solid fa-file-arrow-down w-6 text-brand-100"></i> রিপোর্ট ও এক্সপোর্ট
                 </a>
             </nav>
@@ -111,7 +117,7 @@
                     <button onclick="toggleMobileSidebar()" class="md:hidden text-gray-600 hover:text-brand-700 text-xl focus:outline-none">
                         <i class="fa-solid fa-bars"></i>
                     </button>
-                    <h2 id="page-title" class="text-xl font-bold text-gray-800 tracking-tight">ড্যাশবোর্ড ওভারভিউ</h2>
+                    <h2 id="page-title" class="text-xl font-bold text-gray-800 tracking-tight">জেলা ড্যাশবোর্ড ওভারভিউ</h2>
                 </div>
                 <div class="flex items-center space-x-3">
                     <span class="bg-brand-50 border border-brand-200 text-brand-800 text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center shadow-sm">
@@ -123,124 +129,121 @@
             <!-- Dynamic Views Container -->
             <main class="p-4 md:p-6 flex-1 max-w-7xl w-full mx-auto">
                 
-                <!-- 1. DASHBOARD VIEW -->
-                <section id="view-dashboard" class="space-y-6">
-                    <!-- Key Statistics Cards -->
+                <!-- 1. DISTRICT DASHBOARD VIEW -->
+                <section id="view-dashboard-district" class="space-y-6">
+                    <div class="bg-brand-50 border-l-4 border-brand-600 p-4 rounded-r-xl shadow-sm">
+                        <h4 class="font-bold text-brand-900 text-base">জেলা প্রবেশন অফিসারের নিয়ন্ত্রণাধীন মামলাসমূহ</h4>
+                        <p class="text-xs text-brand-700 mt-1">এখানে সরাসরি জেলা প্রবেশন অফিসার, রাজশাহী কর্তৃক পরিচালিত প্রবেশনারদের পরিসংখ্যান প্রদর্শিত হচ্ছে।</p>
+                    </div>
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <p class="text-xs font-semibold uppercase tracking-wider text-gray-500">মোট প্রবেশনার</p>
-                                    <h3 id="stat-total" class="text-3xl font-bold text-gray-800 mt-2">০</h3>
-                                </div>
-                                <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
-                                    <i class="fa-solid fa-users text-xl"></i>
-                                </div>
-                            </div>
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+                            <p class="text-xs font-semibold uppercase text-gray-500">জেলা মোট কেস</p>
+                            <h3 id="dist-stat-total" class="text-3xl font-bold text-gray-800 mt-2">০</h3>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <p class="text-xs font-semibold uppercase tracking-wider text-gray-500">মামলা চলমান</p>
-                                    <h3 id="stat-running" class="text-3xl font-bold text-green-600 mt-2">০</h3>
-                                </div>
-                                <div class="p-3 bg-green-50 text-green-600 rounded-xl">
-                                    <i class="fa-solid fa-spinner text-xl"></i>
-                                </div>
-                            </div>
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+                            <p class="text-xs font-semibold uppercase text-gray-500">চলমান কেস</p>
+                            <h3 id="dist-stat-running" class="text-3xl font-bold text-green-600 mt-2">০</h3>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <p class="text-xs font-semibold uppercase tracking-wider text-gray-500">মেয়াদ উত্তীর্ণ</p>
-                                    <h3 id="stat-expired" class="text-3xl font-bold text-amber-600 mt-2">০</h3>
-                                </div>
-                                <div class="p-3 bg-amber-50 text-amber-600 rounded-xl">
-                                    <i class="fa-solid fa-clock-rotate-left text-xl"></i>
-                                </div>
-                            </div>
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+                            <p class="text-xs font-semibold uppercase text-gray-500">মেয়াদ উত্তীর্ণ</p>
+                            <h3 id="dist-stat-expired" class="text-3xl font-bold text-amber-600 mt-2">০</h3>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <p class="text-xs font-semibold uppercase tracking-wider text-gray-500">প্রতিবেদন বাকি</p>
-                                    <h3 id="stat-pending-report" class="text-3xl font-bold text-red-600 mt-2">০</h3>
-                                </div>
-                                <div class="p-3 bg-red-50 text-red-600 rounded-xl">
-                                    <i class="fa-solid fa-file-circle-exclamation text-xl"></i>
-                                </div>
-                            </div>
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+                            <p class="text-xs font-semibold uppercase text-gray-500">প্রতিবেদন বাকি</p>
+                            <h3 id="dist-stat-pending" class="text-3xl font-bold text-red-600 mt-2">০</h3>
                         </div>
                     </div>
 
-                    <!-- Graphical Analytics Charts -->
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <!-- Bar Chart (Upazila Breakdown) -->
-                        <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                            <div class="flex justify-between items-center mb-4">
-                                <h3 class="text-base font-bold text-gray-800"><i class="fa-solid fa-chart-column text-brand-600 mr-2"></i>উপজেলাভিত্তিক প্রবেশনারের সংখ্যা</h3>
-                                <span class="text-xs text-gray-400">রাজশাহী জেলা</span>
-                            </div>
-                            <div class="relative h-64 md:h-72">
-                                <canvas id="chartUpazila"></canvas>
-                            </div>
-                        </div>
-
-                        <!-- Doughnut Chart (Status Breakdown) -->
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                            <div class="flex justify-between items-center mb-4">
-                                <h3 class="text-base font-bold text-gray-800"><i class="fa-solid fa-chart-pie text-brand-600 mr-2"></i>কেস স্ট্যাটাস অনুপাত</h3>
-                            </div>
-                            <div class="relative h-60 flex items-center justify-center">
-                                <canvas id="chartStatus"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Summary Table -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                        <h3 class="text-base font-bold text-gray-800 mb-4"><i class="fa-solid fa-table text-brand-600 mr-2"></i>উপজেলা ও এলাকা ভিত্তিক বিস্তারিত পরিসংখ্যান</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse">
-                                <thead>
-                                    <tr class="bg-gray-50 text-gray-700 text-xs uppercase font-bold border-b border-gray-200">
-                                        <th class="p-3">কার্যালয় / উপজেলা</th>
-                                        <th class="p-3">মোট প্রবেশনার</th>
-                                        <th class="p-3">চলমান কেস</th>
-                                        <th class="p-3">মেয়াদ উত্তীর্ণ</th>
-                                        <th class="p-3">প্রতিবেদন দাখিল বাকি</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="dashboard-summary-table" class="text-sm text-gray-600 divide-y divide-gray-100">
-                                    <!-- Dynamic rows -->
-                                </tbody>
-                            </table>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <h3 class="text-base font-bold text-gray-800 mb-4"><i class="fa-solid fa-chart-column text-brand-600 mr-2"></i>জেলা নিয়ন্ত্রিত কেস পরিসংখ্যান</h3>
+                        <div class="relative h-64">
+                            <canvas id="chartDistrictBar"></canvas>
                         </div>
                     </div>
                 </section>
 
-                <!-- 2. ENTRY VIEW -->
+                <!-- 2. UPAZILA DASHBOARD VIEW -->
+                <section id="view-dashboard-upazila" class="hidden space-y-6">
+                    <div class="bg-amber-50 border-l-4 border-amber-600 p-4 rounded-r-xl shadow-sm">
+                        <h4 class="font-bold text-amber-900 text-base">উপজেলা সমাজসেবা অফিসার / প্রবেশন অফিসারগণের মামলাসমূহ</h4>
+                        <p class="text-xs text-amber-800 mt-1">উপজেলা পর্যায়ে সমর্পিত মামলাসমূহ ও স্থানভিত্তিক তদারকি পরিসংখ্যান।</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+                            <p class="text-xs font-semibold uppercase text-gray-500">উপজেলা মোট কেস</p>
+                            <h3 id="upz-stat-total" class="text-3xl font-bold text-gray-800 mt-2">০</h3>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+                            <p class="text-xs font-semibold uppercase text-gray-500">উপজেলা চলমান কেস</p>
+                            <h3 id="upz-stat-running" class="text-3xl font-bold text-green-600 mt-2">০</h3>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+                            <p class="text-xs font-semibold uppercase text-gray-500">মেয়াদ উত্তীর্ণ কেস</p>
+                            <h3 id="upz-stat-expired" class="text-3xl font-bold text-amber-600 mt-2">০</h3>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+                            <p class="text-xs font-semibold uppercase text-gray-500">চূড়ান্ত প্রতিবেদন বাকি</p>
+                            <h3 id="upz-stat-pending" class="text-3xl font-bold text-red-600 mt-2">০</h3>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <h3 class="text-base font-bold text-gray-800 mb-4"><i class="fa-solid fa-chart-pie text-brand-600 mr-2"></i>উপজেলা ভিত্তিক কেস বন্টন চিত্র</h3>
+                        <div class="relative h-64">
+                            <canvas id="chartUpazilaBar"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. ENTRY VIEW -->
                 <section id="view-entry" class="hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 max-w-4xl mx-auto">
                         <div class="flex justify-between items-center mb-6 border-b pb-4">
                             <div>
                                 <h3 class="text-lg font-bold text-gray-800"><i class="fa-solid fa-user-plus text-brand-600 mr-2"></i>নতুন প্রবেশনার তথ্য এন্ট্রি ফর্ম</h3>
-                                <p class="text-xs text-gray-500 mt-1">প্রবেশনারের বিস্তারিত তথ্য সঠিকভাবে ইনপুট দিয়ে ডাটাবেসে সেভ বা পিডিএফ ইনটেক ফর্ম প্রিন্ট করুন।</p>
+                                <p class="text-xs text-gray-500 mt-1">প্রবেশনারের তথ্য সংরক্ষণ করুন এবং দায়িত্বপ্রাপ্ত কর্মকর্তা সঠিকভাবে নির্বাচন করুন।</p>
                             </div>
                         </div>
 
                         <form id="probationer-form" class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div>
-                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">জেলা অফিসে প্রাপ্তির তারিখ <span class="text-red-500">*</span></label>
-                                <input type="date" id="rcv_date" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">প্রাপ্তির তারিখ <span class="text-red-500">*</span></label>
+                                <input type="date" id="rcv_date" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">আদেশের স্মারক নং ও তারিখ <span class="text-red-500">*</span></label>
-                                <input type="text" id="memo_no" placeholder="যেমন: স্মারক নং-৪৫, তারিখ: ১০/০২/২০২৫" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">স্মারক নং ও তারিখ <span class="text-red-500">*</span></label>
+                                <input type="text" id="memo_no" placeholder="স্মারক নং ও তারিখ" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
+
+                            <div class="md:col-span-2 bg-brand-50/60 p-4 rounded-xl border border-brand-200">
+                                <label class="block text-xs font-bold text-brand-900 uppercase tracking-wider mb-1.5"><i class="fa-solid fa-user-check text-brand-600 mr-1.5"></i>দায়িত্বপ্রাপ্ত কর্মকর্তা বাছাই করুন <span class="text-red-500">*</span></label>
+                                <select id="assigned_officer" required class="w-full border border-brand-300 rounded-lg px-3 py-2 text-sm font-semibold text-brand-900 focus:ring-2 focus:ring-brand-500 outline-none bg-white">
+                                    <option value="">-- দায়িত্বপ্রাপ্ত কর্মকর্তা নির্বাচন করুন --</option>
+                                    <option value="জেলা প্রবেশন অফিসার, রাজশাহী">জেলা প্রবেশন অফিসার, রাজশাহী</option>
+                                    <optgroup label="উপজেলা সমাজসেবা অফিসার / প্রবেশন অফিসার">
+                                        <option value="উপজেলা সমাজসেবা অফিসার, পবা">উপজেলা সমাজসেবা অফিসার, পবা</option>
+                                        <option value="উপজেলা সমাজসেবা অফিসার, গোদাগাড়ী">উপজেলা সমাজসেবা অফিসার, গোদাগাড়ী</option>
+                                        <option value="উপজেলা সমাজসেবা অফিসার, তানোর">উপজেলা সমাজসেবা অফিসার, তানোর</option>
+                                        <option value="উপজেলা সমাজসেবা অফিসার, মোহনপুর">উপজেলা সমাজসেবা অফিসার, মোহনপুর</option>
+                                        <option value="উপজেলা সমাজসেবা অফিসার, বাগমারা">উপজেলা সমাজসেবা অফিসার, বাগমারা</option>
+                                        <option value="উপজেলা সমাজসেবা অফিসার, দুর্গাপুর">উপজেলা সমাজসেবা অফিসার, দুর্গাপুর</option>
+                                        <option value="উপজেলা সমাজসেবা অফিসার, পুঠিয়া">উপজেলা সমাজসেবা অফিসার, পুঠিয়া</option>
+                                        <option value="উপজেলা সমাজসেবা অফিসার, চারঘাট">উপজেলা সমাজসেবা অফিসার, চারঘাট</option>
+                                        <option value="উপজেলা সমাজসেবা অফিসার, বাঘা">উপজেলা সমাজসেবা অফিসার, বাঘা</option>
+                                        <option value="সমাজসেবা অফিসার, বোয়ালিয়া মডেল থানা এলাকা">সমাজসেবা অফিসার, বোয়ালিয়া মডেল থানা এলাকা</option>
+                                        <option value="সমাজসেবা অফিসার, রাজপাড়া থানা এলাকা">সমাজসেবা অফিসার, রাজপাড়া থানা এলাকা</option>
+                                        <option value="সমাজসেবা অফিসার, কাশিয়াডাঙ্গা থানা এলাকা">সমাজসেবা অফিসার, কাশিয়াডাঙ্গা থানা এলাকা</option>
+                                        <option value="সমাজসেবা অফিসার, চন্দ্রিমা থানা এলাকা">সমাজসেবা অফিসার, চন্দ্রিমা থানা এলাকা</option>
+                                        <option value="সমাজসেবা অফিসার, মতিহার থানা এলাকা">সমাজসেবা অফিসার, মতিহার থানা এলাকা</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">আদালতের নাম <span class="text-red-500">*</span></label>
-                                <select id="court_name" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <select id="court_name" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                                     <option value="">-- আদালত নির্বাচন করুন --</option>
                                     <option value="সিনিয়র জেলা ও দায়রা জজ, রাজশাহী">সিনিয়র জেলা ও দায়রা জজ, রাজশাহী</option>
                                     <option value="অতিরিক্ত জেলা জজ, ২য় আদালত, রাজশাহী">অতিরিক্ত জেলা জজ, ২য় আদালত, রাজশাহী</option>
@@ -268,35 +271,31 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">মামলা নম্বর (CR/GR Case No) <span class="text-red-500">*</span></label>
-                                <input type="text" id="case_no" placeholder="যেমন: সিআর-১২৩/২০২৫" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <input type="text" id="case_no" placeholder="যেমন: সিআর-১২৩/২০২৫" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">প্রবেশনারের নাম <span class="text-red-500">*</span></label>
-                                <input type="text" id="p_name" placeholder="প্রবেশনারের নাম" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <input type="text" id="p_name" placeholder="প্রবেশনারের নাম" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">পিতার নাম <span class="text-red-500">*</span></label>
-                                <input type="text" id="f_name" placeholder="পিতার নাম" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <input type="text" id="f_name" placeholder="পিতার নাম" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">মাতার নাম</label>
-                                <input type="text" id="m_name" placeholder="মাতার নাম" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <input type="text" id="m_name" placeholder="মাতার নাম" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">বয়স <span class="text-red-500">*</span></label>
-                                <input type="number" id="age" placeholder="বয়স (বছরে)" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <input type="number" id="age" placeholder="বয়স (বছরে)" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
-
-                            <!-- Occupation Field -->
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">পেশা</label>
-                                <input type="text" id="occupation" placeholder="যেমন: কৃষি, দিনমজুর, ছাত্র" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <input type="text" id="occupation" placeholder="পেশা" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
-
-                            <!-- Educational Qualification -->
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">শিক্ষাগত যোগ্যতা</label>
-                                <select id="education" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <select id="education" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                                     <option value="নিরক্ষর">নিরক্ষর</option>
                                     <option value="স্বাক্ষরজ্ঞানসম্পন্ন">স্বাক্ষরজ্ঞানসম্পন্ন</option>
                                     <option value="প্রাথমিক (১ম-৫ম)">প্রাথমিক (১ম-৫ম)</option>
@@ -305,53 +304,59 @@
                                     <option value="স্নাতক বা তদূর্ধ্ব">স্নাতক বা তদূর্ধ্ব</option>
                                 </select>
                             </div>
-
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">মোবাইল নম্বর <span class="text-red-500">*</span></label>
-                                <input type="text" id="mobile" placeholder="০১৭XXXXXXXX" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <input type="text" id="mobile" placeholder="০১৭XXXXXXXX" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
-                            
                             <div>
-                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">জাতীয় পরিচয়পত্র (NID) / জন্ম নিবন্ধন</label>
-                                <input type="text" id="nid" placeholder="NID বা জন্ম সনদ নম্বর" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">NID / জন্ম নিবন্ধন</label>
+                                <input type="text" id="nid" placeholder="NID বা জন্ম সনদ" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
 
-                            <!-- STRUCTURED ADDRESS BLOCK -->
+                            <!-- DYNAMIC & OPTIONAL ADDRESS STRUCTURE -->
                             <div class="md:col-span-2 bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-3">
-                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider"><i class="fa-solid fa-location-dot text-brand-600 mr-1.5"></i>পুরো ঠিকানার বিবরণ</label>
+                                <div class="flex justify-between items-center">
+                                    <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider"><i class="fa-solid fa-location-dot text-brand-600 mr-1.5"></i>পুরো ঠিকানার বিবরণ (ঐচ্ছিক)</label>
+                                    <span class="text-xs text-gray-400">তথ্য পাওয়া না গেলে ফাঁকা রাখা যাবে</span>
+                                </div>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                                     <div>
                                         <label class="block text-xs font-medium text-gray-600 mb-1">গ্রাম / বাসা নম্বরঃ</label>
-                                        <input type="text" id="addr_village" placeholder="গ্রাম/মহল্লা লিখুন" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white">
+                                        <input type="text" id="addr_village" placeholder="গ্রাম/বাসা নং" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white">
                                     </div>
                                     <div>
                                         <label class="block text-xs font-medium text-gray-600 mb-1">ডাকঘরঃ</label>
-                                        <input type="text" id="addr_post" placeholder="ডাকঘর লিখুন" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white">
+                                        <input type="text" id="addr_post" placeholder="ডাকঘর" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white">
                                     </div>
                                     <div>
-                                        <label class="block text-xs font-medium text-gray-600 mb-1">ইউপি / ওয়ার্ডঃ</label>
-                                        <input type="text" id="addr_union" placeholder="ইউনিয়ন বা ওয়ার্ড নম্বর" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white">
-                                    </div>
-                                    <div class="sm:col-span-2 md:col-span-1">
-                                        <label class="block text-xs font-medium text-gray-600 mb-1">উপজেলা / থানাঃ <span class="text-red-500">*</span></label>
-                                        <select id="upazila" required class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white">
-                                            <option value="">-- নির্বাচন করুন --</option>
-                                            <option value="রাজশাহী জেলা কার্যালয় (সদর)">রাজশাহী জেলা কার্যালয় (সদর)</option>
-                                            <option value="বোয়ালিয়া মডেল থানা এলাকা">বোয়ালিয়া মডেল থানা এলাকা</option>
-                                            <option value="রাজপাড়া থানা এলাকা">রাজপাড়া থানা এলাকা</option>
-                                            <option value="কাশিয়াডাঙ্গা থানা এলাকা">কাশিয়াডাঙ্গা থানা এলাকা</option>
-                                            <option value="চন্দ্রিমা থানা এলাকা">চন্দ্রিমা থানা এলাকা</option>
-                                            <option value="মতিহার থানা এলাকা">মতিহার থানা এলাকা</option>
-                                            <option value="পবা উপজেলা">পবা উপজেলা</option>
-                                            <option value="গোদাগাড়ী উপজেলা">গোদাগাড়ী উপজেলা</option>
-                                            <option value="তানোর উপজেলা">তানোর উপজেলা</option>
-                                            <option value="মোহনপুর উপজেলা">মোহনপুর উপজেলা</option>
-                                            <option value="বাগমারা উপজেলা">বাগমারা উপজেলা</option>
-                                            <option value="দুর্গাপুর উপজেলা">দুর্গাপুর উপজেলা</option>
-                                            <option value="পুঠিয়া উপজেলা">পুঠিয়া উপজেলা</option>
-                                            <option value="চারঘাট উপজেলা">চারঘাট উপজেলা</option>
-                                            <option value="বাঘা উপজেলা">বাঘা উপজেলা</option>
+                                        <label class="block text-xs font-medium text-gray-600 mb-1">উপজেলা / থানাঃ</label>
+                                        <select id="addr_upazila" onchange="updateUnions()" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white">
+                                            <option value="">-- উপজেলা নির্বাচন করুন --</option>
+                                            <option value="পবা">পবা</option>
+                                            <option value="গোদাগাড়ী">গোদাগাড়ী</option>
+                                            <option value="তানোর">তানোর</option>
+                                            <option value="মোহনপুর">মোহনপুর</option>
+                                            <option value="বাগমারা">বাগমারা</option>
+                                            <option value="দুর্গাপুর">দুর্গাপুর</option>
+                                            <option value="পুঠিয়া">পুঠিয়া</option>
+                                            <option value="চারঘাট">চারঘাট</option>
+                                            <option value="বাঘা">বাঘা</option>
+                                            <option value="বোয়ালিয়া">বোয়ালিয়া মডেল থানা</option>
+                                            <option value="রাজপাড়া">রাজপাড়া থানা</option>
+                                            <option value="কাশিয়াডাঙ্গা">কাশিয়াডাঙ্গা থানা</option>
+                                            <option value="চন্দ্রিমা">চন্দ্রিমা থানা</option>
+                                            <option value="মতিহার">মতিহার থানা</option>
                                         </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-gray-600 mb-1">ইউপি (ইউনিয়ন):</label>
+                                        <select id="addr_union" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white">
+                                            <option value="">-- প্রথমে উপজেলা নির্বাচন করুন --</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-gray-600 mb-1">ওয়ার্ড নম্বরঃ</label>
+                                        <input type="text" id="addr_ward" placeholder="যেমন: ০৩ নং ওয়ার্ড" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white">
                                     </div>
                                     <div>
                                         <label class="block text-xs font-medium text-gray-600 mb-1">জেলাঃ</label>
@@ -361,13 +366,13 @@
                             </div>
 
                             <div class="md:col-span-2">
-                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">পরিবারের তথ্য ও সদস্য বিবরণ</label>
-                                <input type="text" id="family_info" placeholder="পারিবারিক সদস্য সংখ্যা, নির্ভরশীল সদস্য ইত্যাদি" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none transition">
+                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">পরিবারের তথ্য</label>
+                                <input type="text" id="family_info" placeholder="পারিবারিক তথ্য" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
 
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">প্রবেশনের মেয়াদ <span class="text-red-500">*</span></label>
-                                <select id="duration" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none transition">
+                                <select id="duration" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                                     <option value="৬ মাস">০৬ মাস</option>
                                     <option value="১ বছর">০১ বছর</option>
                                     <option value="১ বছর ৬ মাস">০১ বছর ০৬ মাস</option>
@@ -377,20 +382,20 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">মেয়াদ শুরুর তারিখ <span class="text-red-500">*</span></label>
-                                <input type="date" id="start_date" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <input type="date" id="start_date" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">মেয়াদ শেষের তারিখ <span class="text-red-500">*</span></label>
-                                <input type="date" id="end_date" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <input type="date" id="end_date" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">মোট নির্ধারিত হাজিরা সংখ্যা</label>
-                                <input type="number" id="total_hazira" value="12" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <input type="number" id="total_hazira" value="12" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                             </div>
 
                             <div class="md:col-span-2">
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">প্রাথমিক পর্যবেক্ষণ ও বিশেষ শর্তাবলি</label>
-                                <textarea id="remarks" rows="2" placeholder="আদালত কর্তৃক প্রদত্ত শর্তাবলী বা প্রারম্ভিক পর্যবেক্ষণ..." class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none transition"></textarea>
+                                <textarea id="remarks" rows="2" placeholder="প্রাথমিক পর্যবেক্ষণ..." class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none"></textarea>
                             </div>
 
                             <div class="md:col-span-2 flex flex-wrap justify-end gap-3 pt-4 border-t">
@@ -405,25 +410,31 @@
                     </div>
                 </section>
 
-                <!-- 3. ATTENDANCE REGISTER VIEW -->
-                <section id="view-register" class="hidden space-y-6">
+                <!-- 4. DISTRICT REGISTER VIEW (With 6 specific date slots) -->
+                <section id="view-register-district" class="hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-base font-bold text-gray-800"><i class="fa-solid fa-book-open text-brand-600 mr-2"></i>হাজিরা রেজিস্টার ও হালনাগাদ</h3>
+                        <div class="flex justify-between items-center mb-4 border-b pb-3">
+                            <div>
+                                <h3 class="text-base font-bold text-gray-800"><i class="fa-solid fa-book-open text-brand-600 mr-2"></i>জেলা কার্যালয় হাজিরা রেজিস্টার</h3>
+                                <p class="text-xs text-gray-500">পূর্ববর্তী হাজিরা তারিখসমূহ ও গতিপথ নিবিড় তদারকির জন্য সংরক্ষণের ঘর।</p>
+                            </div>
                         </div>
                         <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse">
+                            <table class="w-full text-left border-collapse min-w-[1000px]">
                                 <thead>
                                     <tr class="bg-gray-50 text-gray-700 text-xs uppercase font-bold border-b">
                                         <th class="p-3">নাম ও মামলা নং</th>
-                                        <th class="p-3">উপজেলা</th>
-                                        <th class="p-3">হাজিরা (সম্পন্ন/মোট)</th>
-                                        <th class="p-3">পরবর্তী হাজিরা তারিখ</th>
-                                        <th class="p-3">আচরণগত পরিবর্তন ও মন্তব্য</th>
+                                        <th class="p-3">১ম হাজিরা</th>
+                                        <th class="p-3">২য় হাজিরা</th>
+                                        <th class="p-3">৩য় হাজিরা</th>
+                                        <th class="p-3">৪র্থ হাজিরা</th>
+                                        <th class="p-3">৫ম হাজিরা</th>
+                                        <th class="p-3">৬ষ্ঠ হাজিরা</th>
+                                        <th class="p-3 text-center">সম্পন্ন / মোট</th>
                                         <th class="p-3 text-center">কার্যক্রম</th>
                                     </tr>
                                 </thead>
-                                <tbody id="register-table-body" class="text-sm text-gray-600 divide-y divide-gray-100">
+                                <tbody id="register-district-table-body" class="text-sm text-gray-600 divide-y divide-gray-100">
                                     <!-- Populated dynamically -->
                                 </tbody>
                             </table>
@@ -431,13 +442,43 @@
                     </div>
                 </section>
 
-                <!-- 4. DATABASE & SEARCH VIEW -->
+                <!-- 5. UPAZILA REGISTER VIEW (With Expiry Status & Final Report Status) -->
+                <section id="view-register-upazila" class="hidden space-y-6">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <div class="flex justify-between items-center mb-4 border-b pb-3">
+                            <div>
+                                <h3 class="text-base font-bold text-gray-800"><i class="fa-solid fa-clipboard-list text-amber-600 mr-2"></i>উপজেলা হাজিরা ও চূড়ান্ত প্রতিবেদন রেজিস্টার</h3>
+                                <p class="text-xs text-gray-500">উপজেলা কার্যালয়ের আওতায় থাকা মামলার মেয়াদ উত্তীর্ণতা ও প্রতিবেদন দাখিলের চিত্র।</p>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse min-w-[900px]">
+                                <thead>
+                                    <tr class="bg-gray-50 text-gray-700 text-xs uppercase font-bold border-b">
+                                        <th class="p-3">নাম, মামলা ও উপজেলা</th>
+                                        <th class="p-3">পরবর্তী হাজিরার তারিখ</th>
+                                        <th class="p-3">মেয়াদ উত্তীর্ণের অবস্থা</th>
+                                        <th class="p-3">চূড়ান্ত প্রতিবেদন দাখিলের অবস্থা</th>
+                                        <th class="p-3 text-center">কার্যক্রম</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="register-upazila-table-body" class="text-sm text-gray-600 divide-y divide-gray-100">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. DATABASE & SEARCH VIEW -->
                 <section id="view-database" class="hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                            <input type="text" id="search-query" placeholder="নাম, মামলা নং বা NID দিয়ে খুঁজুন..." class="border border-gray-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
-                            <select id="filter-court" class="border border-gray-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
-                                <option value="">সব আদালত</option>
+                            <input type="text" id="search-query" placeholder="নাম, মামলা নং বা NID..." class="border border-gray-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
+                            <select id="filter-officer" class="border border-gray-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
+                                <option value="">সকল কর্মকর্তা / কার্যালয়</option>
+                                <option value="জেলা প্রবেশন অফিসার, রাজশাহী">জেলা প্রবেশন অফিসার, রাজশাহী</option>
+                                <option value="upazila_all">সকল উপজেলা কার্যালয়</option>
                             </select>
                             <select id="filter-status" class="border border-gray-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none">
                                 <option value="">সকল অবস্থা</option>
@@ -453,7 +494,7 @@
                                         <th class="p-3">তারিখ</th>
                                         <th class="p-3">নাম ও পিতা</th>
                                         <th class="p-3">মামলা ও আদালত</th>
-                                        <th class="p-3">উপজেলা ও মোবাইল</th>
+                                        <th class="p-3">দায়িত্বপ্রাপ্ত কর্মকর্তা</th>
                                         <th class="p-3">মেয়াদ</th>
                                         <th class="p-3">অবস্থা</th>
                                         <th class="p-3 text-center">অ্যাকশন</th>
@@ -467,31 +508,31 @@
                     </div>
                 </section>
 
-                <!-- 5. REPORTS & EXPORT VIEW -->
+                <!-- 7. REPORTS & EXPORT VIEW -->
                 <section id="view-reports" class="hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
-                        <h3 class="text-lg font-bold text-gray-800 border-b pb-3"><i class="fa-solid fa-file-arrow-down text-brand-600 mr-2"></i>রিপোর্ট ডাউনলোড ও এক্সপোর্ট</h3>
+                        <h3 class="text-lg font-bold text-gray-800 border-b pb-3"><i class="fa-solid fa-file-arrow-down text-brand-600 mr-2"></i>রিপোর্ট ডাউনলোড ও আলাদা এক্সপোর্ট</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="border p-5 rounded-2xl space-y-3 bg-gray-50/50">
-                                <h4 class="font-bold text-gray-700">এক্সেল রিপোর্ট (CSV)</h4>
-                                <p class="text-xs text-gray-500">সকল প্রবেশনারের বিস্তারিত তালিকা মাইক্রোসফট এক্সেল ফরম্যাটে ডাউনলোড করুন।</p>
-                                <button onclick="exportToCSV()" class="w-full bg-green-600 hover:bg-green-700 text-white text-sm py-2.5 rounded-xl font-medium transition shadow-sm"><i class="fa-solid fa-file-excel mr-2"></i> এক্সেল ডাউনলোড</button>
+                                <h4 class="font-bold text-gray-700">জেলা অফিসের রিপোর্ট (CSV)</h4>
+                                <p class="text-xs text-gray-500">শুধুমাত্র জেলা প্রবেশন অফিসার পরিচালিত কেসের তথ্য এক্সেল ফাইলে ডাউনলোড করুন।</p>
+                                <button onclick="exportToCSV('district')" class="w-full bg-green-600 hover:bg-green-700 text-white text-sm py-2.5 rounded-xl font-medium transition shadow-sm"><i class="fa-solid fa-file-excel mr-2"></i> জেলা রিপোর্ট ডাউনলোড</button>
                             </div>
                             <div class="border p-5 rounded-2xl space-y-3 bg-gray-50/50">
-                                <h4 class="font-bold text-gray-700">প্রিন্ট / পিডিএফ রিপোর্ট</h4>
-                                <p class="text-xs text-gray-500">অফিসিয়াল সারসংক্ষেপ ও পূর্ণাঙ্গ তালিকা প্রিন্ট বা পিডিএফ সেভ করুন।</p>
-                                <button onclick="window.print()" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm py-2.5 rounded-xl font-medium transition shadow-sm"><i class="fa-solid fa-print mr-2"></i> প্রিন্ট / PDF</button>
+                                <h4 class="font-bold text-gray-700">উপজেলাসমূহের রিপোর্ট (CSV)</h4>
+                                <p class="text-xs text-gray-500">উপজেলা সমাজসেবা অফিসারগণের তত্ত্বাবধানে থাকা কেসের তথ্য ডাউনলোডের লিঙ্ক।</p>
+                                <button onclick="exportToCSV('upazila')" class="w-full bg-amber-600 hover:bg-amber-700 text-white text-sm py-2.5 rounded-xl font-medium transition shadow-sm"><i class="fa-solid fa-file-excel mr-2"></i> উপজেলা রিপোর্ট ডাউনলোড</button>
                             </div>
                             <div class="border p-5 rounded-2xl space-y-3 bg-gray-50/50">
-                                <h4 class="font-bold text-gray-700">ডেটা রিসেট ও ডিলিট</h4>
-                                <p class="text-xs text-gray-500">সঞ্চয়কৃত সব তথ্য মুছে নতুন করে মেমোরি খালি করতে চাইলে ক্লিক করুন।</p>
+                                <h4 class="font-bold text-gray-700">ডাটা রিসেট ও ডিলিট</h4>
+                                <p class="text-xs text-gray-500">মেমোরি খালি করে সকল তথ্য স্থায়ীভাবে মুছে ফেলুন।</p>
                                 <button onclick="clearAllData()" class="w-full bg-red-600 hover:bg-red-700 text-white text-sm py-2.5 rounded-xl font-medium transition shadow-sm"><i class="fa-solid fa-trash mr-2"></i> সমস্ত ডাটা মুছুন</button>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- 6. PRINTABLE REPORT CONTAINER (For PDF / Print) -->
+                <!-- 8. PRINTABLE REPORT CONTAINER -->
                 <div id="printable-report" class="hidden">
                     <div class="text-center space-y-1.5 mb-8 border-b-2 border-gray-800 pb-4">
                         <h2 class="text-2xl font-bold">প্রবেশন অফিস, সমাজসেবা অধিদপ্তর</h2>
@@ -503,7 +544,6 @@
                         <!-- Dynamic Report Content -->
                     </div>
 
-                    <!-- SIGNATURE BLOCK WITH ENHANCED SPACING & GENERIC TITLE -->
                     <div class="mt-32 flex justify-between items-end px-8 text-base">
                         <div class="text-center w-60">
                             <p class="border-t border-gray-800 pt-2 font-semibold">প্রবেশনারের স্বাক্ষর / টিপসই</p>
@@ -519,10 +559,42 @@
         </div>
     </div>
 
-    <!-- JavaScript Application Logic & Charts -->
+    <!-- JavaScript Application Logic -->
     <script>
+        let chartDistrictInstance = null;
         let chartUpazilaInstance = null;
-        let chartStatusInstance = null;
+
+        // UNION DATA MAP FOR RAJSHAHI UPAZILAS
+        const unionData = {
+            "পবা": ["হরিপুর", "হড়গ্রাম", "পরিবা", "দামকুড়া", "কাটাখালী", "দর্শনপাড়া", "বড়গাছি", "হুজুরিপাড়া"],
+            "গোদাগাড়ী": ["গোদাগাড়ী", "মোহনপুর", "পাকড়ী", "রিশিকুল", "গোগ্রাম", "মাটিshared", "দেওপাড়া", "বাসুদেবপুর", "চর অনসংপুর"],
+            "তানোর": ["কলমা", "বাঁধাইড়", "পাঁচন্দর", "সরনজাই", "তালন্দ", "কামারগাঁ", "চান্দুড়িয়া"],
+            "মোহনপুর": ["রায়ঘাটি", "ঘাসিগ্রাম", "মৌগাছি", "বাকশিমইল", "ধুরইল"],
+            "বাগমারা": ["গোবিন্দপাড়া", "নরদাশ", "দ্বীপপুর", "বড়বিহানালী", "আউচপাড়া", "শ্রীপুর", "বাসুপাড়া", "কাঁচাপাড়া", "হামিরকুstage", "যোগীপাড়া", "শুভডাঙ্গা", "সোনাডাঙ্গা", "মাঝগ্রাম", "গণিপুর", "ঝিকরা"],
+            "দুর্গাপুর": ["নওপাড়া", "কিসমত গনকৈড়", "পানানগর", "দেউলা", "মাড়িয়া", "জয়নগর", "ঝালুকা"],
+            "পুঠিয়া": ["পুঠিয়া", "বেলপুকুরিয়া", "বানেশ্বর", "ভালুকগাছী", "জিল্লাবান্ধা", "সিলমারী"],
+            "চারঘাট": ["ইউসুফপুর", "শলুয়া", "সরদহ", "নিমপাড়া", "চারঘাট", "মাথারো"],
+            "বাঘা": ["বাজুবাঘা", "গরগড়ি", "পাকুড়িয়া", "মনিগ্রাম", "বাউসা", "আড়ানী", "চকরাজাপুর"],
+            "বোয়ালিয়া": ["ওয়ার্ড ১-১০", "ওয়ার্ড ১১-২০", "ওয়ার্ড ২১-৩০"],
+            "রাজপাড়া": ["ওয়ার্ড ১", "ওয়ার্ড ২", "ওয়ার্ড ৩", "ওয়ার্ড ৪"],
+            "কাশিয়াডাঙ্গা": ["ওয়ার্ড ১", "ওয়ার্ড ২", "ওয়ার্ড ৩"],
+            "চন্দ্রিমা": ["ওয়ার্ড ৪", "ওয়ার্ড ৫", "ওয়ার্ড ৬"],
+            "মতিহার": ["ওয়ার্ড ২৮", "ওয়ার্ড ২৯", "ওয়ার্ড ৩০"]
+        };
+
+        function updateUnions() {
+            let upz = document.getElementById('addr_upazila').value;
+            let unionSelect = document.getElementById('addr_union');
+            unionSelect.innerHTML = '<option value="">-- ইউপি / ইউনিয়ন নির্বাচন করুন --</option>';
+
+            if(upz && unionData[upz]) {
+                unionData[upz].forEach(u => {
+                    unionSelect.innerHTML += `<option value="${u}">${u}</option>`;
+                });
+            } else {
+                unionSelect.innerHTML = '<option value="">-- তথ্য পাওয়া যায়নি (হাতে লিখুন) --</option>';
+            }
+        }
 
         function getDB() {
             let data = localStorage.getItem('probation_db_rajshahi');
@@ -534,8 +606,7 @@
         }
 
         function toggleMobileSidebar() {
-            const aside = document.querySelector('aside');
-            aside.classList.toggle('hidden');
+            document.querySelector('aside').classList.toggle('hidden');
         }
 
         function switchTab(tabId) {
@@ -553,16 +624,20 @@
             }
 
             const titles = {
-                'dashboard': 'ড্যাশবোর্ড ওভারভিউ',
+                'dashboard-district': 'জেলা ড্যাশবোর্ড ওভারভিউ',
+                'dashboard-upazila': 'উপজেলা ড্যাশবোর্ড ওভারভিউ',
                 'entry': 'নতুন প্রবেশনার তথ্য এন্ট্রি',
-                'register': 'হাজিরা রেজিস্টার ও হালনাগাদ',
-                'database': 'প্রবেশনারের ডাটাবেস ও অনুসন্ধান',
-                'reports': 'রিপোর্ট ডাউনলোড ও এক্সপোর্ট'
+                'register-district': 'জেলা কার্যালয় হাজিরা রেজিস্টার',
+                'register-upazila': 'উপজেলা কার্যালয় হাজিরা রেজিস্টার',
+                'database': 'প্রবেশনার ডাটাবেস ও ফিল্টারিং',
+                'reports': 'আলাদা রিপোর্ট ও এক্সপোর্ট'
             };
             document.getElementById('page-title').innerText = titles[tabId] || '';
 
-            if(tabId === 'dashboard') loadDashboard();
-            if(tabId === 'register') loadRegister();
+            if(tabId === 'dashboard-district') loadDistrictDashboard();
+            if(tabId === 'dashboard-upazila') loadUpazilaDashboard();
+            if(tabId === 'register-district') loadDistrictRegister();
+            if(tabId === 'register-upazila') loadUpazilaRegister();
             if(tabId === 'database') loadDatabase();
         }
 
@@ -573,16 +648,18 @@
 
             let village = document.getElementById('addr_village').value.trim();
             let post = document.getElementById('addr_post').value.trim();
+            let upz = document.getElementById('addr_upazila').value.trim();
             let union = document.getElementById('addr_union').value.trim();
-            let upazilaVal = document.getElementById('upazila').value;
+            let ward = document.getElementById('addr_ward').value.trim();
             let districtVal = document.getElementById('addr_district').value.trim();
 
-            let fullAddress = `গ্রাম/বাসাঃ ${village || 'প্রযোজ্য নয়'}, ডাকঘরঃ ${post || 'প্রযোজ্য নয়'}, ইউপি/ওয়ার্ডঃ ${union || 'প্রযোজ্য নয়'}, উপজেলাঃ ${upazilaVal}, জেলাঃ ${districtVal}`;
+            let fullAddress = `গ্রাম/বাসাঃ ${village || 'N/A'}, ডাকঘরঃ ${post || 'N/A'}, উপজেলাঃ ${upz || 'N/A'}, ইউপিঃ ${union || 'N/A'}, ওয়ার্ডঃ ${ward || 'N/A'}, জেলাঃ ${districtVal}`;
 
             let newRecord = {
                 id: Date.now(),
                 rcv_date: document.getElementById('rcv_date').value,
                 memo_no: document.getElementById('memo_no').value,
+                assigned_officer: document.getElementById('assigned_officer').value,
                 court_name: document.getElementById('court_name').value,
                 case_no: document.getElementById('case_no').value,
                 p_name: document.getElementById('p_name').value,
@@ -592,7 +669,7 @@
                 occupation: document.getElementById('occupation').value,
                 education: document.getElementById('education').value,
                 mobile: document.getElementById('mobile').value,
-                upazila: upazilaVal,
+                upazila: upz || 'রাজশাহী সদর',
                 nid: document.getElementById('nid').value,
                 address: fullAddress,
                 family_info: document.getElementById('family_info').value,
@@ -601,156 +678,201 @@
                 end_date: document.getElementById('end_date').value,
                 total_hazira: parseInt(document.getElementById('total_hazira').value) || 12,
                 completed_hazira: 0,
+                // 6 Slot dates for District Office
+                h1: '', h2: '', h3: '', h4: '', h5: '', h6: '',
+                // Upazila extra fields
                 next_hazira: '',
-                behavior_notes: '',
+                final_report_status: 'মামলা চলমান',
                 remarks: document.getElementById('remarks').value
             };
             db.push(newRecord);
             saveDB(db);
-            alert('সফলভাবে নতুন প্রবেশনারের তথ্য সংরক্ষণ করা হয়েছে!');
+            alert('সফলভাবে প্রবেশনারের তথ্য সংরক্ষণ করা হয়েছে!');
             this.reset();
-            switchTab('dashboard');
+            
+            if(newRecord.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী') {
+                switchTab('dashboard-district');
+            } else {
+                switchTab('dashboard-upazila');
+            }
         });
 
-        function loadDashboard() {
-            let db = getDB();
-            document.getElementById('stat-total').innerText = db.length;
-            
-            let running = 0, expired = 0, pendingReport = 0;
+        // 1. DISTRICT DASHBOARD LOAD
+        function loadDistrictDashboard() {
+            let db = getDB().filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
             let today = new Date().toISOString().split('T')[0];
-            let upazilaCounts = {};
-
+            
+            let running = 0, expired = 0, pending = 0;
             db.forEach(item => {
                 if(item.end_date >= today) running++;
-                else {
-                    expired++;
-                    pendingReport++;
-                }
-
-                if(!upazilaCounts[item.upazila]) {
-                    upazilaCounts[item.upazila] = { total: 0, running: 0, expired: 0, pending: 0 };
-                }
-                upazilaCounts[item.upazila].total++;
-                if(item.end_date >= today) upazilaCounts[item.upazila].running++;
-                else {
-                    upazilaCounts[item.upazila].expired++;
-                    upazilaCounts[item.upazila].pending++;
-                }
+                else { expired++; pending++; }
             });
 
-            document.getElementById('stat-running').innerText = running;
-            document.getElementById('stat-expired').innerText = expired;
-            document.getElementById('stat-pending-report').innerText = pendingReport;
+            document.getElementById('dist-stat-total').innerText = db.length;
+            document.getElementById('dist-stat-running').innerText = running;
+            document.getElementById('dist-stat-expired').innerText = expired;
+            document.getElementById('dist-stat-pending').innerText = pending;
 
-            let tbody = document.getElementById('dashboard-summary-table');
-            tbody.innerHTML = '';
-            if(Object.keys(upazilaCounts).length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400">কোনো তথ্য পাওয়া যায়নি</td></tr>`;
-            } else {
-                for(let up in upazilaCounts) {
-                    tbody.innerHTML += `
-                        <tr class="hover:bg-gray-50 transition">
-                            <td class="p-3 font-semibold text-gray-800">${up}</td>
-                            <td class="p-3">${upazilaCounts[up].total}</td>
-                            <td class="p-3 text-green-600 font-semibold">${upazilaCounts[up].running}</td>
-                            <td class="p-3 text-amber-600">${upazilaCounts[up].expired}</td>
-                            <td class="p-3 text-red-600">${upazilaCounts[up].pending}</td>
-                        </tr>
-                    `;
-                }
-            }
-
-            // Render Charts
-            renderCharts(upazilaCounts, running, expired);
-        }
-
-        function renderCharts(upazilaData, runningCount, expiredCount) {
-            let labels = Object.keys(upazilaData);
-            let totals = labels.map(l => upazilaData[l].total);
-
-            // 1. Upazila Bar Chart
-            const ctxBar = document.getElementById('chartUpazila').getContext('2d');
-            if(chartUpazilaInstance) chartUpazilaInstance.destroy();
-            chartUpazilaInstance = new Chart(ctxBar, {
+            const ctx = document.getElementById('chartDistrictBar').getContext('2d');
+            if(chartDistrictInstance) chartDistrictInstance.destroy();
+            chartDistrictInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: labels.length > 0 ? labels : ['তথ্য নেই'],
+                    labels: ['মোট কেস', 'চলমান কেস', 'মেয়াদ উত্তীর্ণ', 'প্রতিবেদন বাকি'],
                     datasets: [{
-                        label: 'প্রবেশনার সংখ্যা',
-                        data: labels.length > 0 ? totals : [0],
-                        backgroundColor: '#16a34a',
+                        label: 'জেলা কেস সংখ্যা',
+                        data: [db.length, running, expired, pending],
+                        backgroundColor: ['#1e40af', '#16a34a', '#d97706', '#dc2626'],
                         borderRadius: 6
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
-                }
-            });
-
-            // 2. Status Doughnut Chart
-            const ctxDoughnut = document.getElementById('chartStatus').getContext('2d');
-            if(chartStatusInstance) chartStatusInstance.destroy();
-            chartStatusInstance = new Chart(ctxDoughnut, {
-                type: 'doughnut',
-                data: {
-                    labels: ['মামলা চলমান', 'মেয়াদ উত্তীর্ণ'],
-                    datasets: [{
-                        data: [runningCount, expiredCount],
-                        backgroundColor: ['#22c55e', '#f59e0b'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: 'bottom' } }
-                }
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
         }
 
-        function loadRegister() {
-            let db = getDB();
-            let tbody = document.getElementById('register-table-body');
+        // 2. UPAZILA DASHBOARD LOAD
+        function loadUpazilaDashboard() {
+            let db = getDB().filter(item => item.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী');
+            let today = new Date().toISOString().split('T')[0];
+            
+            let running = 0, expired = 0, pending = 0;
+            let upazilaGroup = {};
+
+            db.forEach(item => {
+                let officer = item.assigned_officer || 'অন্যান্য উপজেলা';
+                if(!upazilaGroup[officer]) upazilaGroup[officer] = 0;
+                upazilaGroup[officer]++;
+
+                if(item.end_date >= today) running++;
+                else {
+                    expired++;
+                    if(item.final_report_status !== 'দাখিল হয়েছে') pending++;
+                }
+            });
+
+            document.getElementById('upz-stat-total').innerText = db.length;
+            document.getElementById('upz-stat-running').innerText = running;
+            document.getElementById('upz-stat-expired').innerText = expired;
+            document.getElementById('upz-stat-pending').innerText = pending;
+
+            const ctx = document.getElementById('chartUpazilaBar').getContext('2d');
+            if(chartUpazilaInstance) chartUpazilaInstance.destroy();
+            chartUpazilaInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(upazilaGroup).length > 0 ? Object.keys(upazilaGroup).map(k => k.replace('উপজেলা সমাজসেবা অফিসার, ', '')) : ['কোনো তথ্য নেই'],
+                    datasets: [{
+                        label: 'উপজেলা কেস বন্টন',
+                        data: Object.keys(upazilaGroup).length > 0 ? Object.values(upazilaGroup) : [0],
+                        backgroundColor: '#d97706',
+                        borderRadius: 6
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+        }
+
+        // 3. DISTRICT REGISTER LOAD (With 6 Hazira Date Slots)
+        function loadDistrictRegister() {
+            let db = getDB().filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
+            let tbody = document.getElementById('register-district-table-body');
             tbody.innerHTML = '';
+            
             if(db.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-400">কোনো প্রবেশনার এন্ট্রি করা হয়নি</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="9" class="p-4 text-center text-gray-400">জেলা প্রবেশন অফিসারের অধীনে কোনো কেস পাওয়া যায়নি।</td></tr>`;
                 return;
             }
+
             db.forEach(item => {
                 tbody.innerHTML += `
                     <tr class="hover:bg-gray-50 transition">
-                        <td class="p-3"><strong>${item.p_name}</strong><br><small class="text-gray-400">মামলা: ${item.case_no}</small></td>
-                        <td class="p-3">${item.upazila}</td>
-                        <td class="p-3"><input type="number" id="comp_${item.id}" value="${item.completed_hazira}" class="w-16 border rounded px-2 py-1 text-center"> / ${item.total_hazira}</td>
-                        <td class="p-3"><input type="date" id="next_${item.id}" value="${item.next_hazira}" class="border rounded px-2 py-1 text-xs"></td>
-                        <td class="p-3"><input type="text" id="note_${item.id}" value="${item.behavior_notes}" placeholder="আচরণ ও মন্তব্য..." class="w-full border rounded px-2 py-1 text-xs"></td>
-                        <td class="p-3 text-center">
-                            <button onclick="updateRegister(${item.id})" class="bg-brand-600 hover:bg-brand-700 text-white text-xs px-3 py-1.5 rounded-lg shadow-sm">আপডেট</button>
+                        <td class="p-3"><strong>${item.p_name}</strong><br><small class="text-gray-400">${item.case_no}</small></td>
+                        <td class="p-2"><input type="date" id="h1_${item.id}" value="${item.h1 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                        <td class="p-2"><input type="date" id="h2_${item.id}" value="${item.h2 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                        <td class="p-2"><input type="date" id="h3_${item.id}" value="${item.h3 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                        <td class="p-2"><input type="date" id="h4_${item.id}" value="${item.h4 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                        <td class="p-2"><input type="date" id="h5_${item.id}" value="${item.h5 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                        <td class="p-2"><input type="date" id="h6_${item.id}" value="${item.h6 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                        <td class="p-2 text-center font-semibold"><input type="number" id="comp_${item.id}" value="${item.completed_hazira || 0}" class="w-12 border rounded text-center"> / ${item.total_hazira}</td>
+                        <td class="p-2 text-center">
+                            <button onclick="updateDistrictRegister(${item.id})" class="bg-brand-600 hover:bg-brand-700 text-white text-xs px-2.5 py-1 rounded shadow">সংরক্ষণ</button>
                         </td>
                     </tr>
                 `;
             });
         }
 
-        function updateRegister(id) {
+        function updateDistrictRegister(id) {
             let db = getDB();
             let item = db.find(d => d.id === id);
             if(item) {
+                item.h1 = document.getElementById(`h1_${id}`).value;
+                item.h2 = document.getElementById(`h2_${id}`).value;
+                item.h3 = document.getElementById(`h3_${id}`).value;
+                item.h4 = document.getElementById(`h4_${id}`).value;
+                item.h5 = document.getElementById(`h5_${id}`).value;
+                item.h6 = document.getElementById(`h6_${id}`).value;
                 item.completed_hazira = parseInt(document.getElementById(`comp_${id}`).value) || 0;
-                item.next_hazira = document.getElementById(`next_${id}`).value;
-                item.behavior_notes = document.getElementById(`note_${id}`).value;
                 saveDB(db);
-                alert('হাজিরা তথ্য সফলভাবে আপডেট করা হয়েছে!');
+                alert('জেলা রেজিস্টারের হাজিরার তারিখসমূহ আপডেট করা হয়েছে!');
             }
         }
 
+        // 4. UPAZILA REGISTER LOAD
+        function loadUpazilaRegister() {
+            let db = getDB().filter(item => item.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী');
+            let tbody = document.getElementById('register-upazila-table-body');
+            let today = new Date().toISOString().split('T')[0];
+            tbody.innerHTML = '';
+            
+            if(db.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400">উপজেলা সমাজসেবা অফিসারগণের আওতায় কোনো কেস পাওয়া যায়নি।</td></tr>`;
+                return;
+            }
+
+            db.forEach(item => {
+                let isExpired = item.end_date < today;
+                let statusBadge = isExpired ? 
+                    `<span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded font-bold">মেয়াদ উত্তীর্ণ</span>` : 
+                    `<span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold">মেয়াদ চলমান</span>`;
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="p-3"><strong>${item.p_name}</strong><br><small class="text-gray-500">${item.case_no}</small><br><span class="text-xs text-brand-700">${item.assigned_officer}</span></td>
+                        <td class="p-3"><input type="date" id="next_${item.id}" value="${item.next_hazira || ''}" class="border rounded px-2 py-1 text-xs"></td>
+                        <td class="p-3">${statusBadge}<br><small class="text-gray-400">শেষ: ${item.end_date}</small></td>
+                        <td class="p-3">
+                            <select id="final_${item.id}" class="border rounded px-2 py-1 text-xs font-semibold">
+                                <option value="মামলা চলমান" ${item.final_report_status === 'মামলা চলমান' ? 'selected' : ''}>মামলা চলমান</option>
+                                <option value="দাখিল হয়েছে" ${item.final_report_status === 'দাখিল হয়েছে' ? 'selected' : ''}>দাখিল হয়েছে</option>
+                                <option value="দাখিল হয়নি" ${item.final_report_status === 'দাখিল হয়নি' ? 'selected' : ''}>দাখিল হয়নি</option>
+                            </select>
+                        </td>
+                        <td class="p-3 text-center">
+                            <button onclick="updateUpazilaRegister(${item.id})" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-3 py-1.5 rounded shadow">আপডেট</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function updateUpazilaRegister(id) {
+            let db = getDB();
+            let item = db.find(d => d.id === id);
+            if(item) {
+                item.next_hazira = document.getElementById(`next_${id}`).value;
+                item.final_report_status = document.getElementById(`final_${id}`).value;
+                saveDB(db);
+                alert('উপজেলা রেজিস্টারের তথ্য হালনাগাদ করা হয়েছে!');
+            }
+        }
+
+        // 5. DATABASE SEARCH & FILTER
         function loadDatabase() {
             let db = getDB();
             let tbody = document.getElementById('database-table-body');
             let searchQuery = document.getElementById('search-query').value.toLowerCase();
+            let filterOfficer = document.getElementById('filter-officer').value;
             let filterStatus = document.getElementById('filter-status').value;
             let today = new Date().toISOString().split('T')[0];
 
@@ -760,10 +882,17 @@
                                   item.case_no.toLowerCase().includes(searchQuery) || 
                                   (item.nid && item.nid.includes(searchQuery));
                 
+                let matchOfficer = true;
+                if(filterOfficer === 'upazila_all') {
+                    matchOfficer = item.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী';
+                } else if(filterOfficer) {
+                    matchOfficer = item.assigned_officer === filterOfficer;
+                }
+
                 let status = item.end_date >= today ? 'Running' : 'Expired';
                 let matchStatus = !filterStatus || status === filterStatus;
 
-                return matchSearch && matchStatus;
+                return matchSearch && matchOfficer && matchStatus;
             });
 
             if(filtered.length === 0) {
@@ -782,19 +911,19 @@
                         <td class="p-3 text-xs">${item.rcv_date}</td>
                         <td class="p-3"><strong>${item.p_name}</strong><br><small class="text-gray-500">পিতা: ${item.f_name}</small></td>
                         <td class="p-3">${item.case_no}<br><small class="text-gray-500">${item.court_name}</small></td>
-                        <td class="p-3">${item.upazila}<br><small class="text-gray-500">${item.mobile}</small></td>
+                        <td class="p-3 text-xs font-semibold text-brand-800">${item.assigned_officer}</td>
                         <td class="p-3 text-xs">${item.start_date} হতে<br>${item.end_date}</td>
                         <td class="p-3">${statusBadge}</td>
                         <td class="p-3 text-center space-x-1">
-                            <button onclick="printIntakePDF(${item.id})" title="ইনটেক ফর্ম প্রিন্ট" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-2.5 py-1.5 rounded-lg shadow-sm"><i class="fa-solid fa-file-pdf"></i></button>
-                            <button onclick="deleteRecord(${item.id})" title="মুছে ফেলুন" class="bg-red-500 hover:bg-red-600 text-white text-xs px-2.5 py-1.5 rounded-lg shadow-sm"><i class="fa-solid fa-trash"></i></button>
+                            <button onclick="printIntakePDF(${item.id})" title="পিডিএফ ফর্ম" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-2.5 py-1.5 rounded"><i class="fa-solid fa-file-pdf"></i></button>
+                            <button onclick="deleteRecord(${item.id})" title="মুছে ফেলুন" class="bg-red-500 hover:bg-red-600 text-white text-xs px-2.5 py-1.5 rounded"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 `;
             });
         }
 
-        // Print Intake Form from Form Inputs directly
+        // PRINT INTAKE FORM LOGIC
         function previewIntakePDFFromForm() {
             let p_name = document.getElementById('p_name').value;
             if(!p_name) {
@@ -804,6 +933,7 @@
             let data = {
                 rcv_date: document.getElementById('rcv_date').value,
                 memo_no: document.getElementById('memo_no').value,
+                assigned_officer: document.getElementById('assigned_officer').value,
                 court_name: document.getElementById('court_name').value,
                 case_no: document.getElementById('case_no').value,
                 p_name: p_name,
@@ -814,7 +944,7 @@
                 education: document.getElementById('education').value,
                 mobile: document.getElementById('mobile').value,
                 nid: document.getElementById('nid').value,
-                address: `গ্রাম/বাসাঃ ${document.getElementById('addr_village').value}, ডাকঘরঃ ${document.getElementById('addr_post').value}, ইউপি/ওয়ার্ডঃ ${document.getElementById('addr_union').value}, উপজেলাঃ ${document.getElementById('upazila').value}, জেলাঃ ${document.getElementById('addr_district').value}`,
+                address: `গ্রাম/বাসাঃ ${document.getElementById('addr_village').value}, ডাকঘরঃ ${document.getElementById('addr_post').value}, উপজেলাঃ ${document.getElementById('addr_upazila').value}, ইউপিঃ ${document.getElementById('addr_union').value}, ওয়ার্ডঃ ${document.getElementById('addr_ward').value}, জেলাঃ ${document.getElementById('addr_district').value}`,
                 family_info: document.getElementById('family_info').value,
                 duration: document.getElementById('duration').value,
                 start_date: document.getElementById('start_date').value,
@@ -826,7 +956,6 @@
             window.print();
         }
 
-        // Print Intake Form for Saved Record
         function printIntakePDF(id) {
             let db = getDB();
             let item = db.find(d => d.id === id);
@@ -836,7 +965,6 @@
             }
         }
 
-        // GENERATE PRINTABLE TABLE WITH INCREASED SPACING & LINE-HEIGHT
         function generatePrintableHTML(item) {
             let contentBody = document.getElementById('report-content-body');
             contentBody.innerHTML = `
@@ -844,6 +972,10 @@
                     <tr>
                         <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50 w-1/3">প্রাপ্তির তারিখ ও স্মারক নং:</td>
                         <td class="border border-gray-400 py-3 px-4">${item.rcv_date || ''} | স্মারক: ${item.memo_no || ''}</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">দায়িত্বপ্রাপ্ত কর্মকর্তা:</td>
+                        <td class="border border-gray-400 py-3 px-4 font-bold text-brand-800">${item.assigned_officer || ''}</td>
                     </tr>
                     <tr>
                         <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">আদালতের নাম:</td>
@@ -863,27 +995,19 @@
                     </tr>
                     <tr>
                         <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">বয়স, পেশা ও শিক্ষাগত যোগ্যতা:</td>
-                        <td class="border border-gray-400 py-3 px-4">বয়স: ${item.age || ''} বছর | পেশা: ${item.occupation || ''} | শিক্ষাগত যোগ্যতা: ${item.education || ''}</td>
+                        <td class="border border-gray-400 py-3 px-4">বয়স: ${item.age || ''} বছর | পেশা: ${item.occupation || ''} | শিক্ষা: ${item.education || ''}</td>
                     </tr>
                     <tr>
                         <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">মোবাইল ও NID:</td>
-                        <td class="border border-gray-400 py-3 px-4">মোবাইল: ${item.mobile || ''} | NID/জন্ম সনদ: ${item.nid || 'প্রযোজ্য নয়'}</td>
+                        <td class="border border-gray-400 py-3 px-4">মোবাইল: ${item.mobile || ''} | NID: ${item.nid || 'N/A'}</td>
                     </tr>
                     <tr>
                         <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">স্থায়ী ঠিকানা:</td>
-                        <td class="border border-gray-400 py-3 px-4 leading-normal">${item.address || ''}</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">পারিবারিক তথ্য:</td>
-                        <td class="border border-gray-400 py-3 px-4">${item.family_info || 'তথ্য সংরক্ষিত নেই'}</td>
+                        <td class="border border-gray-400 py-3 px-4">${item.address || ''}</td>
                     </tr>
                     <tr>
                         <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">প্রবেশনের মেয়াদ ও সময়কাল:</td>
                         <td class="border border-gray-400 py-3 px-4">${item.duration || ''} (${item.start_date || ''} হতে ${item.end_date || ''})</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">নির্ধারিত হাজিরা সংখ্যা:</td>
-                        <td class="border border-gray-400 py-3 px-4">${item.total_hazira || 12} টি</td>
                     </tr>
                     <tr>
                         <td class="border border-gray-400 py-3 px-4 font-semibold bg-gray-50">প্রাথমিক পর্যবেক্ষণ / শর্তাবলি:</td>
@@ -894,37 +1018,43 @@
         }
 
         function deleteRecord(id) {
-            if(confirm('আপনি কি নিশ্চিতভাবে এই প্রবেশনারের রেকর্ডটি মুছে ফেলতে চান?')) {
-                let db = getDB();
-                db = db.filter(d => d.id !== id);
+            if(confirm('আপনি কি নিশ্চিতভাবে এই রেকর্ডটি মুছে ফেলতে চান?')) {
+                let db = getDB().filter(d => d.id !== id);
                 saveDB(db);
                 loadDatabase();
             }
         }
 
         function clearAllData() {
-            if(confirm('সতর্কতা! সমস্ত সংরক্ষিত ডাটা মুছে যাবে। আপনি কি নিশ্চিত?')) {
+            if(confirm('সতর্কতা! সমস্ত ডাটা মুছে যাবে। আপনি কি নিশ্চিত?')) {
                 localStorage.removeItem('probation_db_rajshahi');
                 alert('সকল ডাটা মুছে ফেলা হয়েছে।');
-                loadDashboard();
+                loadDistrictDashboard();
             }
         }
 
-        function exportToCSV() {
+        // CSV EXPORT SEPARATED BY OFFICE TYPES
+        function exportToCSV(type) {
             let db = getDB();
+            if(type === 'district') {
+                db = db.filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
+            } else if(type === 'upazila') {
+                db = db.filter(item => item.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী');
+            }
+
             if(db.length === 0) {
-                alert('এক্সপোর্ট করার মতো কোনো ডাটা নেই!');
+                alert('ডাউনলোড করার মতো কোনো তথ্য নেই!');
                 return;
             }
+
             let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
-            csvContent += "ID,Received Date,Memo No,Court Name,Case No,Probationer Name,Father Name,Mother Name,Age,Occupation,Education,Mobile,Upazila,NID,Address,Duration,Start Date,End Date,Total Hazira\n";
+            csvContent += "ID,Rcv Date,Memo No,Assigned Officer,Court Name,Case No,Probationer Name,Father Name,Age,Mobile,Upazila,Address,Duration,Start Date,End Date\n";
 
             db.forEach(row => {
                 let line = [
-                    row.id, row.rcv_date, `"${row.memo_no}"`, `"${row.court_name}"`, `"${row.case_no}"`, 
-                    `"${row.p_name}"`, `"${row.f_name}"`, `"${row.m_name}"`, row.age, `"${row.occupation}"`, 
-                    `"${row.education}"`, row.mobile, `"${row.upazila}"`, row.nid, `"${row.address}"`, row.duration, 
-                    row.start_date, row.end_date, row.total_hazira
+                    row.id, row.rcv_date, `"${row.memo_no}"`, `"${row.assigned_officer}"`, `"${row.court_name}"`, `"${row.case_no}"`, 
+                    `"${row.p_name}"`, `"${row.f_name}"`, row.age, row.mobile, `"${row.upazila}"`, `"${row.address}"`, row.duration, 
+                    row.start_date, row.end_date
                 ].join(",");
                 csvContent += line + "\n";
             });
@@ -932,14 +1062,14 @@
             let encodedUri = encodeURI(csvContent);
             let link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "probation_rajshahi_report.csv");
+            link.setAttribute("download", `probation_${type}_report.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         }
 
-        // Initial Load
-        loadDashboard();
+        // INITIAL LOAD
+        loadDistrictDashboard();
     </script>
 </body>
 </html>
