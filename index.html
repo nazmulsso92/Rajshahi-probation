@@ -1060,7 +1060,7 @@
         }
 
         // --- DASHBOARD LOADERS ---
-      function loadDistrictDashboard() {
+     function loadDistrictDashboard() {
             let db = getDB().filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
             let allDb = getDB();
             let today = new Date().toISOString().split('T')[0];
@@ -1077,8 +1077,7 @@
             document.getElementById('dist-stat-expired').innerText = expired;
             document.getElementById('dist-stat-pending').innerText = pending;
 
-            // উপজেলাভিত্তিক তালিকা টেবিল লোড
-           // উপজেলাভিত্তিক তালিকা টেবিল লোড (শুধু ৯টি উপজেলা রেখে থানাগুলো বাদ দেওয়া হয়েছে)
+            // উপজেলাভিত্তিক তালিকা টেবিল লোড (শুধু ৯টি উপজেলা রেখে থানাগুলো বাদ দেওয়া হয়েছে)
             let upazilaList = [
                 "উপজেলা সমাজসেবা অফিসার, পবা",
                 "উপজেলা সমাজসেবা অফিসার, গোদাগাড়ী",
@@ -1146,6 +1145,7 @@
                     <td class="p-3 text-center text-red-600">${totalPendingSum}</td>
                 </tr>
             `;
+        }
         function loadUpazilaDashboard() {
             let db = getDB().filter(item => item.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী');
             let today = new Date().toISOString().split('T')[0];
