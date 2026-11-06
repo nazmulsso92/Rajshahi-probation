@@ -208,9 +208,10 @@
                 <div class="flex items-center space-x-3">
                     <span class="bg-brand-50 border border-brand-200 text-brand-800 text-xs font-semibold px-3.5 py-1.5 rounded-lg flex items-center shadow-sm">
                         <i class="fa-solid fa-building-columns mr-2 text-brand-600"></i> 
-                        <span>প্রবেশন অফিসারের কার্যালয়, রাজশাহী<br><span class="font-normal text-brand-700">মোঃ নাজমুল খাঁ, প্রবেশন অফিসার</span></span>
+                        <span>প্রবেশন অফিসারের কার্যালয়, রাজশাহী<br><span id="logged-user-name" class="font-normal text-brand-700">মোঃ নাজমুল খাঁ, প্রবেশন অফিসার</span></span>
                     </span>
                 </div>
+            </header>
 
             <main class="p-4 md:p-6 flex-1 max-w-7xl w-full mx-auto">
                 
@@ -218,7 +219,7 @@
                 <section id="view-dashboard-district" class="space-y-6">
                     <div class="bg-brand-50 border-l-4 border-brand-600 p-4 rounded-r-xl shadow-sm">
                         <h4 class="font-bold text-brand-900 text-base">জেলা প্রবেশন অফিসারের নিয়ন্ত্রণাধীন কেসসমূহ</h4>
-                        <p class="text-xs text-brand-700 mt-1">জেলার অধীনে পরিচালিত প্রবেশনারগণ কোন উপজেলা থেকে এসেছে তার পরিসংখ্যান।</p>
+                        <p class="text-xs text-brand-700 mt-1">জেলার অধীনে পরিচালিত প্রবেশনারগণ কোন উপজেলা থেকে এসেছে তার সরাসরি হিসাব ও পর্যালোচনা।</p>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -240,10 +241,10 @@
                         </div>
                     </div>
 
-                  <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
                         <div>
                             <h3 class="text-base font-bold text-gray-800"><i class="fa-solid fa-list-check text-brand-600 mr-2"></i>উপজেলাভিত্তিক কেস বন্টন ও স্ট্যাটাস তালিকা</h3>
-                            <p class="text-xs text-gray-500 mt-0.5">রাজশাহী জেলার অধীনস্থ সকল উপজেলার দায়িত্বপ্রাপ্ত কেসসমূহের বিস্তারিত পরিসংখ্যান।</p>
+                            <p class="text-xs text-gray-500 mt-0.5">রাজশাহী জেলার অধীনস্থ সকল উপজেলা থেকে এন্ট্রি করা মামলাসমূহের রিয়েল-টাইম বিস্তারিত পরিসংখ্যান।</p>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse min-w-[700px]">
@@ -428,8 +429,8 @@
                                         <input type="text" id="addr_post" placeholder="ডাকঘর" class="w-full border rounded-lg px-3 py-1.5 text-sm bg-white outline-none">
                                     </div>
                                     <div>
-                                        <label class="block text-xs font-medium text-gray-600 mb-1">উপজেলা / থানাঃ</label>
-                                        <select id="addr_upazila" onchange="updateUnions()" class="w-full border rounded-lg px-3 py-1.5 text-sm bg-white outline-none">
+                                        <label class="block text-xs font-medium text-gray-600 mb-1">উপজেলা / থানাঃ <span class="text-red-500">*</span></label>
+                                        <select id="addr_upazila" onchange="updateUnions()" required class="w-full border rounded-lg px-3 py-1.5 text-sm bg-white outline-none">
                                             <option value="">-- নির্বাচন করুন --</option>
                                             <option value="পবা">পবা</option>
                                             <option value="গোদাগাড়ী">গোদাগাড়ী</option>
@@ -521,19 +522,19 @@
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse min-w-[1000px]">
                                 <thead>
-  <tr class="bg-gray-50 text-gray-700 text-xs uppercase font-bold border-b">
-      <th class="p-3">নাম, মামলা ও উপজেলা</th>
-      <th class="p-3">১ম হাজিরা</th>
-      <th class="p-3">২য় হাজিরা</th>
-      <th class="p-3">৩য় হাজিরা</th>
-      <th class="p-3">৪র্থ হাজিরা</th>
-      <th class="p-3">৫ম হাজিরা</th>
-      <th class="p-3">৬ষ্ঠ হাজিরা</th>
-      <th class="p-3 text-center">সম্পন্ন / মোট</th>
-      <th class="p-3 text-center">প্রবেশনারের আচরণগত পরিবর্তন</th>
-      <th class="p-3 text-center">কার্যক্রম</th>
-  </tr>
-</thead>
+                                  <tr class="bg-gray-50 text-gray-700 text-xs uppercase font-bold border-b">
+                                      <th class="p-3">নাম, মামলা ও উপজেলা</th>
+                                      <th class="p-3">১ম হাজিরা</th>
+                                      <th class="p-3">২য় হাজিরা</th>
+                                      <th class="p-3">৩য় হাজিরা</th>
+                                      <th class="p-3">৪র্থ হাজিরা</th>
+                                      <th class="p-3">৫ম হাজিরা</th>
+                                      <th class="p-3">৬ষ্ঠ হাজিরা</th>
+                                      <th class="p-3 text-center">সম্পন্ন / মোট</th>
+                                      <th class="p-3 text-center">প্রবেশনারের আচরণগত পরিবর্তন</th>
+                                      <th class="p-3 text-center">কার্যক্রম</th>
+                                  </tr>
+                                </thead>
                                 <tbody id="register-district-table-body" class="text-sm text-gray-600 divide-y divide-gray-100"></tbody>
                             </table>
                         </div>
@@ -689,7 +690,6 @@
 
     <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
-        let chartDistrictUpazilaInstance = null;
         let chartUpazilaInstance = null;
         let currentUser = null;
 
@@ -724,7 +724,6 @@
         // --- DEFAULT ADMIN & SESSION INITIALIZATION ---
         function checkInitialAdmin() {
             let users = JSON.parse(localStorage.getItem('probation_users_rajshahi')) || [];
-            // ডিফল্ট অ্যাডমিন ইউজার নিশ্চিত করা (যদি না থাকে)
             if(!users.some(u => u.username === 'admin')) {
                 users.push({
                     name: 'জেলা প্রবেশন অফিসার, রাজশাহী',
@@ -1043,6 +1042,11 @@
                 document.getElementById('total_hazira').value = item.total_hazira || 12;
                 document.getElementById('remarks').value = item.remarks || '';
 
+                if(item.upazila) {
+                    document.getElementById('addr_upazila').value = item.upazila;
+                    updateUnions();
+                }
+
                 document.getElementById('form-section-title').innerHTML = `<i class="fa-solid fa-user-pen text-brand-600 mr-2"></i>প্রবেশনারের তথ্য হালনাগাদ (এডিট)`;
                 document.getElementById('form-submit-btn').innerHTML = `<i class="fa-solid fa-floppy-disk mr-2"></i> আপডেট সংরক্ষণ করুন`;
                 document.getElementById('cancel-edit-btn').classList.remove('hidden');
@@ -1060,34 +1064,32 @@
         }
 
         // --- DASHBOARD LOADERS ---
-     function loadDistrictDashboard() {
-            let db = getDB().filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
-            let allDb = getDB();
+        function loadDistrictDashboard() {
+            let db = getDB();
+            // জেলা প্রবেশন অফিসারের নিয়ন্ত্রণাধীন সমস্ত তথ্য (বা রেজিস্টারের রেকর্ডসমূহ)
+            let distDb = db.filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
             let today = new Date().toISOString().split('T')[0];
             
             let running = 0, expired = 0, pending = 0;
 
-            db.forEach(item => {
+            distDb.forEach(item => {
                 if(item.end_date >= today) running++;
-                else { expired++; pending++; }
+                else { 
+                    expired++; 
+                    if(item.final_report_status !== 'দাখিল হয়েছে') pending++;
+                }
             });
 
-            document.getElementById('dist-stat-total').innerText = db.length;
+            document.getElementById('dist-stat-total').innerText = distDb.length;
             document.getElementById('dist-stat-running').innerText = running;
             document.getElementById('dist-stat-expired').innerText = expired;
             document.getElementById('dist-stat-pending').innerText = pending;
 
-            // উপজেলাভিত্তিক তালিকা টেবিল লোড (শুধু ৯টি উপজেলা রেখে থানাগুলো বাদ দেওয়া হয়েছে)
+            // উপজেলাসমূহের তালিকা
             let upazilaList = [
-                "উপজেলা সমাজসেবা অফিসার, পবা",
-                "উপজেলা সমাজসেবা অফিসার, গোদাগাড়ী",
-                "উপজেলা সমাজসেবা অফিসার, তানোর",
-                "উপজেলা সমাজসেবা অফিসার, মোহনপুর",
-                "উপজেলা সমাজসেবা অফিসার, বাগমারা",
-                "উপজেলা সমাজসেবা অফিসার, দুর্গাপুর",
-                "উপজেলা সমাজসেবা অফিসার, পুঠিয়া",
-                "উপজেলা সমাজসেবা অফিসার, চারঘাট",
-                "উপজেলা সমাজসেবা অফিসার, বাঘা"
+                "পবা", "গোদাগাড়ী", "তানোর", "মোহনপুর", 
+                "বাগমারা", "দুর্গাপুর", "পুঠিয়া", "চারঘাট", "বাঘা",
+                "বোয়ালিয়া", "রাজপাড়া", "কাশিয়াডাঙ্গা", "চন্দ্রিমা", "মতিহার"
             ];
 
             let tbody = document.getElementById('dist-upazila-table-body');
@@ -1099,24 +1101,22 @@
             let totalPendingSum = 0;
 
             upazilaList.forEach((upzName, index) => {
-                let officerCases = allDb.filter(i => i.assigned_officer === upzName);
+                // জেলা রেজিস্টার এবং প্রথম ডেটা এন্ট্রি অনুযায়ী উক্ত উপজেলার সকল প্রবেশনার ফিল্টার
+                let upzCases = distDb.filter(i => (i.upazila || '').toLowerCase() === upzName.toLowerCase() || (i.address || '').includes(upzName));
                 
-                // পবা উপজেলার জন্য ৩টি কেস এবং ৩টি চলমান কেস সেট করা, বাকিগুলোতে ০
-                let tCount = (upzName.includes('পবা')) ? 3 : officerCases.length;
-                let rCount = (upzName.includes('পবা')) ? 3 : 0;
+                let tCount = upzCases.length;
+                let rCount = 0;
                 let eCount = 0;
                 let pCount = 0;
 
-                if (!upzName.includes('পবা')) {
-                    officerCases.forEach(item => {
-                        if(item.end_date >= today) {
-                            rCount++;
-                        } else {
-                            eCount++;
-                            if(item.final_report_status !== 'দাখিল হয়েছে') pCount++;
-                        }
-                    });
-                }
+                upzCases.forEach(item => {
+                    if(item.end_date >= today) {
+                        rCount++;
+                    } else {
+                        eCount++;
+                        if(item.final_report_status !== 'দাখিল হয়েছে') pCount++;
+                    }
+                });
 
                 totalCasesSum += tCount;
                 totalRunningSum += rCount;
@@ -1135,7 +1135,7 @@
                 `;
             });
 
-            // টেবিলের নিচে সর্বমোট (Total) সারি যোগ করা
+            // সর্বমোট (Total) সারি
             tbody.innerHTML += `
                 <tr class="bg-gray-100 text-gray-800 text-sm font-bold border-t-2">
                     <td class="p-3" colspan="2">সর্বমোট</td>
@@ -1146,6 +1146,7 @@
                 </tr>
             `;
         }
+
         function loadUpazilaDashboard() {
             let db = getDB().filter(item => item.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী');
             let today = new Date().toISOString().split('T')[0];
@@ -1188,55 +1189,56 @@
         }
 
         // --- REGISTERS ---
-   function loadDistrictRegister() {
-    let db = getDB().filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
-    let tbody = document.getElementById('register-district-table-body');
-    tbody.innerHTML = '';
+        function loadDistrictRegister() {
+            let db = getDB().filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
+            let tbody = document.getElementById('register-district-table-body');
+            tbody.innerHTML = '';
 
-    if(db.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="10" class="p-4 text-center text-gray-400">জেলা প্রবেশন অফিসারের অধীনে কোনো কেস পাওয়া যায়নি।</td></tr>`;
-        return;
-    }
+            if(db.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="10" class="p-4 text-center text-gray-400">জেলা প্রবেশন অফিসারের অধীনে কোনো কেস পাওয়া যায়নি।</td></tr>`;
+                return;
+            }
 
-    db.forEach(item => {
-        tbody.innerHTML += `
-            <tr class="hover:bg-gray-50 transition">
-                <td class="p-3"><strong>${item.p_name}</strong><br><small class="text-gray-400">${item.case_no}</small></td>
-                <td class="p-2"><input type="date" id="h1_${item.id}" value="${item.h1 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
-                <td class="p-2"><input type="date" id="h2_${item.id}" value="${item.h2 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
-                <td class="p-2"><input type="date" id="h3_${item.id}" value="${item.h3 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
-                <td class="p-2"><input type="date" id="h4_${item.id}" value="${item.h4 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
-                <td class="p-2"><input type="date" id="h5_${item.id}" value="${item.h5 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
-                <td class="p-2"><input type="date" id="h6_${item.id}" value="${item.h6 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
-                <td class="p-2 text-center font-semibold">
-                    <input type="number" id="comp_${item.id}" value="${item.completed_hazira || 0}" class="w-12 border rounded text-center"> / ${item.total_hazira}
-                </td>
-                <td class="p-2 text-center">
-                    <textarea id="behavior_${item.id}" rows="2" class="w-32 border rounded px-1.5 py-1 text-xs">${item.behavior_change || ''}</textarea>
-                </td>
-                <td class="p-2 text-center">
-                    <button onclick="updateDistrictRegister(${item.id})" class="bg-brand-600 text-white text-xs px-2.5 py-1 rounded shadow cursor-pointer">সংরক্ষণ</button>
-                </td>
-            </tr>
-        `;
-    });
-}    
-       function updateDistrictRegister(id) {
-    let db = getDB();
-    let item = db.find(d => d.id === id);
-    if(item) {
-        item.h1 = document.getElementById(`h1_${id}`).value;
-        item.h2 = document.getElementById(`h2_${id}`).value;
-        item.h3 = document.getElementById(`h3_${id}`).value;
-        item.h4 = document.getElementById(`h4_${id}`).value;
-        item.h5 = document.getElementById(`h5_${id}`).value;
-        item.h6 = document.getElementById(`h6_${id}`).value;
-        item.completed_hazira = parseInt(document.getElementById(`comp_${id}`).value) || 0;
-        item.behavior_change = document.getElementById(`behavior_${id}`).value.trim();
-        saveDB(db);
-        alert('হাজিরা ও আচরণগত পরিবর্তন সংরক্ষণ করা হয়েছে!');
-    }
-}
+            db.forEach(item => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="p-3"><strong>${item.p_name}</strong><br><small class="text-gray-400">${item.case_no}</small><br><span class="text-xs text-brand-700">উপজেলা: ${item.upazila || 'N/A'}</span></td>
+                        <td class="p-2"><input type="date" id="h1_${item.id}" value="${item.h1 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                        <td class="p-2"><input type="date" id="h2_${item.id}" value="${item.h2 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                        <td class="p-2"><input type="date" id="h3_${item.id}" value="${item.h3 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                        <td class="p-2"><input type="date" id="h4_${item.id}" value="${item.h4 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                        <td class="p-2"><input type="date" id="h5_${item.id}" value="${item.h5 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                        <td class="p-2"><input type="date" id="h6_${item.id}" value="${item.h6 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                        <td class="p-2 text-center font-semibold">
+                            <input type="number" id="comp_${item.id}" value="${item.completed_hazira || 0}" class="w-12 border rounded text-center"> / ${item.total_hazira}
+                        </td>
+                        <td class="p-2 text-center">
+                            <textarea id="behavior_${item.id}" rows="2" class="w-32 border rounded px-1.5 py-1 text-xs">${item.behavior_change || ''}</textarea>
+                        </td>
+                        <td class="p-2 text-center">
+                            <button onclick="updateDistrictRegister(${item.id})" class="bg-brand-600 text-white text-xs px-2.5 py-1 rounded shadow cursor-pointer">সংরক্ষণ</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }    
+
+        function updateDistrictRegister(id) {
+            let db = getDB();
+            let item = db.find(d => d.id === id);
+            if(item) {
+                item.h1 = document.getElementById(`h1_${id}`).value;
+                item.h2 = document.getElementById(`h2_${id}`).value;
+                item.h3 = document.getElementById(`h3_${id}`).value;
+                item.h4 = document.getElementById(`h4_${id}`).value;
+                item.h5 = document.getElementById(`h5_${id}`).value;
+                item.h6 = document.getElementById(`h6_${id}`).value;
+                item.completed_hazira = parseInt(document.getElementById(`comp_${id}`).value) || 0;
+                item.behavior_change = document.getElementById(`behavior_${id}`).value.trim();
+                saveDB(db);
+                alert('হাজিরা ও আচরণগত পরিবর্তন সংরক্ষণ করা হয়েছে!');
+            }
+        }
 
         function loadUpazilaRegister() {
             let db = getDB().filter(item => item.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী');
