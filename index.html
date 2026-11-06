@@ -1126,7 +1126,7 @@
         }
 
         // --- REGISTERS ---
-     function loadDistrictRegister() {
+   function loadDistrictRegister() {
     let db = getDB().filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
     let tbody = document.getElementById('register-district-table-body');
     tbody.innerHTML = '';
@@ -1158,7 +1158,7 @@
             </tr>
         `;
     });
-}
+}    
        function updateDistrictRegister(id) {
     let db = getDB();
     let item = db.find(d => d.id === id);
