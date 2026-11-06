@@ -1126,46 +1126,55 @@
         }
 
         // --- REGISTERS ---
-        function loadDistrictRegister() {
-            let db = getDB().filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
-            let tbody = document.getElementById('register-district-table-body');
-            tbody.innerHTML = '';
-            if(db.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="9" class="p-4 text-center text-gray-400">জেলা প্রবেশন অফিসারের অধীনে কোনো কেস পাওয়া যায়নি।</td></tr>`;
-                return;
-            }
-            db.forEach(item => {
-                tbody.innerHTML += `
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="p-3"><strong>${item.p_name}</strong><br><small class="text-gray-400">${item.case_no}</small></td>
-                        <td class="p-2"><input type="date" id="h1_${item.id}" value="${item.h1 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
-                        <td class="p-2"><input type="date" id="h2_${item.id}" value="${item.h2 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
-                        <td class="p-2"><input type="date" id="h3_${item.id}" value="${item.h3 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
-                        <td class="p-2"><input type="date" id="h4_${item.id}" value="${item.h4 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
-                        <td class="p-2"><input type="date" id="h5_${item.id}" value="${item.h5 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
-                        <td class="p-2"><input type="date" id="h6_${item.id}" value="${item.h6 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
-                        <td class="p-2 text-center font-semibold"><input type="number" id="comp_${item.id}" value="${item.completed_hazira || 0}" class="w-12 border rounded text-center"> / ${item.total_hazira}</td>
-                        <td class="p-2 text-center"><button onclick="updateDistrictRegister(${item.id})" class="bg-brand-600 text-white text-xs px-2.5 py-1 rounded shadow cursor-pointer">সংরক্ষণ</button></td>
-                    </tr>
-                `;
-            });
-        }
+     function loadDistrictRegister() {
+    let db = getDB().filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
+    let tbody = document.getElementById('register-district-table-body');
+    tbody.innerHTML = '';
 
-        function updateDistrictRegister(id) {
-            let db = getDB();
-            let item = db.find(d => d.id === id);
-            if(item) {
-                item.h1 = document.getElementById(`h1_${id}`).value;
-                item.h2 = document.getElementById(`h2_${id}`).value;
-                item.h3 = document.getElementById(`h3_${id}`).value;
-                item.h4 = document.getElementById(`h4_${id}`).value;
-                item.h5 = document.getElementById(`h5_${id}`).value;
-                item.h6 = document.getElementById(`h6_${id}`).value;
-                item.completed_hazira = parseInt(document.getElementById(`comp_${id}`).value) || 0;
-                saveDB(db);
-                alert('হাজিরা তারিখসমূহ আপডেট করা হয়েছে!');
-            }
-        }
+    if(db.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="10" class="p-4 text-center text-gray-400">জেলা প্রবেশন অফিসারের অধীনে কোনো কেস পাওয়া যায়নি।</td></tr>`;
+        return;
+    }
+
+    db.forEach(item => {
+        tbody.innerHTML += `
+            <tr class="hover:bg-gray-50 transition">
+                <td class="p-3"><strong>${item.p_name}</strong><br><small class="text-gray-400">${item.case_no}</small></td>
+                <td class="p-2"><input type="date" id="h1_${item.id}" value="${item.h1 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                <td class="p-2"><input type="date" id="h2_${item.id}" value="${item.h2 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                <td class="p-2"><input type="date" id="h3_${item.id}" value="${item.h3 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                <td class="p-2"><input type="date" id="h4_${item.id}" value="${item.h4 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                <td class="p-2"><input type="date" id="h5_${item.id}" value="${item.h5 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                <td class="p-2"><input type="date" id="h6_${item.id}" value="${item.h6 || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
+                <td class="p-2 text-center font-semibold">
+                    <input type="number" id="comp_${item.id}" value="${item.completed_hazira || 0}" class="w-12 border rounded text-center"> / ${item.total_hazira}
+                </td>
+                <td class="p-2 text-center">
+                    <textarea id="behavior_${item.id}" rows="2" class="w-32 border rounded px-1.5 py-1 text-xs">${item.behavior_change || ''}</textarea>
+                </td>
+                <td class="p-2 text-center">
+                    <button onclick="updateDistrictRegister(${item.id})" class="bg-brand-600 text-white text-xs px-2.5 py-1 rounded shadow cursor-pointer">সংরক্ষণ</button>
+                </td>
+            </tr>
+        `;
+    });
+}
+       function updateDistrictRegister(id) {
+    let db = getDB();
+    let item = db.find(d => d.id === id);
+    if(item) {
+        item.h1 = document.getElementById(`h1_${id}`).value;
+        item.h2 = document.getElementById(`h2_${id}`).value;
+        item.h3 = document.getElementById(`h3_${id}`).value;
+        item.h4 = document.getElementById(`h4_${id}`).value;
+        item.h5 = document.getElementById(`h5_${id}`).value;
+        item.h6 = document.getElementById(`h6_${id}`).value;
+        item.completed_hazira = parseInt(document.getElementById(`comp_${id}`).value) || 0;
+        item.behavior_change = document.getElementById(`behavior_${id}`).value.trim();
+        saveDB(db);
+        alert('হাজিরা ও আচরণগত পরিবর্তন সংরক্ষণ করা হয়েছে!');
+    }
+}
 
         function loadUpazilaRegister() {
             let db = getDB().filter(item => item.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী');
