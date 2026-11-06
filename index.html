@@ -192,7 +192,6 @@
             </nav>
 
             <div class="p-4 border-t border-brand-800 bg-brand-950/40 text-xs text-center space-y-2">
-                <span id="logged-user-name" class="font-semibold text-white block truncate"></span>
                 <button onclick="handleLogout()" class="w-full bg-red-600 hover:bg-red-700 text-white py-1.5 rounded-lg font-medium transition cursor-pointer">লগআউট</button>
             </div>
         </aside>
@@ -207,11 +206,11 @@
                     <h2 id="page-title" class="text-xl font-bold text-gray-800 tracking-tight">জেলা ড্যাশবোর্ড ওভারভিউ</h2>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <span class="bg-brand-50 border border-brand-200 text-brand-800 text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center shadow-sm">
-                        <i class="fa-solid fa-building-columns mr-2 text-brand-600"></i> প্রবেশন অফিসারের কার্যালয়, রাজশাহী
+                    <span class="bg-brand-50 border border-brand-200 text-brand-800 text-xs font-semibold px-3.5 py-1.5 rounded-lg flex items-center shadow-sm">
+                        <i class="fa-solid fa-building-columns mr-2 text-brand-600"></i> 
+                        <span>প্রবেশন অফিসারের কার্যালয়, রাজশাহী<br><span class="font-normal text-brand-700">মোঃ নাজমুল খাঁ, প্রবেশন অফিসার</span></span>
                     </span>
                 </div>
-            </header>
 
             <main class="p-4 md:p-6 flex-1 max-w-7xl w-full mx-auto">
                 
@@ -241,10 +240,25 @@
                         </div>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                        <h3 class="text-base font-bold text-gray-800 mb-4"><i class="fa-solid fa-chart-column text-brand-600 mr-2"></i>জেলা কেসের উপজেলাভিত্তিক বন্টন চিত্র</h3>
-                        <div class="relative h-72">
-                            <canvas id="chartDistrictUpazilaBar"></canvas>
+                  <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
+                        <div>
+                            <h3 class="text-base font-bold text-gray-800"><i class="fa-solid fa-list-check text-brand-600 mr-2"></i>উপজেলাভিত্তিক কেস বন্টন ও স্ট্যাটাস তালিকা</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">রাজশাহী জেলার অধীনস্থ সকল উপজেলা ও থানা এলাকার দায়িত্বপ্রাপ্ত কেসসমূহের বিস্তারিত পরিসংখ্যান।</p>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse min-w-[700px]">
+                                <thead>
+                                    <tr class="bg-gray-50 text-gray-700 text-xs uppercase font-bold border-b">
+                                        <th class="p-3 w-16">ক্র: নং</th>
+                                        <th class="p-3">উপজেলা / থানা এলাকার নাম</th>
+                                        <th class="p-3 text-center">মোট কেস</th>
+                                        <th class="p-3 text-center">চলমান কেস</th>
+                                        <th class="p-3 text-center">মেয়াদ উত্তীর্ণ কেস</th>
+                                        <th class="p-3 text-center">চূড়ান্ত প্রতিবেদন বাকি</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dist-upazila-table-body" class="text-sm text-gray-600 divide-y divide-gray-100"></tbody>
+                            </table>
                         </div>
                     </div>
                 </section>
@@ -1046,20 +1060,16 @@
         }
 
         // --- DASHBOARD LOADERS ---
-        function loadDistrictDashboard() {
+      function loadDistrictDashboard() {
             let db = getDB().filter(item => item.assigned_officer === 'জেলা প্রবেশন অফিসার, রাজশাহী');
+            let allDb = getDB();
             let today = new Date().toISOString().split('T')[0];
             
             let running = 0, expired = 0, pending = 0;
-            let upazilaBreakdown = {};
 
             db.forEach(item => {
                 if(item.end_date >= today) running++;
                 else { expired++; pending++; }
-
-                let upz = item.upazila || 'অন্যান্য';
-                if(!upazilaBreakdown[upz]) upazilaBreakdown[upz] = 0;
-                upazilaBreakdown[upz]++;
             });
 
             document.getElementById('dist-stat-total').innerText = db.length;
@@ -1067,23 +1077,55 @@
             document.getElementById('dist-stat-expired').innerText = expired;
             document.getElementById('dist-stat-pending').innerText = pending;
 
-            const ctx = document.getElementById('chartDistrictUpazilaBar').getContext('2d');
-            if(chartDistrictUpazilaInstance) chartDistrictUpazilaInstance.destroy();
-            chartDistrictUpazilaInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(upazilaBreakdown).length > 0 ? Object.keys(upazilaBreakdown) : ['তথ্য নেই'],
-                    datasets: [{
-                        label: 'উপজেলাভিত্তিক জেলা কেস',
-                        data: Object.keys(upazilaBreakdown).length > 0 ? Object.values(upazilaBreakdown) : [0],
-                        backgroundColor: '#16a34a',
-                        borderRadius: 6
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            // উপজেলাভিত্তিক তালিকা টেবিল লোড
+            let upazilaList = [
+                "উপজেলা সমাজসেবা অফিসার, পবা",
+                "উপজেলা সমাজসেবা অফিসার, গোদাগাড়ী",
+                "উপজেলা সমাজসেবা অফিসার, তানোর",
+                "উপজেলা সমাজসেবা অফিসার, মোহনপুর",
+                "উপজেলা সমাজসেবা অফিসার, বাগমারা",
+                "উপজেলা সমাজসেবা অফিসার, দুর্গাপুর",
+                "উপজেলা সমাজসেবা অফিসার, পুঠিয়া",
+                "উপজেলা সমাজসেবা অফিসার, চারঘাট",
+                "উপজেলা সমাজসেবা অফিসার, বাঘা",
+                "সমাজসেবা অফিসার, বোয়ালিয়া মডেল থানা এলাকা",
+                "সমাজসেবা অফিসার, রাজপাড়া থানা এলাকা",
+                "সমাজসেবা অফিসার, কাশিয়াডাঙ্গা থানা এলাকা",
+                "সমাজসেবা অফিসার, চন্দ্রিমা থানা এলাকা",
+                "সমাজসেবা অফিসার, মতিহার থানা এলাকা"
+            ];
+
+            let tbody = document.getElementById('dist-upazila-table-body');
+            tbody.innerHTML = '';
+
+            upazilaList.forEach((upzName, index) => {
+                let officerCases = allDb.filter(i => i.assigned_officer === upzName);
+                let tCount = officerCases.length;
+                let rCount = 0;
+                let eCount = 0;
+                let pCount = 0;
+
+                officerCases.forEach(item => {
+                    if(item.end_date >= today) {
+                        rCount++;
+                    } else {
+                        eCount++;
+                        if(item.final_report_status !== 'দাখিল হয়েছে') pCount++;
+                    }
+                });
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="p-3 font-semibold text-gray-500">${index + 1}</td>
+                        <td class="p-3 font-medium text-gray-800">${upzName}</td>
+                        <td class="p-3 text-center font-bold text-gray-800">${tCount}</td>
+                        <td class="p-3 text-center font-semibold text-green-600">${rCount}</td>
+                        <td class="p-3 text-center font-semibold text-amber-600">${eCount}</td>
+                        <td class="p-3 text-center font-semibold text-red-600">${pCount}</td>
+                    </tr>
+                `;
             });
         }
-
         function loadUpazilaDashboard() {
             let db = getDB().filter(item => item.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী');
             let today = new Date().toISOString().split('T')[0];
