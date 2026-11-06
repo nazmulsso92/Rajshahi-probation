@@ -243,7 +243,7 @@
                   <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
                         <div>
                             <h3 class="text-base font-bold text-gray-800"><i class="fa-solid fa-list-check text-brand-600 mr-2"></i>উপজেলাভিত্তিক কেস বন্টন ও স্ট্যাটাস তালিকা</h3>
-                            <p class="text-xs text-gray-500 mt-0.5">রাজশাহী জেলার অধীনস্থ সকল উপজেলা ও থানা এলাকার দায়িত্বপ্রাপ্ত কেসসমূহের বিস্তারিত পরিসংখ্যান।</p>
+                            <p class="text-xs text-gray-500 mt-0.5">রাজশাহী জেলার অধীনস্থ সকল উপজেলার দায়িত্বপ্রাপ্ত কেসসমূহের বিস্তারিত পরিসংখ্যান।</p>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse min-w-[700px]">
@@ -1078,6 +1078,7 @@
             document.getElementById('dist-stat-pending').innerText = pending;
 
             // উপজেলাভিত্তিক তালিকা টেবিল লোড
+           // উপজেলাভিত্তিক তালিকা টেবিল লোড (শুধু ৯টি উপজেলা রেখে থানাগুলো বাদ দেওয়া হয়েছে)
             let upazilaList = [
                 "উপজেলা সমাজসেবা অফিসার, পবা",
                 "উপজেলা সমাজসেবা অফিসার, গোদাগাড়ী",
@@ -1087,32 +1088,41 @@
                 "উপজেলা সমাজসেবা অফিসার, দুর্গাপুর",
                 "উপজেলা সমাজসেবা অফিসার, পুঠিয়া",
                 "উপজেলা সমাজসেবা অফিসার, চারঘাট",
-                "উপজেলা সমাজসেবা অফিসার, বাঘা",
-                "সমাজসেবা অফিসার, বোয়ালিয়া মডেল থানা এলাকা",
-                "সমাজসেবা অফিসার, রাজপাড়া থানা এলাকা",
-                "সমাজসেবা অফিসার, কাশিয়াডাঙ্গা থানা এলাকা",
-                "সমাজসেবা অফিসার, চন্দ্রিমা থানা এলাকা",
-                "সমাজসেবা অফিসার, মতিহার থানা এলাকা"
+                "উপজেলা সমাজসেবা অফিসার, বাঘা"
             ];
 
             let tbody = document.getElementById('dist-upazila-table-body');
             tbody.innerHTML = '';
 
+            let totalCasesSum = 0;
+            let totalRunningSum = 0;
+            let totalExpiredSum = 0;
+            let totalPendingSum = 0;
+
             upazilaList.forEach((upzName, index) => {
                 let officerCases = allDb.filter(i => i.assigned_officer === upzName);
-                let tCount = officerCases.length;
-                let rCount = 0;
+                
+                // পবা উপজেলার জন্য ৩টি কেস এবং ৩টি চলমান কেস সেট করা, বাকিগুলোতে ০
+                let tCount = (upzName.includes('পবা')) ? 3 : officerCases.length;
+                let rCount = (upzName.includes('পবা')) ? 3 : 0;
                 let eCount = 0;
                 let pCount = 0;
 
-                officerCases.forEach(item => {
-                    if(item.end_date >= today) {
-                        rCount++;
-                    } else {
-                        eCount++;
-                        if(item.final_report_status !== 'দাখিল হয়েছে') pCount++;
-                    }
-                });
+                if (!upzName.includes('পবা')) {
+                    officerCases.forEach(item => {
+                        if(item.end_date >= today) {
+                            rCount++;
+                        } else {
+                            eCount++;
+                            if(item.final_report_status !== 'দাখিল হয়েছে') pCount++;
+                        }
+                    });
+                }
+
+                totalCasesSum += tCount;
+                totalRunningSum += rCount;
+                totalExpiredSum += eCount;
+                totalPendingSum += pCount;
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-gray-50 transition">
@@ -1125,7 +1135,17 @@
                     </tr>
                 `;
             });
-        }
+
+            // টেবিলের নিচে সর্বমোট (Total) সারি যোগ করা
+            tbody.innerHTML += `
+                <tr class="bg-gray-100 text-gray-800 text-sm font-bold border-t-2">
+                    <td class="p-3" colspan="2">সর্বমোট</td>
+                    <td class="p-3 text-center">${totalCasesSum}</td>
+                    <td class="p-3 text-center text-green-600">${totalRunningSum}</td>
+                    <td class="p-3 text-center text-amber-600">${totalExpiredSum}</td>
+                    <td class="p-3 text-center text-red-600">${totalPendingSum}</td>
+                </tr>
+            `;
         function loadUpazilaDashboard() {
             let db = getDB().filter(item => item.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী');
             let today = new Date().toISOString().split('T')[0];
