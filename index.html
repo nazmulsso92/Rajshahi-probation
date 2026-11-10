@@ -543,23 +543,90 @@
                     </div>
                 </section>
 
-                <!-- 6. DATABASE VIEW -->
+                <!-- 6. DATABASE VIEW (UPDATED FILTER OPTIONS) -->
                 <section id="view-database" class="hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                            <input type="text" id="search-query" placeholder="নাম, মামলা নং বা NID..." class="border rounded-xl px-3 py-2 text-sm outline-none">
-                            <select id="filter-officer" class="border rounded-xl px-3 py-2 text-sm outline-none">
-                                <option value="">সকল কর্মকর্তা / কার্যালয়</option>
-                                <option value="জেলা প্রবেশন অফিসার, রাজশাহী">জেলা প্রবেশন অফিসার, রাজশাহী</option>
-                                <option value="upazila_all">সকল উপজেলা কার্যালয়</option>
-                            </select>
-                            <select id="filter-status" class="border rounded-xl px-3 py-2 text-sm outline-none">
-                                <option value="">সকল অবস্থা</option>
-                                <option value="Running">মামলা চলমান</option>
-                                <option value="Expired">মেয়াদ উত্তীর্ণ</option>
-                            </select>
-                            <button type="button" onclick="loadDatabase()" class="bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium py-2 rounded-xl transition shadow-sm cursor-pointer"><i class="fa-solid fa-filter mr-1"></i> ফিল্টার করুন</button>
+                        <!-- Advanced Filter Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">সার্চ করুন</label>
+                                <input type="text" id="search-query" placeholder="নাম, মামলা নং বা NID..." class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">কর্মকর্তা / উপজেলা</label>
+                                <select id="filter-officer" class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
+                                    <option value="">সকল কর্মকর্তা / কার্যালয়</option>
+                                    <option value="জেলা প্রবেশন অফিসার, রাজশাহী">জেলা প্রবেশন অফিসার, রাজশাহী</option>
+                                    <optgroup label="রাজশাহীর সকল উপজেলা ও থানা">
+                                        <option value="পবা">পবা উপজেলা</option>
+                                        <option value="গোদাগাড়ী">গোদাগাড়ী উপজেলা</option>
+                                        <option value="তানোর">তানোর উপজেলা</option>
+                                        <option value="মোহনপুর">মোহনপুর উপজেলা</option>
+                                        <option value="বাগমারা">বাগমারা উপজেলা</option>
+                                        <option value="দুর্গাপুর">দুর্গাপুর উপজেলা</option>
+                                        <option value="পুঠিয়া">পুঠিয়া উপজেলা</option>
+                                        <option value="চারঘাট">চারঘাট উপজেলা</option>
+                                        <option value="বাঘা">বাঘা উপজেলা</option>
+                                        <option value="বোয়ালিয়া">বোয়ালিয়া থানা এলাকা</option>
+                                        <option value="রাজপাড়া">রাজপাড়া থানা এলাকা</option>
+                                        <option value="কাশিয়াডাঙ্গা">কাশিয়াডাঙ্গা থানা এলাকা</option>
+                                        <option value="চন্দ্রিমা">চন্দ্রিমা থানা এলাকা</option>
+                                        <option value="মতিহার">মতিহার থানা এলাকা</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">বছরভিত্তিক খুঁজুন</label>
+                                <select id="filter-year" class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
+                                    <option value="">সকল বছর</option>
+                                    <option value="2024">২০২৪</option>
+                                    <option value="2025">২০২৫</option>
+                                    <option value="2026">২০২৬</option>
+                                    <option value="2027">২০২৭</option>
+                                    <option value="2028">২০২৮</option>
+                                    <option value="2029">২০২৯</option>
+                                    <option value="2030">২০৩০</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">মাসভিত্তিক খুঁজুন</label>
+                                <select id="filter-month" class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
+                                    <option value="">সকল মাস</option>
+                                    <option value="01">জানুয়ারী</option>
+                                    <option value="02">ফেব্রুয়ারী</option>
+                                    <option value="03">মার্চ</option>
+                                    <option value="04">এপ্রিল</option>
+                                    <option value="05">মে</option>
+                                    <option value="06">জুন</option>
+                                    <option value="07">জুলাই</option>
+                                    <option value="08">আগস্ট</option>
+                                    <option value="09">সেপ্টেম্বর</option>
+                                    <option value="10">অক্টোবর</option>
+                                    <option value="11">নভেম্বর</option>
+                                    <option value="12">ডিসেম্বর</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">মামলার অবস্থা</label>
+                                <select id="filter-status" class="w-full border rounded-xl px-3 py-2 text-sm outline-none">
+                                    <option value="">সকল অবস্থা</option>
+                                    <option value="Running">মামলা চলমান</option>
+                                    <option value="Expired">মেয়াদ উত্তীর্ণ</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button type="button" onclick="loadDatabase()" class="w-full bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium py-2 rounded-xl transition shadow-sm cursor-pointer"><i class="fa-solid fa-filter mr-1"></i> ফিল্টার করুন</button>
+                            </div>
                         </div>
+
+                        <!-- Action Bar for Download -->
+                        <div class="flex justify-between items-center pt-2 border-t border-gray-100">
+                            <span id="database-count-badge" class="text-xs text-gray-500 font-medium">মোট রেকর্ড: 0 টি</span>
+                            <button type="button" onclick="exportFilteredDatabaseCSV()" class="bg-green-700 hover:bg-green-800 text-white text-xs px-4 py-2 rounded-xl font-medium shadow transition cursor-pointer flex items-center">
+                                <i class="fa-solid fa-file-excel mr-1.5"></i> ফিল্টারকৃত ডাটাবেস ডাউনলোড (CSV)
+                            </button>
+                        </div>
+
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
                                 <thead>
@@ -567,7 +634,7 @@
                                         <th class="p-3">তারিখ</th>
                                         <th class="p-3">নাম ও পিতা</th>
                                         <th class="p-3">মামলা ও আদালত</th>
-                                        <th class="p-3">দায়িত্বপ্রাপ্ত কর্মকর্তা</th>
+                                        <th class="p-3">উপজেলা / কর্মকর্তা</th>
                                         <th class="p-3">মেয়াদ</th>
                                         <th class="p-3">অবস্থা</th>
                                         <th class="p-3 text-center">অ্যাকশন</th>
@@ -1193,29 +1260,63 @@
             }
         }
 
-        // --- DATABASE ---
-        function loadDatabase() {
+        // --- DATABASE ADVANCED FILTER & SEARCH ---
+        function getFilteredDatabase() {
             let db = getDB();
-            let tbody = document.getElementById('database-table-body');
             let searchQuery = document.getElementById('search-query').value.toLowerCase();
             let filterOfficer = document.getElementById('filter-officer').value;
+            let filterYear = document.getElementById('filter-year').value;
+            let filterMonth = document.getElementById('filter-month').value;
             let filterStatus = document.getElementById('filter-status').value;
             let today = new Date().toISOString().split('T')[0];
 
-            tbody.innerHTML = '';
-            let filtered = db.filter(item => {
-                let matchSearch = item.p_name.toLowerCase().includes(searchQuery) || item.case_no.toLowerCase().includes(searchQuery);
+            return db.filter(item => {
+                let matchSearch = !searchQuery || 
+                                  item.p_name.toLowerCase().includes(searchQuery) || 
+                                  item.case_no.toLowerCase().includes(searchQuery) || 
+                                  (item.nid && item.nid.toLowerCase().includes(searchQuery));
+
                 let matchOfficer = true;
-                if(filterOfficer === 'upazila_all') matchOfficer = item.assigned_officer !== 'জেলা প্রবেশন অফিসার, রাজশাহী';
-                else if(filterOfficer) matchOfficer = item.assigned_officer === filterOfficer;
+                if(filterOfficer) {
+                    let offLower = (item.assigned_officer || '').toLowerCase();
+                    let upzLower = (item.upazila || '').toLowerCase();
+                    let addrLower = (item.address || '').toLowerCase();
+                    let queryLower = filterOfficer.toLowerCase();
+
+                    matchOfficer = offLower.includes(queryLower) || upzLower.includes(queryLower) || addrLower.includes(queryLower);
+                }
+
+                let matchYear = true;
+                if(filterYear && item.rcv_date) {
+                    matchYear = item.rcv_date.startsWith(filterYear);
+                }
+
+                let matchMonth = true;
+                if(filterMonth && item.rcv_date) {
+                    let parts = item.rcv_date.split('-'); // YYYY-MM-DD
+                    if(parts.length >= 2) {
+                        matchMonth = parts[1] === filterMonth;
+                    }
+                }
 
                 let status = item.end_date >= today ? 'Running' : 'Expired';
                 let matchStatus = !filterStatus || status === filterStatus;
-                return matchSearch && matchOfficer && matchStatus;
+
+                return matchSearch && matchOfficer && matchYear && matchMonth && matchStatus;
             });
+        }
+
+        function loadDatabase() {
+            let filtered = getFilteredDatabase();
+            let tbody = document.getElementById('database-table-body');
+            let countBadge = document.getElementById('database-count-badge');
+            let today = new Date().toISOString().split('T')[0];
+
+            countBadge.innerText = `মোট রেকর্ড: ${filtered.length} টি`;
+            tbody.innerHTML = '';
 
             if(filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-gray-400">কোনো রেকর্ড পাওয়া যায়নি</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-gray-400"><i class="fa-solid fa-triangle-exclamation mr-2"></i>কোনো প্রবেশনার রেকর্ড পাওয়া যায়নি</td></tr>`;
                 return;
             }
 
@@ -1225,19 +1326,55 @@
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-gray-50 transition">
-                        <td class="p-3 text-xs">${item.rcv_date}</td>
-                        <td class="p-3"><strong>${item.p_name}</strong><br><small class="text-gray-500">পিতা: ${item.f_name}</small></td>
-                        <td class="p-3">${item.case_no}<br><small class="text-gray-500">${item.court_name}</small></td>
-                        <td class="p-3 text-xs font-semibold text-brand-800">${item.assigned_officer}</td>
-                        <td class="p-3 text-xs">${item.start_date} হতে<br>${item.end_date}</td>
+                        <td class="p-3 text-xs font-medium text-gray-600">${item.rcv_date || 'N/A'}</td>
+                        <td class="p-3">
+                            <strong class="text-gray-900">${item.p_name}</strong>
+                            <br><small class="text-gray-500">পিতা: ${item.f_name}</small>
+                            ${item.mobile ? `<br><small class="text-blue-600 font-semibold"><i class="fa-solid fa-phone text-[10px]"></i> ${item.mobile}</small>` : ''}
+                        </td>
+                        <td class="p-3">
+                            <span class="font-semibold text-gray-800">${item.case_no}</span>
+                            <br><small class="text-gray-500 max-w-[150px] inline-block truncate" title="${item.court_name}">${item.court_name}</small>
+                        </td>
+                        <td class="p-3 text-xs">
+                            <span class="font-bold text-brand-800">${item.upazila || 'রাজশাহী'}</span>
+                            <br><small class="text-gray-500">${item.assigned_officer || ''}</small>
+                        </td>
+                        <td class="p-3 text-xs text-gray-600">
+                            ${item.start_date || ''} হতে<br>${item.end_date || ''}
+                            <br><span class="text-[11px] font-semibold text-brand-700">(${item.duration || ''})</span>
+                        </td>
                         <td class="p-3">${statusBadge}</td>
                         <td class="p-3 text-center space-x-1">
-                            <button type="button" onclick="editRecord(${item.id})" title="embeddings" class="bg-amber-500 text-white text-xs px-2 py-1 rounded cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button type="button" onclick="deleteRecord(${item.id})" title="ডিলিট" class="bg-red-500 text-white text-xs px-2 py-1 rounded cursor-pointer"><i class="fa-solid fa-trash"></i></button>
+                            <button type="button" onclick="editRecord(${item.id})" title="এডিট" class="bg-amber-500 hover:bg-amber-600 text-white text-xs px-2 py-1 rounded shadow cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button type="button" onclick="deleteRecord(${item.id})" title="ডিলিট" class="bg-red-500 hover:bg-red-600 text-white text-xs px-2 py-1 rounded shadow cursor-pointer"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 `;
             });
+        }
+
+        function exportFilteredDatabaseCSV() {
+            let filteredData = getFilteredDatabase();
+            if(filteredData.length === 0) {
+                alert('ডাউনলোড করার জন্য কোনো রেকর্ড পাওয়া যায়নি!');
+                return;
+            }
+
+            let csvContent = "\uFEFFপ্রাপ্তির তারিখ,স্মারক নং,প্রবেশনারের নাম,পিতার নাম,উপজেলা,দায়িত্বপ্রাপ্ত কর্মকর্তা,আদালতের নাম,মামলা নং,মোবাইল,NID,পেশা,শিক্ষাগত যোগ্যতা,প্রবেশন মেয়াদ,মেয়াদ শুরু,মেয়াদ শেষ,অবস্থা\n";
+            let today = new Date().toISOString().split('T')[0];
+
+            filteredData.forEach(row => {
+                let status = row.end_date >= today ? 'চলমান' : 'মেয়াদ উত্তীর্ণ';
+                csvContent += `"${row.rcv_date || ''}","${row.memo_no || ''}","${row.p_name || ''}","${row.f_name || ''}","${row.upazila || ''}","${row.assigned_officer || ''}","${row.court_name || ''}","${row.case_no || ''}","${row.mobile || ''}","${row.nid || ''}","${row.occupation || ''}","${row.education || ''}","${row.duration || ''}","${row.start_date || ''}","${row.end_date || ''}","${status}"\n`;
+            });
+
+            let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = `probation_filtered_database_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
         }
 
         function deleteRecord(id) {
