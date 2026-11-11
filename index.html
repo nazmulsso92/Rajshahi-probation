@@ -508,7 +508,7 @@
                                       <th class="p-3">৫ম হাজিরা</th>
                                       <th class="p-3">৬ষ্ঠ হাজিরা</th>
                                       <th class="p-3">অব্যহতির তথ্য</th>
-                                      <th class="p-3">অব্যহতির তারিখ</th>
+                                      <th class="p-3">অব্যাহতি/অব্যাহতি না পাওয়ার তারিখ</th>
                                       <th class="p-3 text-center">সম্পন্ন / মোট</th>
                                       <th class="p-3 text-center">আচরণগত পরিবর্তন</th>
                                       <th class="p-3 text-center">কার্যক্রম</th>
@@ -1164,7 +1164,7 @@
                 item.completed_hazira = parseInt(document.getElementById(`comp_${id}`).value) || 0;
                 item.behavior_change = document.getElementById(`behavior_${id}`).value.trim();
                 saveDB(db);
-                alert('হাজিরা, অব্যাহতির তথ্য ও অব্যাহতির তারিখ সফলভাবে সংরক্ষণ করা হয়েছে!');
+                alert('হাজিরা, অব্যাহতির তথ্য ও তারিখ সফলভাবে সংরক্ষণ করা হয়েছে!');
             }
         }
 
@@ -1190,7 +1190,7 @@
                 alert('এক্সপোর্ট করার মতো কোনো ডেটা নেই!');
                 return;
             }
-            let csvContent = "\uFEFFমামলা নং,নাম,উপজেলা,আদালত,মোবাইল,১ম হাজিরা,২য় হাজিরা,৩য় হাজিরা,৪র্থ হাজিরা,৫ম হাজিরা,৬ষ্ঠ হাজিরা,অব্যহতির তথ্য,অব্যহতির তারিখ,সম্পন্ন হাজিরা\n";
+            let csvContent = "\uFEFFমামলা নং,নাম,উপজেলা,আদালত,মোবাইল,১ম হাজিরা,২য় হাজিরা,৩য় হাজিরা,৪র্থ হাজিরা, ৫ম হাজিরা, ৬ষ্ঠ হাজিরা,অব্যহতির তথ্য,অব্যাহতি/অব্যাহতি না পাওয়ার তারিখ,সম্পন্ন হাজিরা\n";
             db.forEach(row => {
                 csvContent += `"${row.case_no}","${row.p_name}","${row.upazila || ''}","${row.court_name}","${row.mobile}","${row.h1 || ''}","${row.h2 || ''}","${row.h3 || ''}","${row.h4 || ''}","${row.h5 || ''}","${row.h6 || ''}","${row.exemption_info || 'চলমান'}","${row.exemption_date || ''}","${row.completed_hazira}/${row.total_hazira}"\n`;
             });
@@ -1214,7 +1214,7 @@
                     <th class="border border-gray-400 p-2">মামলা ও আদালত</th>
                     <th class="border border-gray-400 p-2">হাজিরা তারিখসমূহ</th>
                     <th class="border border-gray-400 p-2">অব্যহতির তথ্য</th>
-                    <th class="border border-gray-400 p-2">অব্যহতির তারিখ</th>
+                    <th class="border border-gray-400 p-2">অব্যাহতি/অব্যাহতি না পাওয়ার তারিখ</th>
                     <th class="border border-gray-400 p-2">সম্পন্ন</th>
                 </tr>`;
             db.forEach((item, index) => {
@@ -1342,7 +1342,11 @@
                 else if(statusVal === 'অব্যাহতি প্রাপ্ত না') badgeColor = 'bg-red-100 text-red-800';
                 else badgeColor = 'bg-amber-100 text-amber-800';
 
-                let dateDisplay = item.exemption_date ? `<br><span class="text-[10px] text-gray-600 font-normal"><i class="fa-regular fa-calendar-check mr-1"></i>${item.exemption_date}</span>` : '';
+                // Display exemption/non-exemption date if status is set to "অব্যাহতি প্রাপ্ত" or "অব্যাহতি প্রাপ্ত না"
+                let dateDisplay = '';
+                if((statusVal === 'অব্যাহতি প্রাপ্ত' || statusVal === 'অব্যাহতি প্রাপ্ত না') && item.exemption_date) {
+                    dateDisplay = `<br><span class="text-[10px] text-gray-700 font-semibold"><i class="fa-regular fa-calendar-check mr-1"></i>তারিখ: ${item.exemption_date}</span>`;
+                }
 
                 let statusBadge = `<div class="inline-block text-center"><span class="${badgeColor} text-xs px-2.5 py-1 rounded-full font-semibold">${statusVal}</span>${dateDisplay}</div>`;
 
@@ -1383,7 +1387,7 @@
                 return;
             }
 
-            let csvContent = "\uFEFFপ্রাপ্তির তারিখ,স্মারক নং,প্রবেশনারের নাম,পিতার নাম,উপজেলা,দায়িত্বপ্রাপ্ত কর্মকর্তা,আদালতের নাম,মামলা নং,মোবাইল,NID,পেশা,শিক্ষাগত যোগ্যতা,প্রবেশন মেয়াদ,মেয়াদ শুরু,মেয়াদ শেষ,অবস্থা (অব্যহতির তথ্য),অব্যহতির তারিখ\n";
+            let csvContent = "\uFEFFপ্রাপ্তির তারিখ,স্মারক নং,প্রবেশনারের নাম,পিতার নাম,উপজেলা,দায়িত্বপ্রাপ্ত কর্মকর্তা,আদালতের নাম,মামলা নং,মোবাইল,NID,পেশা,শিক্ষাগত যোগ্যতা,প্রবেশন মেয়াদ,মেয়াদ শুরু,মেয়াদ শেষ,অবস্থা (অব্যহতির তথ্য),অব্যাহতি/অব্যাহতি না পাওয়ার তারিখ\n";
 
             filteredData.forEach(row => {
                 let status = row.exemption_info || 'চলমান';
@@ -1455,7 +1459,7 @@
         function previewIntakePDFFromForm() {
             let pName = document.getElementById('p_name').value || 'নাম পাওয়া যায়নি';
             let caseNo = document.getElementById('case_no').value || 'N/A';
-            let court = document.getElementById('court_name').value || 'N/A';
+            let court = document.getElementById('court_name5').value || 'N/A';
             let mobile = document.getElementById('mobile').value || 'N/A';
             let assigned = document.getElementById('assigned_officer').value || 'N/A';
 
