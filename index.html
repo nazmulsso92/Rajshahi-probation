@@ -496,7 +496,7 @@
                         </div>
 
                         <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse min-w-[1150px]">
+                            <table class="w-full text-left border-collapse min-w-[1250px]">
                                 <thead>
                                   <tr class="bg-gray-50 text-gray-700 text-xs uppercase font-bold border-b">
                                       <th class="p-3">নাম, মামলা ও উপজেলা</th>
@@ -508,6 +508,7 @@
                                       <th class="p-3">৫ম হাজিরা</th>
                                       <th class="p-3">৬ষ্ঠ হাজিরা</th>
                                       <th class="p-3">অব্যহতির তথ্য</th>
+                                      <th class="p-3">অব্যহতির তারিখ</th>
                                       <th class="p-3 text-center">সম্পন্ন / মোট</th>
                                       <th class="p-3 text-center">আচরণগত পরিবর্তন</th>
                                       <th class="p-3 text-center">কার্যক্রম</th>
@@ -867,6 +868,7 @@
                     completed_hazira: 0,
                     h1: '', h2: '', h3: '', h4: '', h5: '', h6: '',
                     exemption_info: 'চলমান',
+                    exemption_date: '',
                     next_hazira: '',
                     final_report_status: 'মামলা চলমান',
                     remarks: document.getElementById('remarks').value
@@ -1097,7 +1099,7 @@
             }
 
             if(filteredList.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="12" class="p-6 text-center text-gray-400"><i class="fa-solid fa-triangle-exclamation mr-2"></i>ফিল্টারিংয়ের সাথে মিলে এমন কোনো প্রবেশনার রেকর্ড পাওয়া যায়নি।</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="13" class="p-6 text-center text-gray-400"><i class="fa-solid fa-triangle-exclamation mr-2"></i>ফিল্টারিংয়ের সাথে মিলে এমন কোনো প্রবেশনার রেকর্ড পাওয়া যায়নি।</td></tr>`;
                 return;
             }
 
@@ -1131,6 +1133,7 @@
                                 <option value="অব্যাহতি প্রাপ্ত না" ${currentExemption === 'অব্যাহতি প্রাপ্ত না' ? 'selected' : ''}>অব্যাহতি প্রাপ্ত না</option>
                             </select>
                         </td>
+                        <td class="p-2"><input type="date" id="exemption_date_${item.id}" value="${item.exemption_date || ''}" class="border rounded px-1.5 py-1 text-xs"></td>
                         <td class="p-2 text-center font-semibold">
                             <input type="number" id="comp_${item.id}" value="${item.completed_hazira || 0}" class="w-12 border rounded text-center"> / ${item.total_hazira}
                         </td>
@@ -1157,10 +1160,11 @@
                 item.h5 = document.getElementById(`h5_${id}`).value;
                 item.h6 = document.getElementById(`h6_${id}`).value;
                 item.exemption_info = document.getElementById(`exemption_${id}`).value;
+                item.exemption_date = document.getElementById(`exemption_date_${id}`).value;
                 item.completed_hazira = parseInt(document.getElementById(`comp_${id}`).value) || 0;
                 item.behavior_change = document.getElementById(`behavior_${id}`).value.trim();
                 saveDB(db);
-                alert('হাজিরা, অব্যাহতির তথ্য ও আচরণগত পরিবর্তন সফলভাবে সংরক্ষণ করা হয়েছে!');
+                alert('হাজিরা, অব্যাহতির তথ্য ও অব্যাহতির তারিখ সফলভাবে সংরক্ষণ করা হয়েছে!');
             }
         }
 
@@ -1186,9 +1190,9 @@
                 alert('এক্সপোর্ট করার মতো কোনো ডেটা নেই!');
                 return;
             }
-            let csvContent = "\uFEFFমামলা নং,নাম,উপজেলা,আদালত,মোবাইল,১ম হাজিরা,২য় হাজিরা,৩য় হাজিরা,৪র্থ হাজিরা,৫ম হাজিরা,৬ষ্ঠ হাজিরা,অব্যহতির তথ্য,সম্পন্ন হাজিরা\n";
+            let csvContent = "\uFEFFমামলা নং,নাম,উপজেলা,আদালত,মোবাইল,১ম হাজিরা,২য় হাজিরা,৩য় হাজিরা,৪র্থ হাজিরা,৫ম হাজিরা,৬ষ্ঠ হাজিরা,অব্যহতির তথ্য,অব্যহতির তারিখ,সম্পন্ন হাজিরা\n";
             db.forEach(row => {
-                csvContent += `"${row.case_no}","${row.p_name}","${row.upazila || ''}","${row.court_name}","${row.mobile}","${row.h1 || ''}","${row.h2 || ''}","${row.h3 || ''}","${row.h4 || ''}","${row.h5 || ''}","${row.h6 || ''}","${row.exemption_info || 'চলমান'}","${row.completed_hazira}/${row.total_hazira}"\n`;
+                csvContent += `"${row.case_no}","${row.p_name}","${row.upazila || ''}","${row.court_name}","${row.mobile}","${row.h1 || ''}","${row.h2 || ''}","${row.h3 || ''}","${row.h4 || ''}","${row.h5 || ''}","${row.h6 || ''}","${row.exemption_info || 'চলমান'}","${row.exemption_date || ''}","${row.completed_hazira}/${row.total_hazira}"\n`;
             });
             let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             let url = URL.createObjectURL(blob);
@@ -1210,6 +1214,7 @@
                     <th class="border border-gray-400 p-2">মামলা ও আদালত</th>
                     <th class="border border-gray-400 p-2">হাজিরা তারিখসমূহ</th>
                     <th class="border border-gray-400 p-2">অব্যহতির তথ্য</th>
+                    <th class="border border-gray-400 p-2">অব্যহতির তারিখ</th>
                     <th class="border border-gray-400 p-2">সম্পন্ন</th>
                 </tr>`;
             db.forEach((item, index) => {
@@ -1220,6 +1225,7 @@
                     <td class="border border-gray-400 p-2">${item.case_no}<br><small>${item.court_name}</small></td>
                     <td class="border border-gray-400 p-2">${dates || 'নির্ধারিত হয়নি'}</td>
                     <td class="border border-gray-400 p-2">${item.exemption_info || 'চলমান'}</td>
+                    <td class="border border-gray-400 p-2">${item.exemption_date || 'N/A'}</td>
                     <td class="border border-gray-400 p-2 text-center">${item.completed_hazira}/${item.total_hazira}</td>
                 </tr>`;
             });
@@ -1336,7 +1342,9 @@
                 else if(statusVal === 'অব্যাহতি প্রাপ্ত না') badgeColor = 'bg-red-100 text-red-800';
                 else badgeColor = 'bg-amber-100 text-amber-800';
 
-                let statusBadge = `<span class="${badgeColor} text-xs px-2.5 py-1 rounded-full font-semibold">${statusVal}</span>`;
+                let dateDisplay = item.exemption_date ? `<br><span class="text-[10px] text-gray-600 font-normal"><i class="fa-regular fa-calendar-check mr-1"></i>${item.exemption_date}</span>` : '';
+
+                let statusBadge = `<div class="inline-block text-center"><span class="${badgeColor} text-xs px-2.5 py-1 rounded-full font-semibold">${statusVal}</span>${dateDisplay}</div>`;
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-gray-50 transition">
@@ -1375,11 +1383,11 @@
                 return;
             }
 
-            let csvContent = "\uFEFFপ্রাপ্তির তারিখ,স্মারক নং,প্রবেশনারের নাম,পিতার নাম,উপজেলা,দায়িত্বপ্রাপ্ত কর্মকর্তা,আদালতের নাম,মামলা নং,মোবাইল,NID,পেশা,শিক্ষাগত যোগ্যতা,প্রবেশন মেয়াদ,মেয়াদ শুরু,মেয়াদ শেষ,অবস্থা (অব্যহতির তথ্য)\n";
+            let csvContent = "\uFEFFপ্রাপ্তির তারিখ,স্মারক নং,প্রবেশনারের নাম,পিতার নাম,উপজেলা,দায়িত্বপ্রাপ্ত কর্মকর্তা,আদালতের নাম,মামলা নং,মোবাইল,NID,পেশা,শিক্ষাগত যোগ্যতা,প্রবেশন মেয়াদ,মেয়াদ শুরু,মেয়াদ শেষ,অবস্থা (অব্যহতির তথ্য),অব্যহতির তারিখ\n";
 
             filteredData.forEach(row => {
                 let status = row.exemption_info || 'চলমান';
-                csvContent += `"${row.rcv_date || ''}","${row.memo_no || ''}","${row.p_name || ''}","${row.f_name || ''}","${row.upazila || ''}","${row.assigned_officer || ''}","${row.court_name || ''}","${row.case_no || ''}","${row.mobile || ''}","${row.nid || ''}","${row.occupation || ''}","${row.education || ''}","${row.duration || ''}","${row.start_date || ''}","${row.end_date || ''}","${status}"\n`;
+                csvContent += `"${row.rcv_date || ''}","${row.memo_no || ''}","${row.p_name || ''}","${row.f_name || ''}","${row.upazila || ''}","${row.assigned_officer || ''}","${row.court_name || ''}","${row.case_no || ''}","${row.mobile || ''}","${row.nid || ''}","${row.occupation || ''}","${row.education || ''}","${row.duration || ''}","${row.start_date || ''}","${row.end_date || ''}","${status}","${row.exemption_date || ''}"\n`;
             });
 
             let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -1416,7 +1424,6 @@
 
             let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             let url = URL.createObjectURL(blob);
-            let a = URL.createObjectURL(blob);
             let aElem = document.createElement('a');
             aElem.href = url;
             aElem.download = `${type}_report_${new Date().toISOString().split('T')[0]}.csv`;
