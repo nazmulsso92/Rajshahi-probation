@@ -820,15 +820,43 @@
             switchTab('dashboard-district');
         }
 
-        // --- DATABASE & STORAGE ---
-        function getDB() {
-            let data = localStorage.getItem('probation_db_rajshahi');
-            return data ? JSON.parse(data) : [];
-        }
+        // --- GOOGLE SHEETS ONLINE DATABASE ---
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxrcwaGx0fWD-C_ngAH0JBptZuWrGh4uKNYd72gXF567mjDx_DtQPfiCR730hd76QZC/exec"; //
 
-        function saveDB(data) {
-            localStorage.setItem('probation_db_rajshahi', JSON.stringify(data));
-        }
+// ক্যাশ মেমোরি হিসেবে কাজ করবে যাতে বারবার লোড না হয়
+let localMemoryDB = [];
+
+async function getDB() {
+    try {
+        let response = await fetch(WEB_APP_URL + "?action=getData");
+        let textData = await response.text();
+        localMemoryDB = textData ? JSON.parse(textData) : [];
+        return localMemoryDB;
+    } catch (err) {
+        console.error("Online DB Fetch Error, falling back to local:", err);
+        let fallback = localStorage.getItem('probation_db_rajshahi');
+        return fallback ? JSON.parse(fallback) : [];
+    }
+}
+
+async function saveDB(data) {
+    localMemoryDB = data;
+    // ব্যাকআপ হিসেবে লোকালস্টোরেজেও সেভ থাকবে
+    localStorage.setItem('probation_db_rajshahi', JSON.stringify(data));
+    
+    try {
+        await fetch(WEB_APP_URL, {
+            method: "POST",
+            mode: "no-cors", // ক্রস-অরজিন সমস্যা এড়াতে
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+    } catch (err) {
+        console.error("Online DB Save Error:", err);
+    }
+}
 
         function toggleMobileSidebar() {
             document.querySelector('aside').classList.toggle('hidden');
