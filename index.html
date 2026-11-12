@@ -821,9 +821,8 @@
         }
 
         // --- GOOGLE SHEETS ONLINE DATABASE ---
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxrcwaGx0fWD-C_ngAH0JBptZuWrGh4uKNYd72gXF567mjDx_DtQPfiCR730hd76QZC/exec"; //
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxrcwaGx0fWD-C_ngAH0JBptZuWrGh4uKNYd72gXF567mjDx_DtQPfiCR730hd76QZC/exec";
 
-// ক্যাশ মেমোরি হিসেবে কাজ করবে যাতে বারবার লোড না হয়
 let localMemoryDB = [];
 
 async function getDB() {
@@ -841,13 +840,13 @@ async function getDB() {
 
 async function saveDB(data) {
     localMemoryDB = data;
-    // ব্যাকআপ হিসেবে লোকালস্টোরেজেও সেভ থাকবে
+
     localStorage.setItem('probation_db_rajshahi', JSON.stringify(data));
     
     try {
         await fetch(WEB_APP_URL, {
             method: "POST",
-            mode: "no-cors", // ক্রস-অরজিন সমস্যা এড়াতে
+            mode: "no-cors", 
             headers: {
                 "Content-Type": "application/json"
             },
